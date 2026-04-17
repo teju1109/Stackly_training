@@ -1,0 +1,166 @@
+What is Type Casting?
+Process of converting one data type to another data type.
+eg  : int data type to float data type
+
+widening typecasting : 
+1.automatically converts small data type to large data type
+2.no data loss
+3.also called as implicit typecasting 
+eg :
+int a = 100;
+long l = a;
+
+narrowing typecasting :
+1. also called as explicit typecasting
+2. it is done manually by the programmer
+3. loss of data because large data is converted into small data type
+eg :
+double num = 10.75;
+int value = (int) num;
+System.out.println(value);  // Output: 10
+
+what is access modifiers ?
+*Access modifiers are keywords used to control who can access variables, methods, and classes
+*They help in security and restricting unwanted access
+*Types: public, private, protected, default
+public → can be accessed from anywhere (any class, any package)
+private → can be accessed only inside the same class
+protected → can be accessed in same package and by child classes
+default (no keyword) → can be accessed only within the same package
+
+What is a String ?
+A String is a sequence of characters (like text).
+It is used to store words, names, or sentences.
+In Java, String is an object and immutable.
+
+what is concade ?
+Concatenation (concade) means joining two or more strings together
+String s = "hello";
+s = s.concat(" world");
+System.out.println(s);
+
+what is == and equals() ?
+== is used to compare memory/reference (address) of objects
+equals() is used to compare actual content (values) of objects
+For strings: == may give false even if values are same
+
+TASK-1
+
+public class MathFunctionsExample {
+    public static void main(String[] args) {
+
+        double a = 16, b = -5, c = 2.5;
+
+        System.out.println("abs: " + Math.abs(b));
+        System.out.println("sqrt: " + Math.sqrt(a));
+        System.out.println("pow: " + Math.pow(a, 2));
+        System.out.println("max: " + Math.max(a, b));
+        System.out.println("min: " + Math.min(a, b));
+        System.out.println("round: " + Math.round(c));
+        System.out.println("ceil: " + Math.ceil(c));
+        System.out.println("floor: " + Math.floor(c));
+        System.out.println("random: " + Math.random());
+        System.out.println("cbrt: " + Math.cbrt(a));
+        System.out.println("exp: " + Math.exp(2));
+        System.out.println("log: " + Math.log(a));
+        System.out.println("log10: " + Math.log10(a));
+        System.out.println("sin: " + Math.sin(a));
+        System.out.println("cos: " + Math.cos(a));
+        System.out.println("tan: " + Math.tan(a));
+        System.out.println("asin: " + Math.asin(0.5));
+        System.out.println("acos: " + Math.acos(0.5));
+        System.out.println("atan: " + Math.atan(1));
+        System.out.println("signum: " + Math.signum(b));
+    }
+}
+
+EXPLANATION : 
+abs(b) → gives positive value of number → -5 → 5
+sqrt(a) → square root → √16 = 4
+pow(a,2) → power → 16² = 256
+max(a,b) → أكبر value → 16
+min(a,b) → smallest value → -5
+round(c) → rounds to nearest integer → 2.5 → 3
+ceil(c) → next highest integer → 2.5 → 3
+floor(c) → next lowest integer → 2.5 → 2
+random() → gives random value between 0.0 to 1.0
+cbrt(a) → cube root → ∛16 ≈ 2.52
+exp(2) → e² (Euler number power)
+log(a) → natural log (ln)
+log10(a) → base 10 log
+sin(a), cos(a), tan(a) → trigonometric functions (angle in radians)
+asin(0.5), acos(0.5), atan(1) → inverse trigonometric
+signum(b) → gives sign → -1 for negative, 1 for positive, 0 for zero
+
+TASK-2
+
+public class StringFunctions {
+    public static void main(String[] args) {
+
+        String s = "  Hello World  ";
+
+        System.out.println("length: " + s.length());
+        System.out.println("charAt: " + s.charAt(1));
+        System.out.println("substring: " + s.substring(2, 7));
+        System.out.println("toUpperCase: " + s.toUpperCase());
+        System.out.println("toLowerCase: " + s.toLowerCase());
+        System.out.println("trim: " + s.trim());
+        System.out.println("equals: " + s.equals("Hello"));
+        System.out.println("equalsIgnoreCase: " + s.equalsIgnoreCase("hello world"));
+        System.out.println("contains: " + s.contains("World"));
+        System.out.println("startsWith: " + s.startsWith("  He"));
+        System.out.println("endsWith: " + s.endsWith("  "));
+        System.out.println("indexOf: " + s.indexOf("o"));
+        System.out.println("lastIndexOf: " + s.lastIndexOf("o"));
+        System.out.println("replace: " + s.replace("World", "Java"));
+        System.out.println("concat: " + s.concat("!!!"));
+    }
+}
+
+EXPLANATION :
+length() → returns total number of characters
+charAt(index) → returns character at given position
+substring(start,end) → extracts part of string
+toUpperCase() → converts to uppercase
+toLowerCase() → converts to lowercase
+trim() → removes extra spaces from start and end
+equals() → checks if two strings are exactly same
+equalsIgnoreCase() → compares strings ignoring case
+contains() → checks if string has a word/part
+startsWith() → checks if string starts with given text
+endsWith() → checks if string ends with given text
+indexOf() → gives first position of a character/word
+lastIndexOf() → gives last position of a character/word
+replace() → replaces old text with new text
+concat() → joins two strings together
+
+TASK-3
+
+What is StringBuffer?
+StringBuffer is a class used to create mutable strings (can be changed after creation)
+It is thread-safe → safe to use in multi-threaded programs
+Methods like append(), insert(), delete() modify the same object
+
+What is StringBuilder?
+StringBuilder is also a mutable string class
+It is not thread-safe → faster than StringBuffer
+Used when performance is important and no multiple threads
+
+Key Difference
+StringBuffer → thread-safe, slower
+StringBuilder → not thread-safe, faster
+Both allow modifying string without creating new objects
+
+When to use
+Use StringBuffer → when working with multiple threads (safety needed)
+Use StringBuilder → when working with single thread (better performance)
+
+Example
+StringBuffer sb1 = new StringBuffer("Hello");
+sb1.append(" World");
+
+StringBuilder sb2 = new StringBuilder("Hi");
+sb2.append(" Java");
+
+System.out.println(sb1); // Hello World
+System.out.println(sb2); // Hi Java
