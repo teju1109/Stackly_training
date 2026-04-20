@@ -1,0 +1,139 @@
+Scanner - class used to read input from the user.
+eg :
+import java.util.Scanner;
+
+public class ScannerAllTypes {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter int: ");
+        int i = sc.nextInt();
+
+        System.out.print("Enter float: ");
+        float f = sc.nextFloat();
+
+        System.out.print("Enter double: ");
+        double d = sc.nextDouble();
+
+        System.out.print("Enter long: ");
+        long l = sc.nextLong();
+
+        System.out.print("Enter short: ");
+        short s = sc.nextShort();
+
+        System.out.print("Enter byte: ");
+        byte b = sc.nextByte();
+
+        System.out.print("Enter boolean: ");
+        boolean bool = sc.nextBoolean();
+
+        sc.nextLine(); // clear buffer
+
+        System.out.print("Enter string: ");
+        String str = sc.nextLine();
+
+        System.out.print("Enter char: ");
+        char ch = sc.next().charAt(0);
+
+        System.out.println("\n--- Output ---");
+        System.out.println("int: " + i);
+        System.out.println("float: " + f);
+        System.out.println("double: " + d);
+        System.out.println("long: " + l);
+        System.out.println("short: " + s);
+        System.out.println("byte: " + b);
+        System.out.println("boolean: " + bool);
+        System.out.println("string: " + str);
+        System.out.println("char: " + ch);
+
+        sc.close();
+    }
+}
+
+Control Flow Statements:
+1. Decision Making Statements
+eg : 
+public class DecisionMaking {
+    public static void main(String[] args) {
+
+        int num = 10;
+
+        // if statement
+        if (num > 0) {
+            System.out.println("Positive number");
+        }
+
+        // if-else
+        if (num % 2 == 0) {
+            System.out.println("Even number");
+        } else {
+            System.out.println("Odd number");
+        }
+
+        // if-else-if ladder
+        if (num > 0) {
+            System.out.println("Positive");
+        } else if (num < 0) {
+            System.out.println("Negative");
+        } else {
+            System.out.println("Zero");
+        }
+
+        // switch case
+        int day = 2;
+        switch (day) {
+            case 1:
+                System.out.println("Monday");
+                break;
+            case 2:
+                System.out.println("Tuesday");
+                break;
+            default:
+                System.out.println("Other day");
+        }
+    }
+}
+
+2.Looping
+eg :
+public class LoopExample {
+    public static void main(String[] args) {
+
+        // for loop
+        System.out.println("For Loop:");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(i);
+        }
+
+        // while loop
+        System.out.println("\nWhile Loop:");
+        int j = 1;
+        while (j <= 5) {
+            System.out.println(j);
+            j++;
+        }
+
+        // do-while loop
+        System.out.println("\nDo-While Loop:");
+        int k = 1;
+        do {
+            System.out.println(k);
+            k++;
+        } while (k <= 5);
+    }
+}
+
+Task-1
+student marks management program,
+read 3 subject marks, total marks, declare grade of the student with else if ladder and display o/p like a report card
+
+Task-2
+employee management program.
+id, name, department, designation, net salary, gross salary
+
+Task-3
+any scanner program (do it unique)
+
+Task-4
+loan eligible with help of nested 
