@@ -1,4 +1,5 @@
 Scanner - class used to read input from the user.
+
 eg :
 import java.util.Scanner;
 
@@ -170,8 +171,6 @@ public class StudentReport {
         System.out.println("Total  : " + total);
         System.out.println("Average: " + avg);
         System.out.println("Grade  : " + grade);
-
-        sc.close();
     }
 }
 
@@ -216,8 +215,6 @@ public class EmployeeManagement {
         System.out.println("Designation : " + desig);
         System.out.println("Gross Salary: " + gross);
         System.out.println("Net Salary  : " + net);
-
-        sc.close();
     }
 }
 
@@ -251,8 +248,6 @@ public class ElectricityBill {
         System.out.println("Name  : " + name);
         System.out.println("Units : " + units);
         System.out.println("Bill  : " + bill);
-
-        sc.close();
     }
 }
 
@@ -288,7 +283,5 @@ public class LoanEligibility {
         } else {
             System.out.println("Loan Rejected: Age not eligible");
         }
-
-        sc.close();
     }
 }
