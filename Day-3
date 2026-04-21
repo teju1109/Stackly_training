@@ -128,12 +128,167 @@ Task-1
 student marks management program,
 read 3 subject marks, total marks, declare grade of the student with else if ladder and display o/p like a report card
 
+import java.util.Scanner;
+
+public class StudentReport {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Student Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Subject 1 Marks: ");
+        int m1 = sc.nextInt();
+
+        System.out.print("Enter Subject 2 Marks: ");
+        int m2 = sc.nextInt();
+
+        System.out.print("Enter Subject 3 Marks: ");
+        int m3 = sc.nextInt();
+
+        int total = m1 + m2 + m3;
+        double avg = total / 3.0;
+
+        String grade;
+
+        if (avg >= 90) {
+            grade = "A";
+        } else if (avg >= 75) {
+            grade = "B";
+        } else if (avg >= 60) {
+            grade = "C";
+        } else if (avg >= 50) {
+            grade = "D";
+        } else {
+            grade = "F";
+        }
+
+        System.out.println("\n----- Report Card -----");
+        System.out.println("Name   : " + name);
+        System.out.println("Marks  : " + m1 + ", " + m2 + ", " + m3);
+        System.out.println("Total  : " + total);
+        System.out.println("Average: " + avg);
+        System.out.println("Grade  : " + grade);
+
+        sc.close();
+    }
+}
+
 Task-2
 employee management program.
 id, name, department, designation, net salary, gross salary
 
+import java.util.Scanner;
+
+public class EmployeeManagement {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Employee ID: ");
+        int id = sc.nextInt();
+        sc.nextLine(); // clear buffer
+
+        System.out.print("Enter Employee Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Department: ");
+        String dept = sc.nextLine();
+
+        System.out.print("Enter Designation: ");
+        String desig = sc.nextLine();
+
+        System.out.print("Enter Basic Salary: ");
+        double basic = sc.nextDouble();
+
+        double hra = basic * 0.20;
+        double da = basic * 0.10;
+        double gross = basic + hra + da;
+
+        double tax = gross * 0.10;
+        double net = gross - tax;
+
+        System.out.println("\n----- Employee Details -----");
+        System.out.println("ID          : " + id);
+        System.out.println("Name        : " + name);
+        System.out.println("Department  : " + dept);
+        System.out.println("Designation : " + desig);
+        System.out.println("Gross Salary: " + gross);
+        System.out.println("Net Salary  : " + net);
+
+        sc.close();
+    }
+}
+
 Task-3
 any scanner program (do it unique)
 
+import java.util.Scanner;
+
+public class ElectricityBill {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Customer Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Units Consumed: ");
+        int units = sc.nextInt();
+
+        double bill;
+
+        if (units <= 100) {
+            bill = units * 1.5;
+        } else if (units <= 200) {
+            bill = (100 * 1.5) + (units - 100) * 2.5;
+        } else {
+            bill = (100 * 1.5) + (100 * 2.5) + (units - 200) * 4;
+        }
+
+        System.out.println("\n----- Electricity Bill -----");
+        System.out.println("Name  : " + name);
+        System.out.println("Units : " + units);
+        System.out.println("Bill  : " + bill);
+
+        sc.close();
+    }
+}
+
 Task-4
 loan eligible with help of nested 
+
+import java.util.Scanner;
+
+public class LoanEligibility {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Age: ");
+        int age = sc.nextInt();
+
+        System.out.print("Enter Salary: ");
+        double salary = sc.nextDouble();
+
+        System.out.print("Enter Credit Score: ");
+        int credit = sc.nextInt();
+
+        if (age >= 21) {
+            if (salary >= 25000) {
+                if (credit >= 700) {
+                    System.out.println("Loan Approved");
+                } else {
+                    System.out.println("Loan Rejected: Low Credit Score");
+                }
+            } else {
+                System.out.println("Loan Rejected: Low Salary");
+            }
+        } else {
+            System.out.println("Loan Rejected: Age not eligible");
+        }
+
+        sc.close();
+    }
+}
