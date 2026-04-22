@@ -34,7 +34,7 @@ public class LoginSystem {
 
 
 task-2
-simple calculator using 
+simple calculator using charAt()
 
 package day4;
 
