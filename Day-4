@@ -1,14 +1,242 @@
 task-1 
 login system using nested if else
 
+package day4;
+
+import java.util.Scanner;
+
+public class LoginSystem {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String correctUser = "admin";
+        String correctPass = "1234";
+
+        System.out.print("Enter Username: ");
+        String user = sc.nextLine();
+
+        System.out.print("Enter Password: ");
+        String pass = sc.nextLine();
+
+        if (user.equals(correctUser)) {
+            if (pass.equals(correctPass)) {
+                System.out.println("Login Successful");
+            } else {
+                System.out.println("Wrong Password");
+            }
+        } else {
+            System.out.println("Invalid Username");
+        }
+    }
+
+}
+
+
 task-2
 simple calculator using 
+
+package day4;
+
+import java.util.Scanner;
+
+public class SimpleCalculator {
+	public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        double a = sc.nextDouble();
+
+        System.out.print("Enter operator (+, -, *, /): ");
+        char op = sc.next().charAt(0);
+
+        System.out.print("Enter second number: ");
+        double b = sc.nextDouble();
+
+        double result;
+
+        if (op == '+') {
+            result = a + b;
+        } else if (op == '-') {
+            result = a - b;
+        } else if (op == '*') {
+            result = a * b;
+        } else if (op == '/') {
+            if (b != 0) {
+                result = a / b;
+            } else {
+                System.out.println("Cannot divide by zero");
+                return;
+            }
+        } else {
+            System.out.println("Invalid operator");
+            return;
+        }
+
+        System.out.println("Result: " + result);
+    }
+}
+
 
 task-3
 calculate no.of days in a month
 
+package day4;
+
+import java.util.Scanner;
+
+public class DaysInMonth {
+	public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter month number (1-12): ");
+        int month = sc.nextInt();
+
+        System.out.print("Enter year: ");
+        int year = sc.nextInt();
+
+        int days;
+
+        if (month == 2) {
+            if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                days = 29;
+            } else {
+                days = 28;
+            }
+        } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+            days = 30;
+        } else {
+            days = 31;
+        }
+
+        System.out.println("Number of days: " + days);
+    }
+}
+
+
 task-4
 atm machine program using switch expression case
 
+package day4;
+
+import java.util.Scanner;
+
+public class ATMProgram {
+	public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        double balance = 10000; 
+
+        System.out.println("1. Check Balance");
+        System.out.println("2. Deposit");
+        System.out.println("3. Withdraw");
+        System.out.print("Choose option: ");
+        int choice = sc.nextInt();
+
+        switch (choice) {
+
+            case 1:
+                System.out.println("Balance: " + balance);
+                break;
+
+            case 2:
+                System.out.print("Enter deposit amount: ");
+                double deposit = sc.nextDouble();
+                balance += deposit;
+                System.out.println("Updated Balance: " + balance);
+                break;
+
+            case 3:
+                System.out.print("Enter withdraw amount: ");
+                double withdraw = sc.nextDouble();
+
+                if (withdraw <= balance) {
+                    balance -= withdraw;
+                    System.out.println("Updated Balance: " + balance);
+                } else {
+                    System.out.println("Insufficient Balance");
+                }
+                break;
+
+            default:
+                System.out.println("Invalid Choice");
+        }
+    }
+
+}
+
+
 task-5
 hotel booking(buffet system) system with help of nested switch 
+
+package day4;
+
+import java.util.Scanner;
+
+public class HotelBuffet {
+	public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("1. Veg Menu");
+        System.out.println("2. Non-Veg Menu");
+        System.out.print("Select Menu: ");
+        int menu = sc.nextInt();
+
+        int price = 0;
+
+        switch (menu) {
+
+            case 1:
+                System.out.println("1. Idli - 50");
+                System.out.println("2. Dosa - 70");
+                System.out.print("Choose Item: ");
+                int veg = sc.nextInt();
+
+                switch (veg) {
+                    case 1:
+                        price = 50;
+                        System.out.println("You selected Idli");
+                        break;
+                    case 2:
+                        price = 70;
+                        System.out.println("You selected Dosa");
+                        break;
+                    default:
+                        System.out.println("Invalid Veg Item");
+                }
+                break;
+
+            case 2:
+                System.out.println("1. Chicken Biryani - 150");
+                System.out.println("2. Fish Fry - 120");
+                System.out.print("Choose Item: ");
+                int nonveg = sc.nextInt();
+
+                switch (nonveg) {
+                    case 1:
+                        price = 150;
+                        System.out.println("You selected Chicken Biryani");
+                        break;
+                    case 2:
+                        price = 120;
+                        System.out.println("You selected Fish Fry");
+                        break;
+                    default:
+                        System.out.println("Invalid Non-Veg Item");
+                }
+                break;
+
+            default:
+                System.out.println("Invalid Menu Choice");
+        }
+
+        if (price > 0) {
+            System.out.println("Total Price: " + price);
+        }
+    }
+
+}
+
