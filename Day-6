@@ -1,1 +1,161 @@
+today's Notes 
 nested for loop, while loop and do while
+
+Task-1,2,3 & 4
+give any four pattern programs(2 star and 2 number) using nested for loop
+
+//Star Pattern Program
+public class StarPattern {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 5; i++) {
+
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+//Inverted Star Pattern
+public class InvertedStarPattern {
+    public static void main(String[] args) {
+
+        for (int i = 5; i >= 1; i--) {
+
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+//Number Pattern Program
+public class NumberPattern {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 5; i++) {
+
+            for (int j = 1; j <= i; j++) {
+                System.out.print(j + " ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+//Repeated Number Pattern
+public class RepeatedNumberPattern {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 5; i++) {
+
+            for (int j = 1; j <= i; j++) {
+                System.out.print(i + " ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+explanation : 
+i = 1 → starts from row 1
+i <= 5 → runs until row 5
+i++ → increases row number by 1
+j starts from 1
+loop runs until j <= i
+System.out.print("* ");  // not println
+System.out.println(); // moves to next line
+
+Task-5
+Generate a electricity bill for 6 months and calculate the total amount for that six months.
+
+import java.util.Scanner;
+
+public class ElectricityBill {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        double totalBill = 0;
+
+        for (int i = 1; i <= 6; i++) {
+
+            System.out.print("Enter electricity bill for month " + i + ": ");
+            double bill = sc.nextDouble();
+
+            totalBill = totalBill + bill;
+        }
+
+        System.out.println("Total electricity bill for 6 months = ₹" + totalBill);
+    }
+}
+
+Task-6
+Number guessing program with three attempts 
+
+import java.util.Scanner;
+
+public class NumberGuessing {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int secretNumber = 50;
+
+        for (int i = 1; i <= 3; i++) {
+
+            System.out.print("Enter your guess: ");
+            int guess = sc.nextInt();
+
+            if (guess == secretNumber) {
+                System.out.println("Number is correct");
+                break;
+            } 
+            else if (guess < secretNumber) {
+                System.out.println("Number is Small");
+            } 
+            else if (guess > secretNumber) {
+                System.out.println("Number is big");
+            }
+            else {
+                System.out.println("Number is invalid");
+            }
+        }
+    }
+}
+
+Task-7
+code using while loop
+username and password, check the strength of the password if it is strong or weak
+
+// very very difficult logic 
+
+Task-8
+reverse a String
+
+import java.util.Scanner;
+
+public class ReverseString {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String s = sc.nextLine();  
+
+        String r = "";
+
+        for (int i = 0; i < s.length(); i++) {
+            r = s.charAt(i) + r;  
+        }
+
+        System.out.println("Reversed String: " + r);
+    }
+}
