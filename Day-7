@@ -1,0 +1,67 @@
+Arrays: Collections of similar type of data stored in a single variable
+--> fixed size 
+--> cannot change the position of the array 
+--> memory stored in heap in Contiguous form
+--> index based (starts from zero)
+
+types 
+1. Single-Dimensional
+2. Multi-Dimensional
+3. Jagged Arrays (not important)
+
+syntax : 
+int arr[] = {1,2,3,4,5};
+
+using for loop:
+for(int i=0; i<arr.length-1; i++)
+{
+System.out.println(arr[i]);
+}
+
+to reverse the array:
+int[] arr = {1, 2, 3, 4, 5};
+for (int i = arr.length - 1; i >= 0; i--) {
+    System.out.print(arr[i] + " ");
+
+example code:
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class ArrayExample {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the size of the array : ");
+        int size = sc.nextInt();
+
+        int array[] = new int[size];
+
+        System.out.println("Enter the Array elements : ");
+
+        for (int i = 0; i < size; i++) {
+
+            System.out.print("Enter the " + i + " element : ");
+            array[i] = sc.nextInt();
+        }
+
+        System.out.println();
+
+        for (int i = 0; i < size; i++) {
+
+            System.out.println(array[i]);
+        }
+    }
+}
+
+Multi-dimensional array:An array of arrays
+
+
+1. find the sum of elements in an array
+2. sort the array in descending order
+3. find duplicate elements in an array
+4. search a number in an array and print the index number of that number.
+5. add a matrix and b matrix and store o/p in c matrix(2d array)
+6. read marks of multiple students using array(array + nested for loop)
