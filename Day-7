@@ -60,8 +60,165 @@ Multi-dimensional array:An array of arrays
 
 
 1. find the sum of elements in an array
+
+public class SumArray {
+    public static void main(String[] args) {
+
+        int[] arr = {10, 20, 30, 40};
+        int sum = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            sum = sum + arr[i];
+        }
+
+        System.out.println("Sum = " + sum);
+    }
+}
+
 2. sort the array in descending order
+
+import java.util.Arrays;
+
+public class DescendingSort {
+    public static void main(String[] args) {
+
+        int[] arr = {40, 10, 30, 20};
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+
+                if (arr[i] < arr[j]) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+
+        System.out.println(Arrays.toString(arr));
+    }
+}
+
 3. find duplicate elements in an array
+
+public class DuplicateElements {
+    public static void main(String[] args) {
+
+        int[] arr = {10, 20, 30, 20, 40, 10};
+
+        System.out.println("Duplicate elements are:");
+
+        for (int i = 0; i < arr.length; i++) {
+
+            for (int j = i + 1; j < arr.length; j++) {
+
+                if (arr[i] == arr[j]) {
+                    System.out.println(arr[i]);
+                }
+            }
+        }
+    }
+}
+
 4. search a number in an array and print the index number of that number.
+
+import java.util.Scanner;
+
+public class SearchNumber {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int[] arr = {10, 20, 30, 40, 50};
+
+        System.out.print("Enter number to search: ");
+        int num = sc.nextInt();
+
+        for (int i = 0; i < arr.length; i++) {
+
+            if (arr[i] == num) {
+                System.out.println("Number found at index: " + i);
+                return;
+            }
+        }
+
+        System.out.println("Number not found");
+    }
+}
+
 5. add a matrix and b matrix and store o/p in c matrix(2d array)
+
+public class MatrixAddition {
+    public static void main(String[] args) {
+
+        int[][] a = {
+                {1, 2},
+                {3, 4}
+        };
+
+        int[][] b = {
+                {5, 6},
+                {7, 8}
+        };
+
+        int[][] c = new int[2][2];
+
+        for (int i = 0; i < 2; i++) {
+
+            for (int j = 0; j < 2; j++) {
+
+                c[i][j] = a[i][j] + b[i][j];
+            }
+        }
+
+        System.out.println("Result Matrix:");
+
+        for (int i = 0; i < 2; i++) {
+
+            for (int j = 0; j < 2; j++) {
+
+                System.out.print(c[i][j] + " ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
 6. read marks of multiple students using array(array + nested for loop)
+
+import java.util.Scanner;
+
+public class StudentMarks {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int[][] marks = new int[3][3];
+
+        for (int i = 0; i < 3; i++) {
+
+            System.out.println("Enter marks for Student " + (i + 1));
+
+            for (int j = 0; j < 3; j++) {
+
+                System.out.print("Subject " + (j + 1) + ": ");
+                marks[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println("\nStudent Marks:");
+
+        for (int i = 0; i < 3; i++) {
+
+            System.out.print("Student " + (i + 1) + ": ");
+
+            for (int j = 0; j < 3; j++) {
+
+                System.out.print(marks[i][j] + " ");
+            }
+
+            System.out.println();
+        }
+    }
+}
