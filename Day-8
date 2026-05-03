@@ -1,3 +1,93 @@
+File Management System:
+--> comes under java.io.*;
+
+to create a new file:
+File = new File("stu.txt");
+//here .txt extention is maditory.
+
+1. Methods & Method	Purpose of File Class
+//import java.io.File;
+
+createNewFile()	Creates a new file
+exists()	Checks if file exists
+getName()	Returns file name
+getPath()	Returns file path
+getAbsolutePath()	Returns full path
+canRead()	Checks if file is readable
+canWrite()	Checks if file is writable
+length()	Returns file size
+delete()	Deletes file
+mkdir()	Creates a folder
+mkdirs()	Creates nested folders
+isFile()	Checks if it is a file
+isDirectory()	Checks if it is a directory
+list()	Lists files in folder
+renameTo()	Renames file
+lastModified()	Returns last modified time
+setReadOnly()	Makes file read-only
+rename() Reanames the existing file 
+flush() Remove the bufferspace
+
+Example Using File Methods
+import java.io.File;
+
+public class Main {
+    public static void main(String[] args) {
+
+        File file = new File("student.txt");
+
+        System.out.println(file.exists());
+        System.out.println(file.getName());
+        System.out.println(file.getPath());
+        System.out.println(file.canRead());
+        System.out.println(file.canWrite());
+    }
+}
+
+2. Methods & Method	Purpose of FileWriter
+//import java.io.FileWriter;
+
+write()	Writes data into file
+append()	Adds data at end
+close()	Closes file
+
+Example
+FileWriter fw = new FileWriter("data.txt");
+
+fw.write("Hello");
+fw.append(" World");
+
+fw.close();
+
+3. Methods & Method Purpose of FileReader
+read()	Reads character
+close()	Closes reader
+
+4. Methods & Method	Purpose of BufferedReader
+readLine()	Reads one line
+close()	Closes reader
+
+5. Methods & Method	Purpose of BufferedWriter
+write()	Writes data
+newLine()	Adds new line
+close()	Closes writer
+
+6. Methods & Method	Purpose of Scanner
+hasNextLine()	Checks next line exists
+nextLine()	Reads line
+close()	Closes scanner
+
+
+--> whenever we open the filewriter, we have to close it without fail.
+--> To append data, use:
+    FileWriter("filename", true)
+    here true means append mode.
+--> Without append mode it will remove old content and write new content only.
+
+
+
+TASKS:
+
 1. Employee Management System (Based on Your StudentResultSystem Logic)
 import java.util.Scanner;
 
