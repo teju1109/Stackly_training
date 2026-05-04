@@ -390,3 +390,70 @@ public class VotingSystem {
         System.out.println("Program execution finished.");
     }
 }
+
+WORKING OF TASK-3 : 
+
+Step 1: Start with basic structure
+
+public class VotingSystem {
+    public static void main(String[] args) {
+
+    }
+}
+
+Step 2: Take input from user
+
+import java.util.Scanner;
+
+public class VotingSystem {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter your age: ");
+        int age = sc.nextInt();
+    }
+}
+
+Step 3: Add simple logic first (no exception yet)
+
+if (age < 18) {
+    System.out.println("Not eligible to vote");
+} else {
+    System.out.println("You can vote");
+}
+
+Step 4: Think → “I want custom error”
+
+Replace this:
+System.out.println("Not eligible to vote");
+With:
+throw new InvalidAgeException("Age is too small");
+
+Step 5: Create your custom exception
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+Step 6: Java gives error again Because it’s a checked exception.
+
+Step 7: Add try-catch
+
+try {
+    if (age < 18) {
+        throw new InvalidAgeException("Age is too small");
+    } else {
+        System.out.println("You can vote");
+    }
+} catch (InvalidAgeException e) {
+    System.out.println(e.getMessage());
+}
+
+Step 8: Add finally (optional but good)
+
+finally {
+    sc.close();
+}
