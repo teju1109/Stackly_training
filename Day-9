@@ -1,1 +1,134 @@
+Exception = Runtime error that stops the normal flow of a program
 
+Types of Exceptions (basic idea)
+1.Checked Exceptions
+  Checked at compile time
+  Example: File not 
+Common Checked Exceptions:
+-->FileNotFoundException
+-->IOException
+-->SQLException
+
+2.Unchecked Exceptions
+  Happens during runtime
+  Example: divide by zero, null value
+Common Unchecked Exceptions:
+-->ArithmeticException (divide by zero)
+-->NullPointerException (using null value)
+-->ArrayIndexOutOfBoundsException
+
+| Feature      | Checked Exception | Unchecked Exception |
+| ------------ | ----------------- | ------------------- |
+| When occurs  | Compile time      | Runtime             |
+| Must handle? | Yes (compulsory)  | No (optional)       |
+| Example      | File not found    | Divide by zero      |
+
+exception Handling:
+
+try → put risky code
+catch → handle error
+finally → This block always runs, whether exception occurs or not.
+throw → Used to manually create an exception
+throws → Used in method declaration to declare exceptions
+
+Key Difference: throw vs throws
+| Feature | throw                 | throws                    |
+| ------- | --------------------- | ------------------------- |
+| Usage   | inside method         | in method declaration     |
+| Purpose | create exception      | declare exception         |
+| Example | throw new Exception() | method() throws Exception |
+
+example : 
+public class SimpleExceptionExample {
+    public static void main(String[] args) {
+
+        System.out.println("Program started");
+
+        try {
+            int a = 10;
+            int b = 0;
+
+            int result = a / b; 
+            System.out.println("Result: " + result);
+
+        } catch (ArithmeticException e) {
+            System.out.println("Error: Cannot divide by zero");
+
+        } finally {
+            System.out.println("This block always executes");
+        }
+
+        System.out.println("Program ended");
+    }
+}
+
+Methods to print exception?
+
+1. e.printStackTrace()
+
+Prints full error details + line number + method call path
+Example:
+try {
+    int a = 10 / 0;
+} catch (Exception e) {
+    e.printStackTrace();
+}
+Output: (example)
+java.lang.ArithmeticException: / by zero
+    at Main.main(Main.java:4)
+
+✔ Best for debugging
+✔ Shows where error happened
+
+2. e.getMessage()
+
+Prints only the error message
+
+Example:
+try {
+    int a = 10 / 0;
+} catch (Exception e) {
+    System.out.println(e.getMessage());
+}
+Output :
+/ by zero
+
+✔ Clean and simple
+✔ No class name, no line number
+
+3. e.toString()
+
+Prints exception name + message
+
+Example:
+try {
+    int a = 10 / 0;
+} catch (Exception e) {
+    System.out.println(e.toString());
+}
+Output :
+java.lang.ArithmeticException: / by zero
+
+✔ More info than getMessage()
+✔ Less detail than printStackTrace()
+
+4. Custom Print (Using System.out.println)
+
+You can print your own message
+
+Example:
+try {
+    int a = 10 / 0;
+} catch (Exception e) {
+    System.out.println("Something went wrong!");
+}
+
+✔ User-friendly message
+✔ Used in real applications
+
+| Method              | Output                     | Use           |
+| ------------------- | -------------------------- | ------------- |
+| `printStackTrace()` | Full details + line number | Debugging     |
+| `getMessage()`      | Only message               | Simple output |
+| `toString()`        | Name + message             | Medium detail |
+| Custom print        | Your message               | User display  |
