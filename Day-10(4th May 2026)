@@ -1,1 +1,189 @@
+Method : Method is a block of code that performs a specific task and
+         can be reused whenever needed.
+A method:
+-->Has a name
+-->May take inputs (parameters)
+-->Executes some statements (code)
+-->May return a value
+-->Inside a method you cannot write another method
+
+SYNTAX :
+access_modifier return_type method_name(parameters) {
+    // method body (code)
+}
+
+Access Modifier
+Defines who can use the method
+Examples:
+public → accessible everywhere
+private → only inside the class
+protected → within package + subclasses
+
+Return Type
+Type of value the method returns
+Examples:
+int → returns integer
+double → returns decimal
+void → returns nothing
+
+Method Name
+Name of the method (e.g., addNumbers, display)
+Should follow naming rules (camelCase)
+
+Parameters
+Inputs to the method
+Written inside ()
+Example: (int a, int b)
+Can be empty → ()
+Method Body
+Code inside { }
+Executes when method is called
+
+Example 1 (No return, no parameters) :
+public static void greet() {
+    System.out.println("Hello");
+}
+
+Example 2 (With parameters & return) :
+public static int add(int a, int b) {
+    return a + b;
+}
+
+Methods can be:
+
+Void / Non-void
+With / Without parameters
+Static / Non-static
+
+Void Method (no return value)
+Does not return anything
+public static void greet() {
+    System.out.println("Hello");
+}
+
+Non-Void Method (returns value)
+Returns a value using return
+public static int add(int a, int b) {
+    return a + b;
+}
+
+Static Method
+Called using class name
+static void hello() {
+    System.out.println("Hi");
+}
+
+Non-Static Method
+void show() {
+    System.out.println("Instance method");
+}
+
+No parameters + No return value
+public static void greet() {
+    System.out.println("Hello");
+}
+
+No parameters + Return value
+public static int getNumber() {
+    return 10;
+}
+
+Parameters + No return value
+public static void printSum(int a, int b) {
+    System.out.println(a + b);
+}
+
+Parameters + Return value (Most important)
+public static int multiply(int a, int b) {
+    return a * b;
+}
+
+Simples codes to understand Methods using :
+
+1.Void vs Non-Void Methods
+
+public class MethodTypes1 {
+
+    // Void method (no return)
+    static void greet() {
+        System.out.println("Hello");
+    }
+
+    // Non-void method (returns value)
+    static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        greet();  // calling void method
+
+        int result = add(5, 3);  // calling non-void
+        System.out.println(result);
+    }
+}
+
+2. With Parameters vs Without Parameters
+
+public class MethodTypes2 {
+
+    // Without parameters
+    static void show() {
+        System.out.println("No parameters");
+    }
+
+    // With parameters
+    static void display(int num) {
+        System.out.println("Number: " + num);
+    }
+
+    public static void main(String[] args) {
+        show();           // no input
+        display(10);      // passing input
+    }
+}
+
+3. Static vs Non-Static Methods
+
+public class MethodTypes3 {
+
+    // Static method
+    static void staticMethod() {
+        System.out.println("Static method");
+    }
+
+    // Non-static method
+    void nonStaticMethod() {
+        System.out.println("Non-static method");
+    }
+
+    public static void main(String[] args) {
+
+        // Calling static method
+        staticMethod();
+
+        // Calling non-static method
+        MethodTypes3 obj = new MethodTypes3();
+        obj.nonStaticMethod();
+    }
+}
+
+
+
+
+Tasks
+1.simulate the same program customize if you want to.
+
+2.calculate house rent with 3 scenes 
+a. method-1
+calculate rent()int rentAmount & int noOfMonths
+method--2
+rent with security deposit (rent or lease)
+method-3(in array concept)
+store owner and tenants details(owner name, type of rent/lease,)
+search by owner name 
+
+3. combine 3 concepts together:
+Develop a Java program to process salaries for multiple employees 
+using arrays, methods (bonus, increment, gross, net), 
+and a do-while loop to repeatedly perform operations based on user choice
 
