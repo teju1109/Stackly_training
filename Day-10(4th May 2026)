@@ -176,14 +176,130 @@ Tasks
 2.calculate house rent with 3 scenes 
 a. method-1
 calculate rent()int rentAmount & int noOfMonths
+
+public class HouseRent {
+
+    static int calculateRent(int rentAmount, int noOfMonths) {
+        int totalRent = rentAmount * noOfMonths;
+        return totalRent;
+    }
+
+    public static void main(String[] args) {
+
+        int rentAmount = 5000;
+        int noOfMonths = 6;
+
+        int result = calculateRent(rentAmount, noOfMonths);
+
+        System.out.println("Total Rent = " + result);
+    }
+}
+
 method--2
 rent with security deposit (rent or lease)
+
+
 method-3(in array concept)
 store owner and tenants details(owner name, type of rent/lease,)
 search by owner name 
+
+import java.util.Scanner;
+public class HouseRent {
+
+    static void searchOwner(String[] owner, String[] tenant, String[] type, String name) {
+
+        for (int i = 0; i < owner.length; i++) {
+
+            if (owner[i].equalsIgnoreCase(name)) {
+                System.out.println("Owner: " + owner[i]);
+                System.out.println("Tenant: " + tenant[i]);
+                System.out.println("Type: " + type[i]);
+                return; // stop after finding
+            }
+        }
+
+        System.out.println("Owner not found");
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String[] owner = {"Ravi", "Suresh", "Anita"};
+        String[] tenant = {"Kiran", "Meena", "Rahul"};
+        String[] type = {"rent", "lease", "rent"};
+        System.out.print("Enter owner name: ");
+        String name = sc.nextLine();
+        searchOwner(owner, tenant, type, name);
+
+        sc.close();
+    }
+}
 
 3. combine 3 concepts together:
 Develop a Java program to process salaries for multiple employees 
 using arrays, methods (bonus, increment, gross, net), 
 and a do-while loop to repeatedly perform operations based on user choice
+
+package Methods;
+
+import java.util.Scanner;
+
+public class PayrollSystem {
+
+    static String[] names = {"Alice", "Bob", "Charlie"};
+    static double[] salaries = {5000, 6000, 7000};
+
+    public double getBonus(double s) {
+        return s * 0.10; 
+    }
+
+    public double getIncrement(double s, double p) {
+        return s * (p / 100);
+    }
+
+    public static void showNet(double s) {
+        double tax = s * 0.15;
+        System.out.println("Net Salary after Tax: " + (s - tax));
+    }
+
+    public static void welcome() {
+        System.out.println("\n--- MENU ---");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        PayrollSystem obj = new PayrollSystem(); 
+        int choice;
+
+        do {
+            welcome(); 
+            System.out.println("1. Bonus\n2. Increment\n3. Net Salary\n4. Exit");
+            System.out.print("Select: ");
+            choice = sc.nextInt();
+
+            if (choice >= 1 && choice <= 3) {
+                System.out.print("Enter Employee ID (0, 1, or 2): ");
+                int id = sc.nextInt();
+                double s = salaries[id];
+
+                if (choice == 1) {
+                    double b = obj.getBonus(s);
+                    System.out.println("Bonus for " + names[id] + ": " + b);
+                } 
+                else if (choice == 2) {
+                    System.out.print("Enter %: ");
+                    double p = sc.nextDouble();
+                    System.out.println("Increment: " + obj.getIncrement(s, p));
+                } 
+                else if (choice == 3) {
+                    showNet(s);
+                }
+            }
+        } while (choice != 4);
+
+        System.out.println("Closed.");
+        sc.close();
+    }
+}
 
