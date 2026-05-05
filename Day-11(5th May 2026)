@@ -1,1 +1,107 @@
+Constructor : constructor is a special method used to initialize 
+              an object when it is created.
 
+-->A constructor has the same name as the class.
+-->It does not have a return type (not even void).
+-->It is called automatically when you create an object using the new keyword.
+-->For each constructor we have to create a seperate object
+
+Types of constructors:
+
+1.Default constructor
+-->No parameters
+Student() {
+    name = "Unknown";
+}
+
+2.Parameterized constructor
+-->Takes arguments to initialize values
+Student(String n) {
+    name = n;
+}
+
+this : a keyword used to refer the current object.
+
+example code of a constructor :
+
+class Student {
+    String name;
+    int age;
+    Student() {
+        name = "Teju";
+        age = 21;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Student s1 = new Student();
+        System.out.println("Name: " + s1.name);
+        System.out.println("Age: " + s1.age);
+    }
+}
+
+working of the above code :
+
+Step 1: Start with Main Class (Entry Point)
+public class Main {
+    public static void main(String[] args) {
+
+        Student s1 = new Student();  // object creation
+
+        System.out.println("Name: " + s1.name);
+        System.out.println("Age: " + s1.age);
+    }
+}
+
+Step 2: Now Add the Student Class
+class Student {
+    String name;
+    int age;
+}
+
+Step 3: Now Add Constructor (Important Part)
+class Student {
+    String name;
+    int age;
+
+    // Constructor
+    Student() {
+        name = "Teju";
+        age = 21;
+    }
+}
+
+Steps to Create a Constructor
+Step 1: Create a Class
+        class Student {}
+Step 2: Add Variables (Data)
+        class Student 
+        {
+          String name;
+          int age;
+        }
+Step 3: Write the Constructor
+        class Student 
+        {
+          String name;
+          int age;
+          Student()
+           {   // constructor
+             name = "Teju";
+             age = 21;
+           }
+        }
+-->Same name as class
+-->No return type
+-->Used to assign values
+
+
+
+
+
+Tasks
+1. write a code using default constructor, parameterized constructor and use "this" keyword , all in a single program.
+2. What do you mean by steap copy and shallow copy
+3. static program
