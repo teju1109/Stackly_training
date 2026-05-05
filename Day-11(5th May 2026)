@@ -97,6 +97,79 @@ Step 3: Write the Constructor
 -->No return type
 -->Used to assign values
 
+final-->Once assigned, you cannot change it.
+public class Main {
+    public static void main(String[] args) {
+        final int x = 10;
+        // x = 20; ❌ ERROR (cannot change)
+        System.out.println(x);
+    }
+}
+
+finally-->This block will run no matter what (exception or not)
+public class Main {
+    public static void main(String[] args) {
+        try {
+            int a = 10 / 0;  // error
+            } 
+        catch (Exception e) {
+             System.out.println("Exception caught");
+            } 
+        finally {
+            System.out.println("Finally block always runs");
+        }
+    }
+}
+
+finalize()-->Method → called before object is destroyed.
+class Demo {
+    protected void finalize() {
+        System.out.println("Object is destroyed");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Demo d1 = new Demo();
+        d1 = null;   // making object eligible for garbage collection
+        System.gc(); // request JVM to clean memory
+    }
+}
+
+Comparison :
+| Feature   | final                   | finally             | finalize()          |
+| --------- | ----------------------- | ------------------- | ------------------- |
+| Type      | Keyword                 | Block               | Method              |
+| Purpose   | Restrict changes        | Always execute code | Cleanup before GC   |
+| Used with | Variable, method, class | try-catch           | Object (GC process) |
+
+final stops changes, 
+finally always runs and
+finalize() is for cleanup before an object is removed.
+
+Garbage Collection (GC) :
+It is a process where Java automatically removes unused objects from memory.
+
+example code : 
+class Demo {
+    public void show() {
+        System.out.println("Object is alive");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Demo d1 = new Demo();  // object created
+        d1.show();
+        d1 = null;  // object is now unused (eligible for GC)
+        System.gc();  // request JVM to run garbage collection
+    }
+}
+
+-->Java handles memory automatically (no need to free manually)
+-->System.gc() is only a request, not a guarantee
+-->You don’t control exactly when GC runs
+
 
 
 
