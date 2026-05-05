@@ -176,5 +176,190 @@ public class Main {
 
 Tasks
 1. write a code using default constructor, parameterized constructor and use "this" keyword , all in a single program.
+
+class Student {
+
+    String name;
+    int age;
+    Student() {
+        name = "Tejesh";
+        age = 22;
+    }
+    Student(String name, int age) {
+        this.name = name;  
+        this.age = age;
+    }
+    void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        s1.display();
+        Student s2 = new Student("Teju", 21);
+        s2.display();
+    }
+}
+
+Step 1: Start with Main 
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        s1.display();
+    }
+}
+
+Step 2: Add Basic Student Class
+class Student {
+    String name;
+    int age;
+    void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+Step 3: Add Default Constructor
+class Student {
+    String name;
+    int age;
+
+    Student() {
+        name = "Unknown";
+        age = 0;
+    }
+
+    void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+Step 4: Add Parameterized Constructor
+class Student {
+    String name;
+    int age;
+    Student() {
+        name = "Unknown";
+        age = 0;
+    }
+
+    // Parameterized constructor
+    Student(String n, int a) {
+        name = n;
+        age = a;
+    }
+
+    void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+Step 5: Use Both Constructors in Main
+public class Main {
+    public static void main(String[] args) {
+
+        Student s1 = new Student();          // default
+        s1.display();
+
+        Student s2 = new Student("Teju", 21); // parameterized
+        s2.display();
+    }
+}
+
+Step 6: Add this Keyword 
+class Student {
+    String name;
+    int age;
+
+    Student() {
+        name = "Unknown";
+        age = 0;
+    }
+
+    Student(String name, int age) {
+        this.name = name;   // important
+        this.age = age;
+    }
+
+    void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
 2. What do you mean by steap copy and shallow copy
+
+Shallow Copy → copy reference (share same data)
+You are not copying the real object, you are just copying the address (reference).
+Shallow copy → sharing same house
+
+Deep Copy → copy actual data (independent copy)
+You create a new object inside constructor
+Deep copy → building a new house
+
+| Feature       | Shallow Copy   | Deep Copy     |
+| ------------- | -------------- | ------------- |
+| Copy type     | Reference      | Actual data   |
+| Memory        | Shared         | Separate      |
+| Change effect | Affects both   | Independent   |
+
+
+
 3. static program(previous day first task)
+
+public class StaticDemo {
+
+    // Static variables (shared by all objects)
+    static String collegeName = "Global University";
+    static int studentCount = 0;
+
+    // Instance variables (unique for each object)
+    String studentName;
+    int rollNo;
+
+    // Constructor
+    public StaticDemo(String name) {
+        this.studentName = name;
+        studentCount++;              // increase count
+        this.rollNo = studentCount;  // assign roll number
+    }
+
+    // Static method
+    static void changeCollege(String newName) {
+        collegeName = newName;
+    }
+
+    // Instance method
+    void displayInfo() {
+        System.out.println("Roll No: " + rollNo +
+                           " | Name: " + studentName +
+                           " | College: " + collegeName);
+    }
+
+    // Main method
+    public static void main(String[] args) {
+
+        // Access static variable
+        System.out.println("Initial College: " + StaticDemo.collegeName);
+
+        // Create objects
+        StaticDemo s1 = new StaticDemo("Alice");
+        StaticDemo s2 = new StaticDemo("Bob");
+
+        // Display info
+        s1.displayInfo();
+        s2.displayInfo();
+
+        // Change college name
+        StaticDemo.changeCollege("Tech Institute");
+
+        System.out.println("\n--- After College Name Update ---");
+
+        // Display again
+        s1.displayInfo();
+        s2.displayInfo();
+
+        // Total students
+        System.out.println("Total Students created: " + StaticDemo.studentCount);
+    }
+}
