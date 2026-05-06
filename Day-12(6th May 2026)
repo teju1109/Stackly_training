@@ -1,1 +1,68 @@
+ OOPS
 
+OOPS (Object-Oriented Programming System) is a programming approach based on
+objects and classes.
+
+Four Pillars of OOPS in Java
+The four pillars are:
+1. Encapsulation
+2. Inheritance
+3. Polymorphism
+4. Abstraction
+
+Inheritance
+Inheritance allows one class to acquire properties and methods of another class.
+●Keyword used here is extends.
+● Code reuse
+● Reduces duplication
+● Inheritance allows a child class to inherit properties and behaviors
+  from a parent
+  class using the extends keyword.
+
+Types of Inheritance
+1. Single Inheritance
+One child class inherits one parent class.
+2. Multilevel Inheritance
+A class inherits from a class which already inherits from another class.
+3. Hierarchical Inheritance
+Multiple child classes inherit from one parent.
+4. Multiple Inheritance (Not supported with classes)
+Java does not support multiple inheritance using classes, but supports it using
+interfaces.
+5. Hybrid Inheritance
+Combination of two or more types (achieved using interfaces in Java).
+
+Syntax of Inheritance :
+class Parent {   }
+class Child extends Parent {   }
+
+-->IS-A relationship is achieved using inheritance and represents parent-child
+relationship.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tasks-
+1.Banking program
+change constructor,
+
+2. employee management system
+parent class- employee
+empid, empname and basic salary
+child class - manager, developer, intern
+methods - calculate
+display the employee salary
+3. online shopping system
+parent class- product
+productid, productname and productprice
+child class- electronic items(warrenty), clothing(sizes) and food(veg or non-veg)
