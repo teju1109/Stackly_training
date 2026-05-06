@@ -1,0 +1,47 @@
+How to Write Inheritance code Step by Step :
+
+Step 1 — Create Parent Class
+class Parent {}
+
+Step 2 — Add Parent Methods
+class Parent 
+{
+    void method1() 
+    {
+        System.out.println("Parent Method");
+    }
+}
+
+Step 3 — Create Child Class Using extends
+class Child extends Parent {}
+
+Step 4 — Add Child Method
+class Child extends Parent 
+{
+    void method2() 
+    {
+        System.out.println("Child Method");
+    }
+}
+
+Step 5 — Create Object in Main Method
+Child obj = new Child();
+
+Step 6 — Call Both Methods
+obj.method1();
+obj.method2();
+--> method1() comes from Parent
+--> method2() comes from Child
+
+Output :
+Parent Method
+Child Method
+
+Simple Formula to Remember :
+Parent Class
+        ↓
+Child Class extends Parent
+        ↓
+Create Child Object
+        ↓
+Call Parent + Child Methods
