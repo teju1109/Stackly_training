@@ -37,11 +37,3 @@ Output :
 Parent Method
 Child Method
 
-Simple Formula to Remember :
-Parent Class
-        ↓
-Child Class extends Parent
-        ↓
-Create Child Object
-        ↓
-Call Parent + Child Methods
