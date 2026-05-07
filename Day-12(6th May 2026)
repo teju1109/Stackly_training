@@ -53,8 +53,135 @@ relationship.
 
 
 Tasks-
-1.Banking program
-change constructor,
+1.same program in the recording, do modifications 
+a. write constructor in the //base class
+b. modify withdraw
+c. check password verification, add method if entered pin and current pin are the same.
+
+
+import java.util.Scanner;
+
+// Base class
+class Account {
+
+    String accountHolder;
+    double balance;
+
+    // Constructor in Base Class
+    Account(String name, double bal) {
+        accountHolder = name;
+        balance = bal;
+    }
+
+    void showBalance() {
+        System.out.println("Account Holder : " + accountHolder);
+        System.out.println("Balance : ₹" + balance);
+    }
+}
+
+// Intermediate class
+class ATM extends Account {
+
+    // Constructor of ATM calling Base class constructor
+    ATM(String name, double bal) {
+        super(name, bal);
+    }
+
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println("₹" + amount + " deposited.");
+    }
+
+    // Modified Withdraw Method
+    void withdraw(double amount) {
+
+        if (amount <= 0) {
+            System.out.println("Enter valid amount.");
+        }
+
+        else if (amount > balance) {
+            System.out.println("Insufficient balance.");
+        }
+
+        else {
+            balance -= amount;
+            System.out.println("₹" + amount + " withdrawn.");
+        }
+    }
+}
+
+// Derived class
+class ATMMachine extends ATM {
+
+    private int currentPIN = 1234;
+
+    // Constructor
+    ATMMachine(String name, double bal) {
+        super(name, bal);
+    }
+
+    // Password Verification Method
+    boolean checkPassword(int enteredPIN) {
+
+        if (enteredPIN == currentPIN) {
+            return true;
+        }
+
+        else {
+            return false;
+        }
+    }
+
+    void doTransaction(int enteredPIN, String type, double amount) {
+
+        // checking password verification
+        if (checkPassword(enteredPIN)) {
+
+            System.out.println("PIN verified.");
+
+            if (type.equalsIgnoreCase("withdraw")) {
+                withdraw(amount);
+            }
+
+            else if (type.equalsIgnoreCase("deposit")) {
+                deposit(amount);
+            }
+
+            else {
+                System.out.println("Invalid transaction type.");
+            }
+
+            showBalance();
+        }
+
+        else {
+            System.out.println("Invalid PIN.");
+        }
+    }
+}
+
+// Main class
+public class ATMTransactionExample {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // object creation
+        ATMMachine atm = new ATMMachine("Janani", 5000);
+
+        System.out.println("Enter the PIN Number : ");
+        int pin = sc.nextInt();
+
+        atm.doTransaction(pin, "withdraw", 2000);
+
+        atm.doTransaction(pin, "deposit", 1000);
+
+        atm.doTransaction(1111, "withdraw", 500);
+
+        sc.close();
+    }
+}
 
 2. employee management system
 parent class- employee
