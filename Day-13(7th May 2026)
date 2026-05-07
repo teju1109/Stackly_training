@@ -98,6 +98,95 @@ Difference Between Overloading and Overriding :
 | ------------------ | ------------ | -------------- |
 | Same Method Name   | Yes          | Yes            |
 | Parameters         | Different    | Same           |
+
+
+
+
+Encapsulation in Java (OOP Concept):
+Wrapping data and methods into a single unit and 
+protecting the data from direct access.
+
+In Java:
+
+-->variables → hidden using private
+-->access given using:
+-->getter methods
+-->setter methods
+-->Hide data → Allow controlled access
+
+Encapsulation is Achieved in Java by Using:
+1.private variables
+2.public getter and setter methods
+
+example code : 
+
+class Student {
+    // Private variable
+    private int marks;
+
+    // Setter method
+    void setMarks(int m) {
+        marks = m;
+    }
+
+    // Getter method
+    int getMarks() {
+        return marks;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Student obj = new Student();
+        obj.setMarks(90);
+        System.out.println(obj.getMarks());
+    }
+}
+
+Output :
+90
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tasks :
+
+crate a car rental system using overloading,
+a. calculate the car per hour (do-while)
+b. calculate on day basis 2 parameters(no.of days and rent price)
+c. with or without driver using boolean (true-with driver, false-without driver)
+
+simple interest with time period 
+
+compound intrest
+
+encapsulation tasks :
+1.hospital management system
+patient id, p_name, bill,
+
+setbill and getbill
+display patient details
 | Classes            | Same class   | Parent & Child |
 | Time               | Compile Time | Run Time       |
 | Inheritance Needed | No           | Yes            |
