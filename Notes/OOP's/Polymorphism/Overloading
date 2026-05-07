@@ -1,0 +1,43 @@
+Simple Method Overloading Program in Java :
+
+class Addition {
+
+    void add(int a, int b) {
+        System.out.println("Addition of 2 numbers : " + (a + b));
+    }
+
+    void add(int a, int b, int c) {
+        System.out.println("Addition of 3 numbers : " + (a + b + c));
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Addition obj = new Addition();
+
+        obj.add(10, 20);
+
+        obj.add(10, 20, 30);
+    }
+}
+
+Output :
+Addition of 2 numbers : 30
+Addition of 3 numbers : 60
+
+Flow :
+obj.add(10,20)
+→ calls 2-parameter method
+obj.add(10,20,30)
+→ calls 3-parameter method
+
+Simple Syntax of Overloading :
+
+void methodName(int a)
+void methodName(int a, int b)
+void methodName(int a, int b, int c)
+
+Same method name
+Different parameters
