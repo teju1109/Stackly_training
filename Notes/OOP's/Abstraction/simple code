@@ -1,0 +1,40 @@
+abstract class Animal {
+
+    abstract void sound();
+}
+
+class Dog extends Animal {
+
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Dog obj = new Dog();
+
+        obj.sound();
+    }
+}
+
+Output :
+Dog barks
+
+Understanding Step by Step :
+
+Step 1 → Abstract Class
+abstract class Animal
+
+Step 2 → Abstract Method
+abstract void sound();
+
+Step 3 → Child Class
+class Dog extends Animal
+
+Step 4 → Method Implementation
+void sound() {
+    System.out.println("Dog barks");
+}
