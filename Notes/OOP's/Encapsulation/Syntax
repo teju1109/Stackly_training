@@ -1,0 +1,7 @@
+class ClassName 
+{
+    private datatype variable;
+    void setVariable(datatype value) {}
+
+    datatype getVariable() {}
+}
