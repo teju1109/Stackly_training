@@ -1,0 +1,51 @@
+Structure
+        Animal
+       /      \
+     Dog      Cat
+
+Step 1 — Parent Class
+class Animal 
+{
+    void eat() 
+    {
+        System.out.println("Eating");
+    }
+}
+
+Step 2 — First Child
+class Dog extends Animal 
+{
+    void bark() 
+    {
+        System.out.println("Barking");
+    }
+}
+
+Step 3 — Second Child
+class Cat extends Animal 
+{
+    void meow() 
+    {
+        System.out.println("Meowing");
+    }
+}
+
+Step 4 — Main Method
+public class Main 
+{
+    public static void main(String[] args) 
+   {
+        Dog d = new Dog();
+        d.eat();
+        d.bark();
+        Cat c = new Cat();
+        c.eat();
+        c.meow();
+    }
+}
+
+Output :
+Eating
+Barking
+Eating
+Meowing
