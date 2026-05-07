@@ -12,7 +12,7 @@ The four pillars are:
 
 Inheritance
 Inheritance allows one class to acquire properties and methods of another class.
-●Keyword used here is extends.
+● Keyword used here is extends.
 ● Code reuse
 ● Reduces duplication
 ● Inheritance allows a child class to inherit properties and behaviors
