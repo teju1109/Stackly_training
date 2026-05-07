@@ -148,27 +148,49 @@ Output :
 90
 
 
+Abstraction in Java : 
+-->Showing only important details and hiding internal implementation.
+-->Show important things
+-->Hide unnecessary details
+
+Abstract Class Example :
+
+abstract class Animal 
+{
+    abstract void sound();
+}
+
+class Dog extends Animal 
+{
+    void sound() 
+    {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Dog obj = new Dog();
+        obj.sound();
+    }
+}
+
+Output :
+Dog barks
+
+USES :
+1. Security
+Hides internal details.
+
+2. Simplicity
+User sees only required features.
+
+3. Better Design
+Makes code clean and organized.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---------------------------------------------------------------------------------------
 
 Tasks :
 
@@ -190,4 +212,14 @@ display patient details
 | Classes            | Same class   | Parent & Child |
 | Time               | Compile Time | Run Time       |
 | Inheritance Needed | No           | Yes            |
+
+one code on abstraction on any concept.
+
+
+
+
+
+
+
+
 
