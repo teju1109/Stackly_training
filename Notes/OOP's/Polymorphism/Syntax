@@ -1,0 +1,37 @@
+1. Parent Class
+class ParentClass {
+    void methodName() {
+        // parent method
+    }
+}
+
+2. Child Class
+class ChildClass extends ParentClass {
+    void methodName() {
+        // child method
+    }
+}
+
+3. Main Class
+public class Main {
+    public static void main(String[] args) 
+    {
+        ParentClass obj = new ChildClass();
+        obj.methodName();
+    }
+}
+
+Most Important Syntax :
+ParentClass obj = new ChildClass();
+| Part               | Meaning        |
+| ------------------ | -------------- |
+| `ParentClass`      | Reference type |
+| `obj`              | Object name    |
+| `new ChildClass()` | Child object   |
+
+Code Flow :
+1. Create Parent class
+2. Create Child class using extends
+3. Override same method
+4. Create parent reference + child object
+5. Call method
