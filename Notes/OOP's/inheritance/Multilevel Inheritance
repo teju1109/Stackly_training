@@ -1,0 +1,46 @@
+Structure
+Grandparent → Parent → Child
+
+Step 1 — First Class
+class Animal 
+{
+    void eat() 
+    {
+        System.out.println("Eating");
+    }
+}
+
+Step 2 — Second Class Inherits First
+class Dog extends Animal 
+{
+    void bark() 
+    {
+        System.out.println("Barking");
+    }
+}
+
+Step 3 — Third Class Inherits Second
+class Puppy extends Dog 
+{
+    void weep() 
+    {
+        System.out.println("Weeping");
+    }
+}
+
+Step 4 — Main Method
+public class Main 
+{
+    public static void main(String[] args) 
+   {
+        Puppy p = new Puppy();
+        p.eat();
+        p.bark();
+        p.weep();
+    }
+}
+
+Output :
+Eating
+Barking
+Weeping
