@@ -1,0 +1,27 @@
+class Student {
+
+    // Private variable
+    private int marks;
+
+    // Setter method
+    void setMarks(int m) {
+        marks = m;
+    }
+
+    // Getter method
+    int getMarks() {
+        return marks;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Student obj = new Student();
+        obj.setMarks(90);
+        System.out.println(obj.getMarks());
+    }
+}
+
+Output :
+90
