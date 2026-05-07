@@ -1,0 +1,9 @@
+abstract class Parent 
+{
+    abstract void methodName();
+}
+
+class Child extends Parent 
+{
+    void methodName() {}
+}
