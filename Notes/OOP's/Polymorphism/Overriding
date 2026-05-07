@@ -1,0 +1,48 @@
+Simple Method Overriding Program in Java :
+
+class Animal {
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Dog obj = new Dog();
+        obj.sound();
+    }
+}
+
+Output :
+Dog barks
+
+Important Rule In overriding:
+
+Method name → same
+Parameters → same
+Parent and child classes are required
+
+Flow
+1. Animal class has sound()
+2. Dog class overrides sound()
+3. Dog object calls sound()
+4. Child method executes
+
+Simple Syntax :
+
+class Parent 
+{
+    void methodName() { }
+}
+
+class Child extends Parent 
+{
+    void methodName() {}
+}
