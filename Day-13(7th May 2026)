@@ -194,26 +194,311 @@ Makes code clean and organized.
 
 Tasks :
 
-crate a car rental system using overloading,
+1.create a car rental system using overloading,
+
 a. calculate the car per hour (do-while)
+
+import java.util.Scanner;
+class CarRental {
+    void calculateRent(int hours) {
+        int pricePerHour = 200;
+        int total = hours * pricePerHour;
+
+        System.out.println("Hours : " + hours);
+        System.out.println("Price Per Hour : " + pricePerHour);
+        System.out.println("Total Rent : " + total);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        char choice;
+
+        do {
+            System.out.print("Enter Number of Hours : ");
+            int hours = sc.nextInt();
+
+            CarRental c = new CarRental();
+            c.calculateRent(hours);
+            System.out.println("Thank You!");
+           }
+}
+
 b. calculate on day basis 2 parameters(no.of days and rent price)
+
+class CarRental {
+   void calculateRent(int days, int rentPerDay) 
+   {
+        int total = days * rentPerDay;
+
+        System.out.println("Number of Days : " + days);
+        System.out.println("Rent Per Day : " + rentPerDay);
+        System.out.println("Total Rent : " + total);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) 
+    {
+        CarRental c = new CarRental();
+        c.calculateRent(5, 1500);
+    }
+}
+
 c. with or without driver using boolean (true-with driver, false-without driver)
 
-simple interest with time period 
+class CarRental {
+    void calculateRent(boolean driver) {
 
-compound intrest
+        int carRent = 3000;
+        int driverCharge = 1000;
 
-encapsulation tasks :
-1.hospital management system
+        if(driver == true) {
+            System.out.println("Car With Driver");
+            System.out.println("Total Rent : " + (carRent + driverCharge));
+        }
+        else {
+            System.out.println("Car Without Driver");
+            System.out.println("Total Rent : " + carRent);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        CarRental c = new CarRental();
+        c.calculateRent(true);   // With driver
+        // c.calculateRent(false); // Without driver
+    }
+}
+
+2.simple interest with time period 
+
+import java.util.Scanner;
+class Interest 
+{
+    void calculateInterest(double p, double r, double t) 
+    {
+        double si = (p * r * t) / 100;
+        System.out.println("Simple Interest : " + si);
+    }
+}
+
+class TimePeriod extends Interest 
+{
+    @Override
+    void calculateInterest(double p, double r, double t) 
+    {
+        double si = (p * r * t) / 100;
+        System.out.println("Principal Amount : " + p);
+        System.out.println("Rate of Interest : " + r);
+        System.out.println("Time Period : " + t + " years");
+        System.out.println("Simple Interest : " + si);
+    }
+}
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Principal Amount : ");
+        double principal = sc.nextDouble();
+        System.out.print("Enter Rate of Interest : ");
+        double rate = sc.nextDouble();
+        System.out.print("Enter Time Period : ");
+        double time = sc.nextDouble();
+
+        Interest obj = new TimePeriod();
+        obj.calculateInterest(principal, rate, time);
+    }
+}
+
+Easy Structure to Remember :
+class Parent 
+{
+    void method() {}
+}
+
+class Child extends Parent 
+{
+    @Override
+    void method() {}
+}
+
+Parent obj = new Child();
+obj.method();
+
+3.compound intrest :
+
+import java.util.Scanner;
+class Interest 
+{
+    void calculateInterest(double p, double r, double t) 
+    {
+        double amount = p * Math.pow((1 + r / 100), t);
+        double ci = amount - p;
+        System.out.println("Compound Interest : " + ci);
+    }
+}
+
+class Compound extends Interest 
+{
+    @Override
+    void calculateInterest(double p, double r, double t) 
+    {
+        double amount = p * Math.pow((1 + r / 100), t);
+        double ci = amount - p;
+        System.out.println("Principal Amount : " + p);
+        System.out.println("Rate of Interest : " + r);
+        System.out.println("Time Period : " + t + " years");
+        System.out.println("Compound Interest : " + ci);
+        System.out.println("Total Amount : " + amount);
+    }
+}
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Principal Amount : ");
+        double principal = sc.nextDouble();
+        System.out.print("Enter Rate of Interest : ");
+        double rate = sc.nextDouble();
+        System.out.print("Enter Time Period : ");
+        double time = sc.nextDouble();
+
+        Interest obj = new Compound();
+        obj.calculateInterest(principal, rate, time);
+    }
+}
+
+4.Encapsulation tasks :
+hospital management system
 patient id, p_name, bill,
-
 setbill and getbill
 display patient details
-| Classes            | Same class   | Parent & Child |
-| Time               | Compile Time | Run Time       |
-| Inheritance Needed | No           | Yes            |
 
-one code on abstraction on any concept.
+class Patient 
+{
+    // Private Data Members
+    private int patientId;
+    private String patientName;
+    private double bill;
+
+    // Setter Method for Patient ID
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
+
+    // Getter Method for Patient ID
+    public int getPatientId() {
+        return patientId;
+    }
+
+    // Setter Method for Patient Name
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    // Getter Method for Patient Name
+    public String getPatientName() {
+        return patientName;
+    }
+
+    // Setter Method for Bill
+    public void setBill(double bill) {
+        this.bill = bill;
+    }
+
+    // Getter Method for Bill
+    public double getBill() {
+        return bill;
+    }
+
+    // Method to Display Patient Details
+    public void displayDetails() {
+
+        System.out.println("Patient ID : " + getPatientId());
+        System.out.println("Patient Name : " + getPatientName());
+        System.out.println("Patient Bill : " + getBill());
+    }
+}
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        // Object Creation
+        Patient p = new Patient();
+
+        // Setting Values
+        p.setPatientId(101);
+        p.setPatientName("Rahul");
+        p.setBill(5000);
+
+        // Display Details
+        p.displayDetails();
+    }
+}
+
+Easy Structure to Remember :
+class ClassName 
+{
+    private datatype variable;
+    public void setVariable(datatype variable) 
+    {
+        this.variable = variable;
+    }
+
+    public datatype getVariable() 
+    {
+        return variable;
+    }
+}
+
+5. One code on abstraction on any concept :
+
+abstract class Animal 
+{
+    abstract void sound();
+}
+
+class Dog extends Animal 
+{
+    void sound() 
+    {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Dog obj = new Dog();
+        obj.sound();
+    }
+}
+
+Output :
+Dog barks
+
+Syntax :
+
+abstract class Parent 
+{
+    abstract void methodName();
+}
+
+class Child extends Parent 
+{
+    void methodName() {}
+}
 
 
 
