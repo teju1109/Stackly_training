@@ -162,27 +162,56 @@ class ATMMachine extends ATM {
 
 // Main class
 public class ATMTransactionExample {
-
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
         // object creation
         ATMMachine atm = new ATMMachine("Janani", 5000);
-
         System.out.println("Enter the PIN Number : ");
         int pin = sc.nextInt();
 
         atm.doTransaction(pin, "withdraw", 2000);
-
         atm.doTransaction(pin, "deposit", 1000);
-
         atm.doTransaction(1111, "withdraw", 500);
 
         sc.close();
     }
 }
 
+Structure used here is :
+
+// 1. Import Package
+import java.util.Scanner;
+
+// 2. Base Class
+class Account {
+    // Variables
+    // Constructor
+    // Methods
+}
+
+// 3. Intermediate Class
+class ATM extends Account {
+    // Constructor
+    // Methods
+}
+
+// 4. Derived Class
+class ATMMachine extends ATM {
+    // Private Variable
+    // Constructor
+    // Methods
+}
+
+// 5. Main Class
+public class ATMTransactionExample {
+    public static void main(String[] args) {
+        // Object Creation
+        // User Input
+        // Method Calls
+    }
+}
+--------------------------------------------------------------------------------------------------------
 2. employee management system
 parent class- employee
 empid, empname 
