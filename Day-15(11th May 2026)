@@ -1,0 +1,418 @@
+Collection :
+a collection is a framework (set of classes and interfaces) 
+used to store and manipulate a group of objects as a single unit.
+
+Collection Framework : provides a pre-built set of tools consisting of 
+                       interfaces and classes.
+
+Main Interfaces:
+● List
+● Set
+● Map
+● Queue
+
+Collections Framework
+├── List
+│ ├── ArrayList
+│ ├── LinkedList
+│ └── Vector
+│
+├── Set
+│ ├── HashSet
+│ ├── LinkedHashSet
+│ └── TreeSet
+│
+├── Queue
+│ ├── PriorityQueue
+│ └── LinkedList
+│
+└── Map (separate interface) - part of framework but it is not collection framework
+├── HashMap
+├── LinkedHashMap
+├── TreeMap
+└── Hashtable
+
+List MethodsList Methods:
+| Method       | Purpose                     |
+| ------------ | --------------------------- |
+| `add()`      | Add element                 |
+| `get()`      | Access element using index  |
+| `set()`      | Update element              |
+| `remove()`   | Remove element              |
+| `size()`     | Find number of elements     |
+| `contains()` | Check element exists or not |
+| `clear()`    | Remove all elements         |
+| `isEmpty()`  | Check list is empty or not  |
+
+Set Methods :
+| Method       | Purpose              |
+| ------------ | -------------------- |
+| `add()`      | Add unique element   |
+| `remove()`   | Remove element       |
+| `contains()` | Check element exists |
+| `size()`     | Find total elements  |
+| `clear()`    | Remove all elements  |
+| `isEmpty()`  | Check set is empty   |
+
+Queue Methods :
+| Method      | Purpose                         |
+| ----------- | ------------------------------- |
+| `add()`     | Insert element                  |
+| `offer()`   | Add element safely              |
+| `remove()`  | Remove first element            |
+| `poll()`    | Remove and return first element |
+| `peek()`    | View first element              |
+| `element()` | Access first element            |
+| `size()`    | Find queue size                 |
+
+Map Methods :
+| Method            | Purpose                 |
+| ----------------- | ----------------------- |
+| `put()`           | Add key-value pair      |
+| `get()`           | Get value using key     |
+| `remove()`        | Remove key-value pair   |
+| `containsKey()`   | Check key exists        |
+| `containsValue()` | Check value exists      |
+| `keySet()`        | Get all keys            |
+| `values()`        | Get all values          |
+| `entrySet()`      | Get all key-value pairs |
+| `size()`          | Find total entries      |
+| `clear()`         | Remove all entries      |
+
+Iterator Methods :
+| Method      | Purpose                   |
+| ----------- | ------------------------- |
+| `hasNext()` | Check next element exists |
+| `next()`    | Get next element          |
+| `remove()`  | Remove current element    |
+
+Collections Utility Methods :
+| Method      | Purpose                   |
+| ----------- | ------------------------- |
+| `sort()`    | Sort elements             |
+| `reverse()` | Reverse elements          |
+| `shuffle()` | Randomly shuffle elements |
+| `max()`     | Find maximum value        |
+| `min()`     | Find minimum value        |
+
+-------------------------------------------------------------------------------
+
+LIST:
+stores elements in order and allows duplicates.
+Duplicates are allowed.
+
+1.ArrayList :
+--> Stores data in dynamic array format.
+--> Maintains insertion order
+--> Allows duplicates
+--> Fast for reading data
+
+Syntax:
+ArrayList<DataType> objectName = new ArrayList<>();
+
+Simple Code :
+
+import java.util.ArrayList;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        ArrayList<String> fruits = new ArrayList<>(); //Creates an empty ArrayList named fruits
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Mango");
+        System.out.println(fruits);
+    }
+}
+
+2.LinkedList :
+--> Stores elements using nodes connected together.
+--> Fast insertion/deletion
+--> Allows duplicates
+--> Maintains order
+
+Syntax :
+LinkedList<DataType> objectName = new LinkedList<>();
+
+Simple Code :
+
+import java.util.LinkedList;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        LinkedList<String> names = new LinkedList<>();
+        names.add("Tejesh");
+        names.add("Kusuma");
+        names.add("Varshini");
+        System.out.println(names);
+    }
+}
+
+3.Vector :
+--> It is similar to ArrayList but synchronized (thread-safe).
+-->Maintains order
+-->Allows duplicates
+-->Slower than ArrayList
+
+Syntax :
+Vector<DataType> objectName = new Vector<>();
+
+Simple Code :
+
+import java.util.Vector;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Vector<Integer> numbers = new Vector<>();
+
+        numbers.add(10);
+        numbers.add(20);
+
+        System.out.println(numbers);
+    }
+}
+
+SET:
+Set does NOT allow duplicate values.
+
+1.HashSet :
+-->It stores unique elements.
+-->No duplicates
+-->Unordered
+
+Syntax :
+HashSet<DataType> objectName = new HashSet<>();
+
+Simple Code :
+
+import java.util.HashSet;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        HashSet<Integer> set = new HashSet<>();
+        set.add(10);
+        set.add(20);
+        set.add(10);
+        System.out.println(set);
+    }
+}
+
+Output:
+[10, 20] //Duplicate 10 is ignored.
+
+2.LinkedHashSet
+-->Stores unique elements while maintaining insertion order.
+
+Syntax :
+LinkedHashSet<DataType> objectName = new LinkedHashSet<>();
+
+Simple Code :
+
+import java.util.LinkedHashSet;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        LinkedHashSet<String> set = new LinkedHashSet<>();
+        set.add("A");
+        set.add("B");
+        set.add("A");
+        System.out.println(set);
+    }
+}
+
+3.TreeSet :
+-->Stores unique elements in sorted order.
+
+Syntax :
+TreeSet<DataType> objectName = new TreeSet<>();
+
+Simple Code :
+
+import java.util.TreeSet;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        TreeSet<Integer> set = new TreeSet<>();
+        set.add(50);
+        set.add(10);
+        set.add(30);
+        System.out.println(set);
+    }
+}
+
+Output:
+[10, 30, 50] //Automatically sorts values.
+
+QUEUE: It follows FIFO (First In First Out).
+
+1.PriorityQueue
+--> It Stores elements based on priority/sorted order.
+
+Syntax :
+PriorityQueue<DataType> objectName = new PriorityQueue<>();
+
+Simple Code :
+
+import java.util.PriorityQueue;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.add(30);
+        pq.add(10);
+        pq.add(20);
+        System.out.println(pq);
+    }
+}
+
+Output :
+[10, 30, 20] //Smallest element gets highest priority.
+
+2.Queue using LinkedList :
+
+Simple Code :
+
+import java.util.Queue;
+import java.util.LinkedList;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Queue<String> queue = new LinkedList<>();
+        queue.add("A");
+        queue.add("B");
+        System.out.println(queue);
+        queue.remove();
+        System.out.println(queue);
+    }
+}
+
+Output :
+Before remove: [A, B]
+After remove: [B]
+
+MAP:
+-->Stores data in key-value pairs.
+101 -> Ram
+102 -> Sam
+
+1.HashMap:
+-->Stores key-value pairs.
+-->Keys unique
+-->Unordered
+
+Syntax:
+HashMap<Key, Value> objectName = new HashMap<>();
+
+Simple Code:
+
+import java.util.HashMap;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        HashMap<Integer, String> map = new HashMap<>();
+        map.put(1, "Ram");
+        map.put(2, "Sam");
+        System.out.println(map);
+    }
+}
+
+Output :
+{1=Ram, 2=Sam}
+
+2.LinkedHashMap
+Maintains insertion order.
+
+Simple Code:
+
+import java.util.LinkedHashMap;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+        map.put(3, "C");
+        map.put(1, "A");
+        System.out.println(map);
+    }
+}
+
+✅ Output
+{3=C, 1=A}
+
+3.TreeMap :
+Stores key-value pairs in sorted order of keys.
+
+Simple Code:
+
+import java.util.TreeMap;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        TreeMap<Integer, String> map = new TreeMap<>();
+        map.put(3, "C");
+        map.put(1, "A");
+        System.out.println(map);
+    }
+}
+
+Output:
+{1=A, 3=C}
+
+4.Hashtable:
+-->Thread-safe version of HashMap.
+-->Synchronized
+-->No null key/value
+
+Simple Code:
+
+import java.util.Hashtable;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Hashtable<Integer, String> table = new Hashtable<>();
+        table.put(1, "Java");
+        table.put(2, "Python");
+        System.out.println(table);
+    }
+}
+
+Output:
+{2=Python, 1=Java}
+
+| Type          | Order   | Duplicates | Sorted         |
+| ------------- | ------- | ---------- | -------------- |
+| ArrayList     | Yes     | Yes        | No             |
+| LinkedList    | Yes     | Yes        | No             |
+| Vector        | Yes     | Yes        | No             |
+| HashSet       | No      | No         | No             |
+| LinkedHashSet | Yes     | No         | No             |
+| TreeSet       | Yes     | No         | Yes            |
+| PriorityQueue | Partial | Yes        | Priority Based |
+| HashMap       | No      | Keys No    |                |
+| LinkedHashMap | Yes     | Keys No    |                |
+| TreeMap       | Sorted  | Keys No    |                |
+| Hashtable     | No      | Keys No    |                |
+
+
+Tasks 
+1. 
+
+
+
+
+
+
+
+
+
+
