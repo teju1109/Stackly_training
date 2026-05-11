@@ -1,1 +1,635 @@
+Interface is like a blueprint
 
+In Java:
+Interface → defines methods
+Class → gives implementation
+
+Interfaces are mainly used for:
+--> Achieving abstraction
+--> Achieving multiple inheritance
+--> Making code more flexible and reusable
+
+Syntax
+interface Animal 
+{
+    void sound();
+}
+
+--> Animal is an interface
+--> sound() has no body
+--> Any class using this interface MUST define sound()
+
+Implementing Interface :
+
+interface Animal 
+{
+    void sound();
+}
+
+class Dog implements Animal 
+{
+    public void sound() 
+    {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Dog d = new Dog();
+        d.sound();
+    }
+}
+
+Output :
+Dog barks
+
+Steps :
+1. Interface Created
+interface Animal
+2. Method Declared
+void sound();
+3. Class Uses Interface
+class Dog implements Animal
+4. Method Must Be Written
+public void sound()
+
+Difference Between Class and Interface :
+
+| Class                        | Interface                     |
+| ---------------------------- | ----------------------------- |
+| Can contain complete methods | Mostly method declarations    |
+| Uses `extends`               | Uses `implements`             |
+| Supports single inheritance  | Supports multiple inheritance |
+| Can create objects           | Cannot create objects         |
+
+Simple Analogy :
+In real life Java, Rules book is Interface,  
+Worker following rules is Class and
+Rules	are Methods.
+
+Multiple Inheritance Using Interface :
+important -- Java does NOT support multiple inheritance with classes.
+             But it supports it using interfaces.
+
+interface A 
+{
+    void show();
+}
+
+interface B 
+{
+    void display();
+}
+
+class Test implements A, B 
+{
+    public void show() 
+    {
+        System.out.println("Show");
+    }
+    public void display() 
+    {
+        System.out.println("Display");
+    }
+}
+
+Simple Example :
+
+interface Payment 
+{
+    void pay();
+}
+
+class GooglePay implements Payment 
+{
+    public void pay() 
+    {
+        System.out.println("Payment through GooglePay");
+    }
+}
+
+class PhonePe implements Payment 
+{
+    public void pay() 
+    {
+        System.out.println("Payment through PhonePe");
+    }
+}
+
+Serialization : Converting an object into a stream of bytes.
+
+It can be  :
+--> saved into a file
+--> sent through network
+--> stored in database
+--> transferred between systems
+
+Real-Life Example :
+--> Packing luggage for travel
+1. Your clothes/items → Object
+2. Packing into suitcase → Serialization
+3. Opening suitcase later → Deserialization
+
+Example :
+
+Step 1: Create Class
+
+import java.io.Serializable;
+class Student implements Serializable 
+{
+    int id;
+    String name;
+    Student(int id, String name) 
+    {
+        this.id = id;
+        this.name = name;
+    }
+}
+
+Step 2: Serialize Object
+
+import java.io.*;
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        try 
+        {
+            Student s1 = new Student(101, "Teju");
+            FileOutputStream file = new FileOutputStream("student.txt");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(s1);
+            out.close();
+            file.close();
+            System.out.println("Object Serialized");
+        }
+        catch(Exception e) 
+        {
+            System.out.println(e);
+        }
+    }
+}
+
+Here in the program :
+1. Object Created
+   Student s1 = new Student(101, "Teju");
+2. File Opened
+   FileOutputStream file (Used to write data into file.)
+3. ObjectOutputStream
+   ObjectOutputStream out (Used to convert object into bytes.)
+4. Writing Object
+   out.writeObject(s1); (This serializes the object.)
+
+Serialization Flow :
+Object
+   ↓
+Serialization
+   ↓
+Byte Stream
+   ↓
+File / Network
+   ↓
+Deserialization
+   ↓
+Original Object
+
+Deserialization Example
+
+import java.io.*;
+public class Main
+{
+    public static void main(String[] args) 
+    {
+        try 
+        {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("student.txt"));
+            Student s = (Student) in.readObject();
+            System.out.println(s.id);
+            System.out.println(s.name);
+            in.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}
+
+Output :
+101
+Teju
+
+| Concept            | Meaning                              |
+| ------------------ | ------------------------------------ |
+| Serialization      | Object → Bytes                       |
+| Deserialization    | Bytes → Object                       |
+| Serializable       | Marker interface                     |
+| ObjectOutputStream | Writes object                        |
+| ObjectInputStream  | Reads object                         |
+
+
+
+Tasks :
+1. cab booking application,
+interface - bookride, calculate fare by distance and
+in base class initialize customer name and distance using constructor.
+extend base class and extend your base class and interfaces in three different classes(3 child classes).
+in main class - get customer name and details
+
+import java.util.Scanner;
+
+// Interface
+interface CabService 
+{
+    void bookRide();
+    void calculateFare();
+}
+
+// Base Class
+class Customer 
+{
+    String customerName;
+    double distance;
+
+    // Constructor
+    Customer(String customerName, double distance) 
+    {
+        this.customerName = customerName;
+        this.distance = distance;
+    }
+}
+
+// Child Class 1
+class MiniCab extends Customer implements CabService 
+{
+    MiniCab(String customerName, double distance) 
+    {
+        super(customerName, distance);
+    }
+
+    public void bookRide() 
+    {
+        System.out.println("Mini Cab Booked");
+    }
+    public void calculateFare() 
+    {
+        double fare = distance * 10;
+        System.out.println("Fare for Mini Cab : " + fare);
+    }
+}
+
+// Child Class 2
+class SedanCab extends Customer implements CabService 
+{
+    SedanCab(String customerName, double distance) 
+    {
+        super(customerName, distance);
+    }
+    public void bookRide() 
+    {
+        System.out.println("Sedan Cab Booked");
+    }
+    public void calculateFare() 
+    {
+        double fare = distance * 15;
+        System.out.println("Fare for Sedan Cab : " + fare);
+    }
+}
+
+// Child Class 3
+class LuxuryCab extends Customer implements CabService 
+{
+    LuxuryCab(String customerName, double distance) 
+    {
+        super(customerName, distance);
+    }
+    public void bookRide() 
+    {
+        System.out.println("Luxury Cab Booked");
+    }
+    public void calculateFare() 
+    {
+        double fare = distance * 25;
+        System.out.println("Fare for Luxury Cab : " + fare);
+    }
+}
+
+// Main Class
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        // Get Customer Details
+        System.out.print("Enter Customer Name : ");
+        String name = sc.nextLine();
+        System.out.print("Enter Distance : ");
+        double distance = sc.nextDouble();
+        // Mini Cab
+        MiniCab m = new MiniCab(name, distance);
+        System.out.println("\n--- MINI CAB ---");
+        System.out.println("Customer Name : " + m.customerName);
+
+        m.bookRide();
+        m.calculateFare();
+
+        // Sedan Cab
+        SedanCab s = new SedanCab(name, distance);
+        System.out.println("\n--- SEDAN CAB ---");
+        System.out.println("Customer Name : " + s.customerName);
+
+        s.bookRide();
+        s.calculateFare();
+
+        // Luxury Cab
+        LuxuryCab l = new LuxuryCab(name, distance);
+        System.out.println("\n--- LUXURY CAB ---");
+        System.out.println("Customer Name : " + l.customerName);
+
+        l.bookRide();
+        l.calculateFare();
+    }
+}
+
+here :
+--> interface is CabService
+--> Methods used bookRide() and calculateFare()
+--> class used is Customer that Contains customerName and distance which is Initialized using constructor.
+--> Child Classes are MiniCab, SedanCab and LuxuryCab where Each class Extends CustomerImplements and CabService.
+| Keyword    | Meaning                  |
+| ---------- | ------------------------ |
+| interface  | Creates rules            |
+| implements | Uses interface           |
+| extends    | Inherits base class      |
+| super()    | Calls parent constructor |
+
+
+2. Food delevery system - order food using swiggy, zomato and zepto.
+
+import java.util.Scanner;
+
+// Interface
+interface FoodDelivery 
+{
+    void orderFood();
+    void deliveryTime();
+}
+
+// Base Class
+class Customer 
+{
+    String customerName;
+    String foodItem;
+
+    // Constructor
+    Customer(String customerName, String foodItem) 
+    {
+        this.customerName = customerName;
+        this.foodItem = foodItem;
+    }
+}
+
+// Child Class 1
+class Swiggy extends Customer implements FoodDelivery 
+{
+    Swiggy(String customerName, String foodItem) 
+    {
+        super(customerName, foodItem);
+    }
+    public void orderFood() 
+    {
+        System.out.println("Food Ordered Using Swiggy");
+    }
+    public void deliveryTime() 
+    {
+        System.out.println("Delivery Time : 30 Minutes");
+    }
+}
+
+// Child Class 2
+class Zomato extends Customer implements FoodDelivery 
+{
+    Zomato(String customerName, String foodItem) 
+    {
+        super(customerName, foodItem);
+    }
+    public void orderFood() 
+    {
+        System.out.println("Food Ordered Using Zomato");
+    }
+    public void deliveryTime() 
+    {
+        System.out.println("Delivery Time : 25 Minutes");
+    }
+}
+
+// Child Class 3
+class Zepto extends Customer implements FoodDelivery 
+{
+    Zepto(String customerName, String foodItem) 
+    {
+        super(customerName, foodItem);
+    }
+    public void orderFood()  
+    {
+        System.out.println("Food Ordered Using Zepto");
+    }
+    public void deliveryTime() 
+    {
+        System.out.println("Delivery Time : 10 Minutes");
+    }
+}
+
+// Main Class
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        // Customer Details
+        System.out.print("Enter Customer Name : ");
+        String name = sc.nextLine();
+        System.out.print("Enter Food Item : ");
+        String food = sc.nextLine();
+
+        // Swiggy
+        Swiggy s = new Swiggy(name, food);
+        System.out.println("\n--- SWIGGY ---");
+        System.out.println("Customer Name : " + s.customerName);
+        System.out.println("Food Item : " + s.foodItem);
+        s.orderFood();
+        s.deliveryTime();
+
+        // Zomato
+        Zomato z = new Zomato(name, food);
+        System.out.println("\n--- ZOMATO ---");
+        System.out.println("Customer Name : " + z.customerName);
+        System.out.println("Food Item : " + z.foodItem);
+        z.orderFood();
+        z.deliveryTime();
+
+        // Zepto
+        Zepto zp = new Zepto(name, food);
+        System.out.println("\n--- ZEPTO ---");
+        System.out.println("Customer Name : " + zp.customerName);
+        System.out.println("Food Item : " + zp.foodItem);
+        zp.orderFood();
+        zp.deliveryTime();
+    }
+}
+
+here :
+--> interface used idFoodDelivery
+--> Methods are orderFood() and deliveryTime()
+--> class used is Customer that Stores customerName and foodItem Using constructor.
+--> Child Classes are Swiggy, Zomato and Zepto.
+
+
+3. Payment chose 4 payment methods and implement different classes with each
+
+import java.util.Scanner;
+
+// Interface
+interface Payment 
+{
+    void pay();
+    void paymentStatus();
+}
+
+// Base Class
+class Customer 
+{
+    String customerName;
+    double amount;
+
+    // Constructor
+    Customer(String customerName, double amount) 
+    {
+        this.customerName = customerName;
+        this.amount = amount;
+    }
+}
+
+// Child Class 1
+class GooglePay extends Customer implements Payment 
+{
+    GooglePay(String customerName, double amount) 
+    {
+       super(customerName, amount);
+    }
+    public void pay() 
+    {
+        System.out.println("Payment Done Using Google Pay");
+    }
+    public void paymentStatus() 
+    {
+        System.out.println("Payment Successful");
+    }
+}
+
+// Child Class 2
+class PhonePe extends Customer implements Payment 
+{
+    PhonePe(String customerName, double amount) 
+    {
+        super(customerName, amount);
+    }
+    public void pay() 
+    {
+        System.out.println("Payment Done Using PhonePe");
+    }
+    public void paymentStatus() 
+    {
+        System.out.println("Payment Successful");
+    }
+}
+
+// Child Class 3
+class CreditCard extends Customer implements Payment 
+{
+    CreditCard(String customerName, double amount) 
+    {
+        super(customerName, amount);
+    }
+    public void pay() 
+    {
+        System.out.println("Payment Done Using Credit Card");
+    }
+    public void paymentStatus() 
+    {
+        System.out.println("Payment Successful");
+    }
+}
+
+// Child Class 4
+class NetBanking extends Customer implements Payment 
+{
+    NetBanking(String customerName, double amount) 
+    {
+        super(customerName, amount);
+    }
+    public void pay() 
+    {
+        System.out.println("Payment Done Using Net Banking");
+    }
+    public void paymentStatus()  
+    {
+        System.out.println("Payment Successful");
+    }
+}
+
+// Main Class
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+
+        // Customer Details
+        System.out.print("Enter Customer Name : ");
+        String name = sc.nextLine();
+        System.out.print("Enter Payment Amount : ");
+        double amount = sc.nextDouble();
+
+        // Google Pay
+        GooglePay g = new GooglePay(name, amount);
+        System.out.println("\n--- GOOGLE PAY ---");
+        System.out.println("Customer Name : " + g.customerName);
+        System.out.println("Amount : " + g.amount);
+        g.pay();
+        g.paymentStatus();
+        
+        // PhonePe
+        PhonePe p = new PhonePe(name, amount);
+        System.out.println("\n--- PHONEPE ---");
+        System.out.println("Customer Name : " + p.customerName);
+        System.out.println("Amount : " + p.amount);
+        p.pay();
+        p.paymentStatus();
+
+        // Credit Card
+        CreditCard c = new CreditCard(name, amount);
+        System.out.println("\n--- CREDIT CARD ---");
+        System.out.println("Customer Name : " + c.customerName);
+        System.out.println("Amount : " + c.amount);
+        c.pay();
+        c.paymentStatus();
+
+        // Net Banking
+        NetBanking n = new NetBanking(name, amount);
+        System.out.println("\n--- NET BANKING ---");
+        System.out.println("Customer Name : " + n.customerName);
+        System.out.println("Amount : " + n.amount);
+        n.pay();
+        n.paymentStatus();
+    }
+}
+
+here :
+--> interface used is Payment
+--> Methods used are pay() and paymentStatus()
+--> class is Customer that Stores customerName and amount Using constructor.
+--> Child Classes are GooglePay, PhonePe, CreditCard and NetBanking
