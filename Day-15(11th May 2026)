@@ -344,7 +344,7 @@ public class Main
     }
 }
 
-✅ Output
+Output :
 {3=C, 1=A}
 
 3.TreeMap :
@@ -403,16 +403,319 @@ Output:
 | TreeMap       | Sorted  | Keys No    |                |
 | Hashtable     | No      | Keys No    |                |
 
+Golden Formula for Any Collection Framework Project :
 
-Tasks 
-1. 
+  Object Creation
+        +
+ArrayList Storage
+        +
+     Looping
+        +
+   Conditions
+        +
+       Menu
+        +
+  CRUD Operations
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Tasks :
+1. Understand problem
+        ↓
+2. Identify objects
+        ↓
+3. Identify object data
+        ↓
+4. Decide data storage
+        ↓
+5. Decide user operations
+        ↓
+6. Create menu
+        ↓
+7. Add loops
+        ↓
+8. Add conditions
+        ↓
+9. Update object data
+        ↓
+10. Display results
+
+
+1. Library Management System
+
+import java.util.*;
+
+// Book Class
+class Book 
+{
+    int bookId;
+    String title;
+    String author;
+    boolean isAvailable;
+
+    // Constructor
+    public Book(int bookId, String title, String author) 
+    {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.isAvailable = true;
+    }
+}
+
+// Main Class
+public class LibraryManagementSystem 
+{
+    static ArrayList<Book> books = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) 
+    {
+        // Sample Books
+        books.add(new Book(1, "Java Basics", "James"));
+        books.add(new Book(2, "Python Guide", "Mark"));
+        books.add(new Book(3, "Data Structures", "John"));
+        int choice;
+        do 
+        {
+            System.out.println("\n===== Library Management System =====");
+            System.out.println("1. View Books");
+            System.out.println("2. Borrow Book");
+            System.out.println("3. Return Book");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+            switch(choice) 
+            {
+                case 1:
+                    showBooks();
+                    break;
+                case 2:
+                    borrowBook();
+                    break;
+                case 3:
+                    returnBook();
+                    break;
+                case 4:
+                    System.out.println("Thank You!");
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+            }
+
+        } while(choice != 4);
+    }
+
+    // Show Books
+    static void showBooks() 
+    {
+        System.out.println("\nAvailable Books:");
+        for(Book book : books) 
+        {
+            if(book.isAvailable) 
+            {
+                System.out.println(book.bookId + " - " + book.title + " - " + book.author);
+            }
+        }
+    }
+
+    // Borrow Book
+    static void borrowBook() 
+    {
+        System.out.print("Enter Book ID: ");
+        int id = sc.nextInt();
+        for(Book book : books) 
+        {
+            if(book.bookId == id && book.isAvailable) 
+            {
+                System.out.println("Book Borrowed Successfully!");
+                book.isAvailable = false;
+                return;
+            }
+        }
+        System.out.println("Book Not Available");
+    }
+
+    // Return Book
+    static void returnBook() 
+    {
+        System.out.print("Enter Book ID: ");
+        int id = sc.nextInt();
+        for(Book book : books) 
+        {
+            if(book.bookId == id && !book.isAvailable) 
+            {
+                book.isAvailable = true;
+                System.out.println("Book Returned Successfully!");
+                return;
+            }
+        }
+        System.out.println("Invalid Book ID");
+    }
+}
+
+STEP 1 — Understand the Real-World Problem
+--> Books exist
+--> Users see books
+--> Users borrow books
+--> Users return books
+
+STEP 2 — Identify Main Objects
+--> class Book
+--> class LibraryManagementSystem
+
+STEP 3 — Decide What Data Each Object Stores
+class Book 
+{
+    int bookId;
+    String title;
+    String author;
+    boolean isAvailable;
+}
+
+STEP 4 — Books will Be Stored in ArrayList because it is in dynamic size.
+ArrayList<Book> books = new ArrayList<>();
+
+STEP 5 — Add Initial Data using Constructors
+public Book(int bookId, String title, String author)
+
+STEP 6 — Operations User Need
+1. View Books
+2. Borrow Book
+3. Return Book
+4. Exit
+
+STEP 7 — do-while
+do {} 
+while(choice != 4);
+
+STEP 8 — switch(choice)
 
 
 
 
+2. Flight Booking System
 
+import java.util.*;
+// Flight Class
+class Flight 
+{
+    int flightId;
+    String flightName;
+    String source;
+    String destination;
+    int availableSeats;
+    double ticketPrice;
 
+    // Constructor
+    public Flight(int flightId,
+                  String flightName,
+                  String source,
+                  String destination,
+                  int availableSeats,
+                  double ticketPrice) 
+    {
+        this.flightId = flightId;
+        this.flightName = flightName;
+        this.source = source;
+        this.destination = destination;
+        this.availableSeats = availableSeats;
+        this.ticketPrice = ticketPrice;
+    }
+}
 
+// Main Class
+public class FlightBookingSystem 
+{
+    static ArrayList<Flight> flights = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) 
+    {
+        // Sample Flights
+        flights.add(new Flight(1, "Indigo", "Hyderabad", "Delhi", 5, 4500));
+        flights.add(new Flight(2, "Air India", "Chennai", "Mumbai", 3, 5500));
+        flights.add(new Flight(3, "SpiceJet", "Bangalore", "Goa", 4, 3000));
+        int choice;
+        do 
+        {
+            System.out.println("\n===== Flight Booking System =====");
+            System.out.println("1. View Flights");
+            System.out.println("2. Book Ticket");
+            System.out.println("3. Exit");
+            System.out.print("Enter Choice: ");
+            choice = sc.nextInt();
+            switch(choice) 
+            {
+                case 1:
+                    showFlights();
+                    break;
+                case 2:
+                    bookTicket();
+                    break;
+                case 3:
+                    System.out.println("Thank You!");
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+            }
+        } while(choice != 3);
+    }
 
+    // Show Flights
+    static void showFlights() 
+    {
+        System.out.println("\nAvailable Flights:");
+        for(Flight flight : flights) 
+        {
+            System.out.println( flight.flightId + " - " + flight.flightName + " - " + flight.source + " to "
+                + flight.destination + " - Seats: " + flight.availableSeats + " - ₹" + flight.ticketPrice);
+        }
+    }
 
+    // Book Ticket
+    static void bookTicket() 
+    {
+        System.out.print("Enter Flight ID: ");
+        int id = sc.nextInt();
+        for(Flight flight : flights) 
+        {
+            if(flight.flightId == id) 
+            {
+                if(flight.availableSeats > 0) 
+                {
+                    flight.availableSeats--;
+                    System.out.println("Ticket Booked Successfully!");
+                    System.out.println("Ticket Price: ₹" + flight.ticketPrice);
+                    return;
+                }
+                else 
+                {
+                    System.out.println("No Seats Available");
+                    return;
+                }
+            }
+        }
+        System.out.println("Flight Not Found");
+    }
+}
+
+STEP 1 — Real-world understanding
+Flights
+Passengers
+Seat booking
+
+STEP 2 — Main Object
+class Flight
+
+STEP 3 — Flight Data
+int flightId;
+String source;
+int availableSeats;
+
+STEP 4 — Store Flights
+ArrayList<Flight>
+
+STEP 5 — User Operations
+View flights
+Book ticket
+Exit
 
