@@ -1,0 +1,73 @@
+1. Find the max, min and reverse the list,
+
+import java.util.*;
+class NumberOperations
+{
+    public static void main(String[] args)
+    {
+        // Creating ArrayList
+        ArrayList<Integer> numbers = new ArrayList<>();
+        // Adding Elements
+        numbers.add(10);
+        numbers.add(45);
+        numbers.add(7);
+        numbers.add(90);
+        numbers.add(25);
+
+        // Printing Original List
+        System.out.println("Original List:");
+        System.out.println(numbers);
+
+        // Finding Maximum Element
+        int max = Collections.max(numbers);
+
+        // Finding Minimum Element
+        int min = Collections.min(numbers);
+
+        // Reversing the List
+        Collections.reverse(numbers);
+
+        // Printing Results
+        System.out.println("\nMaximum Number: " + max);
+
+        System.out.println("Minimum Number: " + min);
+
+        System.out.println("\nReversed List:");
+        System.out.println(numbers);
+    }
+}
+
+2. Read student marks, add and show the results (Map)
+
+import java.util.*;
+
+class StudentMarks
+{
+    public static void main(String[] args)
+    {
+        // Creating HashMap
+        HashMap<String, Integer> marks = new HashMap<>();
+
+        Scanner sc = new Scanner(System.in);
+
+        // Reading Student Details
+        System.out.print("Enter Student Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Marks: ");
+        int score = sc.nextInt();
+
+        // Adding Data to Map
+        marks.put(name, score);
+
+        // Displaying Result
+        System.out.println("\nStudent Results:");
+
+        for(String student : marks.keySet())
+        {
+            System.out.println(
+                student + " : " + marks.get(student)
+            );
+        }
+    }
+}
