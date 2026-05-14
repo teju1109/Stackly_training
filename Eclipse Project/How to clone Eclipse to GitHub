@@ -1,0 +1,22 @@
+Step-1 
+Create Folder For Eclipse Project
+
+Step-2
+Open GitHub Desktop
+Make Sure Correct Repository Is Open(Stackly_training)
+
+Step-3
+Open Repository Folder in one tab
+Open Eclipse Workspace Folder in another tab
+
+Step-4
+Copy Project Folder(From eclipse folder) to Github folder
+
+Step-5
+Return To GitHub Desktop
+--Summary:Added Eclipse training project--
+and Click "Commit to main"
+
+Step-6
+Push To GitHub,
+Go back to browser and verify.
