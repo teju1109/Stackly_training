@@ -1,0 +1,229 @@
+What is Enum?
+Enum means Enumeration
+Used to store a fixed set of constants
+Improves:
+readability
+type safety
+maintainability
+
+Syntax :
+enum Day
+{
+    MONDAY, TUESDAY, WEDNESDAY
+}
+
+Features of Enum
+
+1. Enum in Switch Case :
+switch(day)
+{
+    case MONDAY:
+        System.out.println("Start");
+        break;
+}
+
+2. Enum with Constructor and Methods
+Enum can contain:
+variables
+constructors
+methods
+
+Example:
+
+enum Level
+{
+    LOW(1), MEDIUM(2), HIGH(3);
+
+    int value;
+
+    Level(int value)
+    {
+        this.value = value;
+    }
+}
+
+Important Enum Methods :
+| Method    | Purpose                 |
+| --------- | ----------------------- |
+| values()  | Returns all constants   |
+| valueOf() | Converts string to enum |
+| ordinal() | Returns index value     |
+
+What is Stream?
+Introduced in Java 8
+Used to process collections easily
+Helps avoid lengthy loops
+
+Streams are used for:
+-->filtering
+-->sorting
+-->mapping
+-->counting
+-->collecting data
+
+Creating Stream :
+
+List<String> names = Arrays.asList("Ram", "John");
+names.stream().forEach(System.out::println);
+
+Important Stream Methods :
+| Method      | Purpose               |
+| ----------- | --------------------- |
+| filter()    | Filters data          |
+| map()       | Transforms data       |
+| sorted()    | Sorts elements        |
+| collect()   | Stores result         |
+| count()     | Counts elements       |
+| limit()     | Limits elements       |
+| distinct()  | Removes duplicates    |
+| findFirst() | Returns first element |
+| reduce()    | Performs calculations |
+
+filter()
+numbers.stream()
+       .filter(n -> n % 2 == 0)
+       .forEach(System.out::println);
+
+-->Used to filter data based on condition.
+
+map()
+numbers.stream()
+       .map(n -> n * n)
+       .forEach(System.out::println);
+
+-->Used to transform data.
+
+sorted()
+numbers.stream()
+       .sorted()
+       .forEach(System.out::println);
+
+-->Used to sort elements.
+
+collect()
+.collect(Collectors.toList());
+
+-->Stores stream result into another collection.
+
+reduce()
+int sum = numbers.stream()
+                 .reduce(0, (a,b) -> a+b);
+
+Used for:
+-->sum
+-->multiplication
+-->aggregation operations
+
+Advantages of Streams :
+-->Less code
+-->Faster processing
+-->Better readability
+-->Functional programming support
+
+What is Thread?
+-->A thread is the smallest unit of execution
+-->Used for multitasking inside a program
+
+Why Use Threads?
+-->Perform multiple tasks simultaneously
+-->Better CPU usage
+-->Faster execution
+-->Smooth user experience
+
+Ways to Create Thread :
+
+1. Extending Thread Class
+class MyThread extends Thread
+{
+    public void run()
+    {
+        System.out.println("Running");
+    }
+}
+
+2. Implementing Runnable Interface (Recommended)
+class MyRunnable implements Runnable
+{
+    public void run()
+    {
+        System.out.println("Running");
+    }
+}
+
+Reason:
+-->Java does not support multiple inheritance
+-->Runnable is more flexible
+
+Thread Life Cycle :
+| State           | Meaning              |
+| --------------- | -------------------- |
+| New             | Thread created       |
+| Runnable        | Ready to run         |
+| Running         | Executing            |
+| Blocked/Waiting | Waiting for resource |
+| Terminated      | Execution completed  |
+
+Important Thread Methods :
+| Method        | Purpose                  |
+| ------------- | ------------------------ |
+| start()       | Starts thread            |
+| run()         | Contains logic           |
+| sleep()       | Pauses thread            |
+| join()        | Waits for another thread |
+| setPriority() | Sets priority            |
+| getName()     | Gets thread name         |
+
+What is Wrapper Class?
+Converts primitive datatype into object
+Example:
+int -> Integer
+char -> Character
+
+Primitive and Wrapper Classes :
+| Primitive | Wrapper   |
+| --------- | --------- |
+| int       | Integer   |
+| char      | Character |
+| double    | Double    |
+| float     | Float     |
+| boolean   | Boolean   |
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Tasks :
+
+1.Simple program using Thread class
+
+class MyThread extends Thread
+{
+    public void run()
+    {
+        for(int i = 1; i <= 5; i++)
+        {
+            System.out.println("Thread Running : " + i);
+        }
+    }
+}
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        MyThread t1 = new MyThread();
+        t1.start();
+    }
+}
+
+2.Simple String operations
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        String name = "Teju";
+        System.out.println("Original String : " + name);
+        System.out.println("Length : " + name.length());
+        System.out.println("Uppercase : " + name.toUpperCase());
+        System.out.println("Lowercase : " + name.toLowerCase());
+    }
+}
