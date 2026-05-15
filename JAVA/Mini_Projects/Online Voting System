@@ -1,0 +1,237 @@
+import java.util.*;
+
+// User Class
+class User 
+{
+    String username;
+    String password;
+    boolean hasVoted;
+
+    // Constructor
+    User(String username, String password) 
+    {
+        this.username = username;
+        this.password = password;
+        this.hasVoted = false;
+    }
+}
+
+// Candidate Class
+class Candidate 
+{
+    String name;
+    int votes;
+
+    // Constructor
+    Candidate(String name) 
+    {
+        this.name = name;
+        this.votes = 0;
+    }
+}
+
+// Main Voting System Class
+class VotingSystem 
+{
+    // Store Users
+    HashMap<String, User> users = new HashMap<>();
+
+    // Store Candidates
+    ArrayList<Candidate> candidates = new ArrayList<>();
+
+    Scanner sc = new Scanner(System.in);
+
+    // Constructor
+    VotingSystem() 
+    {
+        // Add Candidates
+        candidates.add(new Candidate("Rahul"));
+        candidates.add(new Candidate("Priya"));
+        candidates.add(new Candidate("Arjun"));
+    }
+
+    // Register Method
+    void register() 
+    {
+        System.out.println("\n===== REGISTER =====");
+
+        System.out.print("Enter Username: ");
+        String username = sc.next();
+
+        System.out.print("Enter Password: ");
+        String password = sc.next();
+
+        // Check User Already Exists
+        if (users.containsKey(username)) 
+        {
+            System.out.println("User already exists!");
+        } 
+        else 
+        {
+            users.put(username, new User(username, password));
+            System.out.println("Registration Successful!");
+        }
+    }
+
+    // Login Method
+    User login() 
+    {
+        System.out.println("\n===== LOGIN =====");
+
+        System.out.print("Enter Username: ");
+        String username = sc.next();
+
+        System.out.print("Enter Password: ");
+        String password = sc.next();
+
+        // Check Login
+        if (users.containsKey(username) &&
+            users.get(username).password.equals(password)) 
+        {
+            System.out.println("Login Successful!");
+            return users.get(username);
+        } 
+        else 
+        {
+            System.out.println("Invalid Username or Password!");
+            return null;
+        }
+    }
+
+    // Show Candidates
+    void showCandidates() 
+    {
+        System.out.println("\n===== CANDIDATE LIST =====");
+
+        for (int i = 0; i < candidates.size(); i++) 
+        {
+            System.out.println((i + 1) + ". " + candidates.get(i).name);
+        }
+    }
+
+    // Vote Method
+    void vote(User user) 
+    {
+        // Check Already Voted
+        if (user.hasVoted) 
+        {
+            System.out.println("You already voted!");
+            return;
+        }
+
+        showCandidates();
+
+        System.out.print("Choose Candidate Number: ");
+
+        try 
+        {
+            int choice = sc.nextInt();
+
+            // Validate Choice
+            if (choice < 1 || choice > candidates.size()) 
+            {
+                System.out.println("Invalid Candidate Number!");
+                return;
+            }
+
+            // Increase Vote
+            candidates.get(choice - 1).votes++;
+
+            // Mark User as Voted
+            user.hasVoted = true;
+
+            System.out.println("Vote Casted Successfully!");
+
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Invalid Input!");
+            sc.nextLine();
+        }
+    }
+
+    // Show Results
+    void showResults() 
+    {
+        System.out.println("\n===== VOTING RESULTS =====");
+
+        Candidate winner = candidates.get(0);
+
+        for (Candidate c : candidates) 
+        {
+            System.out.println(c.name + " : " + c.votes + " Votes");
+
+            // Find Winner
+            if (c.votes > winner.votes) 
+            {
+                winner = c;
+            }
+        }
+
+        System.out.println("\nWinner is: " + winner.name);
+    }
+
+    // Main Menu
+    void menu() 
+    {
+        while (true) 
+        {
+            System.out.println("\n===== ONLINE VOTING SYSTEM =====");
+
+            System.out.println("1. Register");
+            System.out.println("2. Login & Vote");
+            System.out.println("3. Show Results");
+            System.out.println("4. Exit");
+
+            System.out.print("Enter Choice: ");
+
+            try 
+            {
+                int choice = sc.nextInt();
+
+                switch (choice) 
+                {
+                    case 1:
+                        register();
+                        break;
+
+                    case 2:
+                        User user = login();
+
+                        if (user != null) 
+                        {
+                            vote(user);
+                        }
+                        break;
+
+                    case 3:
+                        showResults();
+                        break;
+
+                    case 4:
+                        System.out.println("Thank You!");
+                        System.exit(0);
+
+                    default:
+                        System.out.println("Invalid Choice!");
+                }
+
+            } 
+            catch (Exception e) 
+            {
+                System.out.println("Please Enter Valid Number!");
+                sc.nextLine();
+            }
+        }
+    }
+}
+
+// Main Class
+public class OnlineVotingSystem 
+{
+    public static void main(String[] args) 
+    {
+        VotingSystem obj = new VotingSystem();
+        obj.menu();
+    }
+}
