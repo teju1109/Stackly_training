@@ -1,0 +1,27 @@
+TASK TO CREATE A TABLE.
+
+CREATE DATABASE books;
+USE books;
+
+CREATE table books(
+books_id INT PRIMARY KEY auto_increment,
+books_title varchar(100),
+books_author varchar(100),
+books_genre varchar(250),
+books_price int,
+books_publishYear int,
+books_inStock boolean
+);
+
+INSERT into books
+(books_title, books_author, books_genre, books_price, books_publishYear, books_inStock)
+VALUES
+('A Lot Like LOve', 'Umrit Shahi', 'Love', 899, 2015, TRUE),
+('Mans search of meaning', 'good man', 'Crime', 899, 2025, TRUE),
+('Template', 'Shake Sphere', 'Drama', 399, 1925, FALSE);
+
+SELECT * FROM books;
+SELECT books_title,books_publishYear FROM books;
+
+
+
