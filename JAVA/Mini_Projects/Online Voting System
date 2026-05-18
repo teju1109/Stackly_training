@@ -1,29 +1,13 @@
 import java.util.*;
 
-// User Class
-class User 
-{
-    String username;
-    String password;
-    boolean hasVoted;
-
-    // Constructor
-    User(String username, String password) 
-    {
-        this.username = username;
-        this.password = password;
-        this.hasVoted = false;
-    }
-}
-
 // Candidate Class
-class Candidate 
+class Candidate
 {
     String name;
     int votes;
 
     // Constructor
-    Candidate(String name) 
+    Candidate(String name)
     {
         this.name = name;
         this.votes = 0;
@@ -31,10 +15,10 @@ class Candidate
 }
 
 // Main Voting System Class
-class VotingSystem 
+class OnlineVotingSystem
 {
-    // Store Users
-    HashMap<String, User> users = new HashMap<>();
+    // Store Employee ID and Voting Status
+    HashMap<String, Boolean> employees = new HashMap<>();
 
     // Store Candidates
     ArrayList<Candidate> candidates = new ArrayList<>();
@@ -42,7 +26,7 @@ class VotingSystem
     Scanner sc = new Scanner(System.in);
 
     // Constructor
-    VotingSystem() 
+    OnlineVotingSystem()
     {
         // Add Candidates
         candidates.add(new Candidate("Rahul"));
@@ -50,72 +34,52 @@ class VotingSystem
         candidates.add(new Candidate("Arjun"));
     }
 
-    // Register Method
-    void register() 
+    // Validate Employee ID
+    boolean isValidEmployeeId(String employeeId)
     {
-        System.out.println("\n===== REGISTER =====");
-
-        System.out.print("Enter Username: ");
-        String username = sc.next();
-
-        System.out.print("Enter Password: ");
-        String password = sc.next();
-
-        // Check User Already Exists
-        if (users.containsKey(username)) 
-        {
-            System.out.println("User already exists!");
-        } 
-        else 
-        {
-            users.put(username, new User(username, password));
-            System.out.println("Registration Successful!");
-        }
+        return employeeId.matches("STK-\\d{2}-\\d{4}");
     }
 
     // Login Method
-    User login() 
+    String login()
     {
-        System.out.println("\n===== LOGIN =====");
+        System.out.println("\n===== EMPLOYEE LOGIN =====");
 
-        System.out.print("Enter Username: ");
-        String username = sc.next();
+        System.out.print("Enter Stackly Employee ID: ");
+        String employeeId = sc.next();
 
-        System.out.print("Enter Password: ");
-        String password = sc.next();
-
-        // Check Login
-        if (users.containsKey(username) &&
-            users.get(username).password.equals(password)) 
+        // Validate Format
+        if (!isValidEmployeeId(employeeId))
         {
-            System.out.println("Login Successful!");
-            return users.get(username);
-        } 
-        else 
-        {
-            System.out.println("Invalid Username or Password!");
+            System.out.println("Invalid Employee ID Format!");
+            System.out.println("Example Format: STK-26-2144");
+
             return null;
         }
+
+        System.out.println("Login Successful!");
+
+        return employeeId;
     }
 
-    // Show Candidates
-    void showCandidates() 
+    // Show Candidate List
+    void showCandidates()
     {
         System.out.println("\n===== CANDIDATE LIST =====");
 
-        for (int i = 0; i < candidates.size(); i++) 
+        for (int i = 0; i < candidates.size(); i++)
         {
             System.out.println((i + 1) + ". " + candidates.get(i).name);
         }
     }
 
-    // Vote Method
-    void vote(User user) 
+    // Cast Vote
+    void castVote(String employeeId)
     {
         // Check Already Voted
-        if (user.hasVoted) 
+        if (employees.containsKey(employeeId))
         {
-            System.out.println("You already voted!");
+            System.out.println("You have already voted!");
             return;
         }
 
@@ -123,46 +87,46 @@ class VotingSystem
 
         System.out.print("Choose Candidate Number: ");
 
-        try 
+        try
         {
             int choice = sc.nextInt();
 
             // Validate Choice
-            if (choice < 1 || choice > candidates.size()) 
+            if (choice < 1 || choice > candidates.size())
             {
                 System.out.println("Invalid Candidate Number!");
                 return;
             }
 
-            // Increase Vote
+            // Increase Vote Count
             candidates.get(choice - 1).votes++;
 
-            // Mark User as Voted
-            user.hasVoted = true;
+            // Mark Employee as Voted
+            employees.put(employeeId, true);
 
-            System.out.println("Vote Casted Successfully!");
+            System.out.println("Vote Cast Successfully!");
 
-        } 
-        catch (Exception e) 
+        }
+        catch (Exception e)
         {
             System.out.println("Invalid Input!");
             sc.nextLine();
         }
     }
 
-    // Show Results
-    void showResults() 
+    // Display Poll Results
+    void showResults()
     {
-        System.out.println("\n===== VOTING RESULTS =====");
+        System.out.println("\n===== POLL RESULTS =====");
 
         Candidate winner = candidates.get(0);
 
-        for (Candidate c : candidates) 
+        for (Candidate c : candidates)
         {
             System.out.println(c.name + " : " + c.votes + " Votes");
 
             // Find Winner
-            if (c.votes > winner.votes) 
+            if (c.votes > winner.votes)
             {
                 winner = c;
             }
@@ -172,52 +136,51 @@ class VotingSystem
     }
 
     // Main Menu
-    void menu() 
+    void menu()
     {
-        while (true) 
+        while (true)
         {
             System.out.println("\n===== ONLINE VOTING SYSTEM =====");
 
-            System.out.println("1. Register");
-            System.out.println("2. Login & Vote");
-            System.out.println("3. Show Results");
-            System.out.println("4. Exit");
+            System.out.println("1. Login & Vote");
+            System.out.println("2. Display Poll Results");
+            System.out.println("3. Exit");
 
             System.out.print("Enter Choice: ");
 
-            try 
+            try
             {
                 int choice = sc.nextInt();
 
-                switch (choice) 
+                switch (choice)
                 {
                     case 1:
-                        register();
+
+                        String employeeId = login();
+
+                        if (employeeId != null)
+                        {
+                            castVote(employeeId);
+                        }
+
                         break;
 
                     case 2:
-                        User user = login();
 
-                        if (user != null) 
-                        {
-                            vote(user);
-                        }
-                        break;
-
-                    case 3:
                         showResults();
                         break;
 
-                    case 4:
+                    case 3:
+
                         System.out.println("Thank You!");
                         System.exit(0);
 
                     default:
+
                         System.out.println("Invalid Choice!");
                 }
-
-            } 
-            catch (Exception e) 
+            }
+            catch (Exception e)
             {
                 System.out.println("Please Enter Valid Number!");
                 sc.nextLine();
@@ -227,11 +190,14 @@ class VotingSystem
 }
 
 // Main Class
-public class OnlineVotingSystem 
+public class Main
 {
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
-        VotingSystem obj = new VotingSystem();
+        OnlineVotingSystem obj = new OnlineVotingSystem();
+
         obj.menu();
     }
 }
+
+Very Important : Employee _id should be in STK-year-roll.no format (ex : STK-26-2144)
