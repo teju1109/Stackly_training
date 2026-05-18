@@ -12,7 +12,57 @@ types
 syntax : 
 int arr[] = {1,2,3,4,5};
 
-using for loop:
+Construction :
+
+Step 1 — Create the Class
+public class Main {}
+
+Step 2 — Create main Method
+public class Main 
+{
+    public static void main(String[] args) {}
+}
+
+Step 3 — Declare an Array
+Syntax :
+datatype[] arrayName;
+int[] numbers;
+
+Step 4 — Create Memory for Array
+numbers = new int[5];
+
+Step 5 — Store Values in Array
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        int[] numbers;
+        numbers = new int[5];
+        numbers[0] = 10;
+        numbers[1] = 20;
+        numbers[2] = 30;
+        numbers[3] = 40;
+        numbers[4] = 50;
+    }
+}
+
+Step 6 — Print Array Values
+System.out.println(numbers[0]);
+System.out.println(numbers[1]);
+
+Short Method :
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        int[] numbers = {10, 20, 30, 40, 50};
+        System.out.println(numbers[0]);
+        System.out.println(numbers[1]);
+        System.out.println(numbers[2]);
+    }
+}
+
+Using for loop:
 for(int i=0; i<arr.length-1; i++)
 {
 System.out.println(arr[i]);
