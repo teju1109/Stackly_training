@@ -1,0 +1,167 @@
+import java.util.Scanner;
+
+// Main Class
+public class Main {
+
+    public static void main(String[] args) {
+
+        MovieTicketBookingSystem system = new MovieTicketBookingSystem();
+        system.menu();
+    }
+}
+
+// Movie Ticket Booking System Class
+class MovieTicketBookingSystem {
+
+    // 5x5 Seat Array
+    boolean[][] seats = new boolean[5][5];
+
+    Scanner sc = new Scanner(System.in);
+
+    // Show Available Seats
+    void showAvailableSeats() {
+
+        System.out.println("\n===== THEATER SEATING CHART =====");
+        System.out.println("    1   2   3   4   5");
+
+        for (int i = 0; i < 5; i++) {
+
+            System.out.print((i + 1) + "   ");
+
+            for (int j = 0; j < 5; j++) {
+
+                if (seats[i][j] == false) {
+                    System.out.print("[O] ");
+                } else {
+                    System.out.print("[X] ");
+                }
+            }
+
+            System.out.println();
+        }
+    }
+
+    // Book Ticket
+    void bookTicket() {
+
+        try {
+
+            System.out.println("\n===== BOOK TICKET =====");
+
+            System.out.print("Enter Row Number (1-5): ");
+            int row = sc.nextInt() - 1;
+
+            System.out.print("Enter Seat Number (1-5): ");
+            int col = sc.nextInt() - 1;
+
+            // Validate Input
+            if (row < 0 || row >= 5 || col < 0 || col >= 5) {
+
+                System.out.println("Invalid Seat Number!");
+                return;
+            }
+
+            // Check Availability
+            if (seats[row][col] == false) {
+
+                seats[row][col] = true;
+                System.out.println("Ticket Booked Successfully!");
+
+            } else {
+
+                System.out.println("Seat Already Booked!");
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Invalid Input!");
+            sc.nextLine();
+        }
+    }
+
+    // Cancel Ticket
+    void cancelTicket() {
+
+        try {
+
+            System.out.println("\n===== CANCEL TICKET =====");
+
+            System.out.print("Enter Row Number (1-5): ");
+            int row = sc.nextInt() - 1;
+
+            System.out.print("Enter Seat Number (1-5): ");
+            int col = sc.nextInt() - 1;
+
+            // Validate Input
+            if (row < 0 || row >= 5 || col < 0 || col >= 5) {
+
+                System.out.println("Invalid Seat Number!");
+                return;
+            }
+
+            // Check Booking
+            if (seats[row][col] == true) {
+
+                seats[row][col] = false;
+                System.out.println("Ticket Cancelled Successfully!");
+
+            } else {
+
+                System.out.println("Seat Was Not Booked!");
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Invalid Input!");
+            sc.nextLine();
+        }
+    }
+
+    // Main Menu
+    void menu() {
+
+        while (true) {
+
+            System.out.println("\n===== MOVIE TICKET BOOKING SYSTEM =====");
+            System.out.println("1. Show Available Seats");
+            System.out.println("2. Book Ticket");
+            System.out.println("3. Cancel Ticket");
+            System.out.println("4. Exit");
+
+            System.out.print("Enter Your Choice: ");
+
+            try {
+
+                int choice = sc.nextInt();
+
+                switch (choice) {
+
+                    case 1:
+                        showAvailableSeats();
+                        break;
+
+                    case 2:
+                        bookTicket();
+                        break;
+
+                    case 3:
+                        cancelTicket();
+                        break;
+
+                    case 4:
+                        System.out.println("Thank You!");
+                        System.exit(0);
+                        break;
+
+                    default:
+                        System.out.println("Invalid Choice!");
+                }
+
+            } catch (Exception e) {
+
+                System.out.println("Please Enter Numbers Only!");
+                sc.nextLine();
+            }
+        }
+    }
+}
