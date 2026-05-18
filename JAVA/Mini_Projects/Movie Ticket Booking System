@@ -1,24 +1,19 @@
 import java.util.Scanner;
 
-// Main Class
-public class Main {
-
-    public static void main(String[] args) {
-
+public class Main 
+{
+    public static void main(String[] args) 
+    {
         MovieTicketBookingSystem system = new MovieTicketBookingSystem();
         system.menu();
     }
 }
 
-// Movie Ticket Booking System Class
 class MovieTicketBookingSystem {
-
-    // 5x5 Seat Array
     boolean[][] seats = new boolean[5][5];
 
     Scanner sc = new Scanner(System.in);
 
-    // Show Available Seats
     void showAvailableSeats() {
 
         System.out.println("\n===== THEATER SEATING CHART =====");
@@ -40,8 +35,6 @@ class MovieTicketBookingSystem {
             System.out.println();
         }
     }
-
-    // Book Ticket
     void bookTicket() {
 
         try {
@@ -54,14 +47,13 @@ class MovieTicketBookingSystem {
             System.out.print("Enter Seat Number (1-5): ");
             int col = sc.nextInt() - 1;
 
-            // Validate Input
+
             if (row < 0 || row >= 5 || col < 0 || col >= 5) {
 
                 System.out.println("Invalid Seat Number!");
                 return;
             }
 
-            // Check Availability
             if (seats[row][col] == false) {
 
                 seats[row][col] = true;
@@ -79,7 +71,6 @@ class MovieTicketBookingSystem {
         }
     }
 
-    // Cancel Ticket
     void cancelTicket() {
 
         try {
@@ -92,14 +83,12 @@ class MovieTicketBookingSystem {
             System.out.print("Enter Seat Number (1-5): ");
             int col = sc.nextInt() - 1;
 
-            // Validate Input
             if (row < 0 || row >= 5 || col < 0 || col >= 5) {
 
                 System.out.println("Invalid Seat Number!");
                 return;
             }
 
-            // Check Booking
             if (seats[row][col] == true) {
 
                 seats[row][col] = false;
@@ -117,7 +106,6 @@ class MovieTicketBookingSystem {
         }
     }
 
-    // Main Menu
     void menu() {
 
         while (true) {
