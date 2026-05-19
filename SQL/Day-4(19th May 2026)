@@ -1,0 +1,283 @@
+create database stackly;
+use stackly;
+ 
+create table customers (
+    customer_id int primary key auto_increment,
+    name varchar(50),
+    city varchar(50)
+);
+ 
+insert into customers (name, city) values
+('Tejesh','Bangalore'),
+('Varshini','Erode'),
+('Harish','Chennai'),
+('Amrutha','Chennai'),
+('Varshitha','Hyderabad'),
+('Sabari','Erode'),
+('Mithun','Bangalore'),
+('Deepak','Bangalore');
+ 
+create table accounts (
+    account_id int primary key auto_increment,
+    customer_id int,
+    account_type varchar(20),
+    balance decimal(10,2),
+    foreign key (customer_id) references customers(customer_id)
+);
+ 
+insert into accounts (customer_id, account_type, balance) values
+(1,'Savings',150000),
+(1,'Current',120000),
+(2,'Savings',30000),
+(3,'Savings',15000),
+(4,'Current',400000),
+(5,'Savings',500000),
+(5,'Current',20000),
+(6,'Savings',35000),
+(7,'Savings',10000);
+ 
+create table trains (
+    train_id int primary key auto_increment,
+    train_name varchar(50),
+    source varchar(50),
+    destination varchar(50)
+);
+ 
+insert into trains (train_name, source, destination) values
+('Express1','Bangalore','Hyderabad'),
+('Express2','Bangalore','Erode'),
+('Express3','Bangalore','Chennai'),
+('Express4','Hyderabad','Erode'),
+('Express5','Hyderabad','Chennai'),
+('Express6','Chennai','Erode');
+ 
+create table bookings (
+    booking_id int primary key auto_increment,
+    train_id int,
+    passenger_name varchar(50),
+    fare decimal(10,2),
+    status varchar(20),
+    foreign key (train_id) references trains(train_id)
+);
+ 
+insert into bookings (train_id, passenger_name, fare, status) values
+(1,'Tejesh',500,'Confirmed'),
+(2,'Varshini',500,'Waiting'),
+(3,'Harish',300,'Confirmed'),
+(4,'Sabari',450,'Cancelled'),
+(5,'Deepak',300,'Confirmed');
+ 
+select * from customers;
+select * from accounts;
+select * from trains;
+select * from bookings;
+---------------------------------------------------------------------------------------------------------
+ 
+select * from accounts
+where balance > 20000;
+ 
+select * from customers
+where city = 'Chennai';
+ 
+select * from accounts
+where balance between 20000 and 50000;
+ 
+select * from customers
+where name like 'J%';
+ 
+select * from accounts
+where account_type in ('Savings','Current');
+ 
+select * from accounts
+where account_type <> 'Savings';
+ 
+select * from customers
+where name like '%a%';
+ 
+select * from accounts
+where balance <= 30000;
+ 
+select * from customers
+where city <> 'Madurai';
+ 
+select * from accounts
+where balance not between 10000 and 40000;
+ 
+select * from customers
+where name like '%i';
+ 
+select * from accounts
+where balance = 50000;
+ 
+select * from customers
+where city in ('Chennai','Salem');
+ 
+select * from accounts
+where balance > 10000
+and balance < 40000;
+ 
+select * from accounts
+where account_type not in ('Current');
+ 
+select * from accounts
+order by balance desc;
+ 
+select * from customers
+order by name asc;
+ 
+select * from accounts
+order by account_type asc, balance desc;
+ 
+select sum(balance) as total_balance
+from accounts;
+ 
+select avg(balance) as average_balance
+from accounts;
+ 
+select max(balance) as maximum_balance
+from accounts;
+ 
+select min(balance) as minimum_balance
+from accounts;
+ 
+select count(*) as total_customers
+from customers;
+ 
+select account_type, sum(balance) as total_balance
+from accounts
+group by account_type;
+ 
+select account_type, avg(balance) as average_balance
+from accounts
+group by account_type;
+ 
+select account_type, avg(balance) as average_balance
+from accounts
+group by account_type
+having avg(balance) > 20000;
+ 
+select customer_id, count(*) as total_accounts
+from accounts
+group by customer_id;
+ 
+select customer_id, count(*) as total_accounts
+from accounts
+group by customer_id
+having count(*) > 1;
+ 
+select customers.name, accounts.balance
+from customers
+inner join accounts
+on customers.customer_id = accounts.customer_id;
+ 
+select customers.name, accounts.account_type, accounts.balance
+from customers
+left join accounts
+on customers.customer_id = accounts.customer_id;
+ 
+select accounts.account_id, accounts.account_type, accounts.balance,
+customers.name, customers.city
+from accounts
+right join customers
+on accounts.customer_id = customers.customer_id;
+ 
+select customers.name, accounts.account_type
+from customers
+inner join accounts
+on customers.customer_id = accounts.customer_id
+where accounts.balance > 20000;
+ 
+select customers.name, sum(accounts.balance) as total_balance
+from customers
+inner join accounts
+on customers.customer_id = accounts.customer_id
+group by customers.name;
+ 
+select customers.name, accounts.balance
+from customers
+inner join accounts
+on customers.customer_id = accounts.customer_id
+order by accounts.balance desc;
+ 
+select customers.city, count(accounts.account_id) as total_accounts
+from customers
+inner join accounts
+on customers.customer_id = accounts.customer_id
+group by customers.city;
+ 
+select * from accounts
+where balance > (
+    select avg(balance)
+    from accounts
+);
+ 
+select * from customers
+where customer_id in (
+    select customer_id
+    from accounts
+);
+ 
+select * from customers
+where customer_id not in (
+    select customer_id
+    from accounts
+);
+ 
+select * from accounts
+where balance = (
+    select max(balance)
+    from accounts
+);
+ 
+select customers.name, sum(accounts.balance) as total_balance
+from customers
+inner join accounts
+on customers.customer_id = accounts.customer_id
+group by customers.name
+having sum(accounts.balance) > 40000;
+ 
+select * from bookings
+where fare > 400;
+ 
+select * from bookings
+where status <> 'Confirmed';
+ 
+select * from trains
+where source = 'Chennai';
+ 
+select * from bookings
+where fare between 300 and 500;
+ 
+select * from bookings
+where passenger_name like 'A%';
+ 
+select trains.train_name, bookings.passenger_name
+from trains
+inner join bookings
+on trains.train_id = bookings.train_id;
+ 
+select trains.train_name, count(bookings.booking_id) as total_bookings
+from trains
+inner join bookings
+on trains.train_id = bookings.train_id
+group by trains.train_name;
+ 
+select trains.train_name, sum(bookings.fare) as total_fare
+from trains
+inner join bookings
+on trains.train_id = bookings.train_id
+group by trains.train_name;
+ 
+select * from bookings
+where fare = (
+    select max(fare)
+    from bookings
+);
+ 
+select * from trains
+where train_id in (
+    select train_id
+    from bookings
+    group by train_id
+    having count(*) > 1
+);
