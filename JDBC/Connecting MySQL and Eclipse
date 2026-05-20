@@ -1,0 +1,146 @@
+Step 1: Create Database in MySQL
+
+create database jdbc_db;
+use jdbc_db;
+create table students
+(
+    students_id int primary key auto_increment,
+    name varchar(100),
+    email varchar(100)
+);
+
+------------------------------------------------------------------------------------------------------------
+
+Step 2: Create Java Project in Eclipse
+
+File → New → Java Project
+Project Name : jdbc
+
+1. Unticked "Create module-info.java file"
+2. Selected JRE : JavaSE-16 / JavaSE-17
+
+------------------------------------------------------------------------------------------------------------
+
+Step 3: Create Package
+
+src → New → Package
+Package Name : jdbc
+
+------------------------------------------------------------------------------------------------------------
+
+Step 4: Create Java Class : DatabaseConnection and tick "public static void main(String[] args)"
+
+------------------------------------------------------------------------------------------------------------
+
+Step 5: Add MySQL Connector JAR
+
+Right Click Project
+→ Build Path
+→ Configure Build Path
+→ Classpath
+→ Add External JARs
+Select : mysql-connector-j-9.7.0.jar
+
+Why Connector JAR is Needed ??
+--> Java understands Java language.
+--> MySQL understands SQL language.
+--> Connector JAR acts as translator.
+
+Flow:
+Java Program
+     ↓
+JDBC Driver
+     ↓
+MySQL Database
+
+------------------------------------------------------------------------------------------------------------
+
+Construction of the Code :
+1. Import JDBC classes
+2. Load Driver
+3. Create Connection
+4. Use Connection
+5. Close Connection
+6. Handle Errors
+
+STEP 1 — Package
+package jdbc;
+"This class belongs to jdbc package"
+
+STEP 2 — Import Statements
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+STEP 3 — Create Class
+public class DatabaseConnection
+
+STEP 4 — Main Method
+public static void main(String[] args)
+
+5. try Block
+try{}
+
+6. Load MySQL Driver
+Class.forName("com.mysql.cj.jdbc.Driver");
+"This line loads MySQL JDBC driver into memory."
+
+7. Create Connection
+Connection con = DriverManager.getConnection();
+
+8. JDBC URL
+"jdbc:mysql://localhost:3306/jdbc_db"
+
+| Part      | Meaning          |
+| --------- | ---------------- |
+| jdbc      | JDBC protocol    |
+| mysql     | MySQL database   |
+| localhost | Current computer |
+| 3306      | MySQL port       |
+| jdbc_db   | Database name    |
+
+9. Username
+"root"
+
+10. Password
+"Root"
+
+11. Success Message
+System.out.println("Connected Successfully...");
+
+12. Close Connection
+con.close();
+
+13. catch Block
+catch(Exception e)
+{ System.out.println(e); }
+
+------------------------------------------------------------------------------------------------------------
+
+Final Code : 
+
+package jdbc;
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DatabaseConnection
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            // Load MySQL Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Create Connection
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/jdbc_db","root","Root"
+            );
+            System.out.println("Connected Successfully...");
+            // Close Connection
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}
