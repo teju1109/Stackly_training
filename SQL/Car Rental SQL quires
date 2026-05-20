@@ -1,0 +1,170 @@
+create database rentals;
+use rentals;
+
+create table users(
+user_id int primary key auto_increment,
+name varchar(100),
+email varchar(100),
+phone varchar(15)
+);
+
+create table bikes(
+bike_id int primary key auto_increment,
+bike_name varchar(250),
+price_per_day int
+);
+
+create table bookings(
+booking_id int primary key auto_increment,
+start_date date,
+end_date date,
+total_price int,
+user_id int,
+bike_id int,
+foreign key (user_id) references users(user_id),
+foreign key (bike_id) references bikes(bike_id)
+);
+
+insert into users (name, email, phone)
+values
+('Teju', 'tej@gmail', '7207233462'),
+('Kusuma', 'kusu@gmail.com', '9848321198'),
+('Harish', 'harish@gmail.com', '9898989898'),
+('Varshii', 'varshii@gmail.com', '9876543210');
+
+insert into bikes (bike_name, price_per_day)
+values
+('Yezdi Adventure', 1200),
+('Classic 350', 1000),
+('Vespa', 700),
+('Activa 5g', 400);
+
+insert into bookings (start_date, end_date, total_price, user_id, bike_id)
+values
+('2025-01-01', '2025-06-01', 120000, 1, 1),
+('2025-01-01', '2025-06-01', 100000, 2, 3),
+('2025-01-01', '2025-06-01', 70000, 3, 2),
+('2025-01-01', '2025-06-01', 40000, 4, 4);
+
+select * from users;
+select * from bikes;
+select * from bookings;
+
+SELECT * FROM bikes
+WHERE price_per_day > 700;
+
+SELECT * FROM bookings
+WHERE total_price > 80000;
+
+SELECT * FROM users
+WHERE name = 'Teju';
+
+SELECT * FROM bikes
+ORDER BY price_per_day DESC;
+
+SELECT * FROM bookings
+ORDER BY total_price DESC;
+
+SELECT * FROM bikes
+ORDER BY price_per_day DESC
+LIMIT 1;
+
+SELECT * FROM bikes
+ORDER BY price_per_day DESC
+LIMIT 2;
+
+SELECT COUNT(*) AS total_users
+FROM users;
+
+SELECT MAX(price_per_day) AS max_price
+FROM bikes;
+
+SELECT MIN(price_per_day) AS min_price
+FROM bikes;
+
+SELECT AVG(price_per_day) AS average_price
+FROM bikes;
+
+SELECT SUM(total_price) AS total_revenue
+FROM bookings;
+
+SELECT bike_id, COUNT(*) AS total_bookings
+FROM bookings
+GROUP BY bike_id;
+
+SELECT bike_id, SUM(total_price) AS total_revenue
+FROM bookings
+GROUP BY bike_id;
+
+SELECT bike_id, SUM(total_price) AS revenue
+FROM bookings
+GROUP BY bike_id
+HAVING SUM(total_price) > 80000;
+
+SELECT users.name, bikes.bike_name, bookings.start_date, bookings.end_date, bookings.total_price
+FROM bookings
+INNER JOIN users ON bookings.user_id = users.user_id
+INNER JOIN bikes ON bookings.bike_id = bikes.bike_id;
+
+SELECT users.name, bikes.bike_name, bookings.start_date, bookings.end_date, bookings.total_price
+FROM bookings
+left JOIN users ON bookings.user_id = users.user_id
+left JOIN bikes ON bookings.bike_id = bikes.bike_id;
+
+SELECT users.name, bikes.bike_name
+FROM users
+LEFT JOIN bookings ON users.user_id = bookings.user_id
+LEFT JOIN bikes ON bookings.bike_id = bikes.bike_id;
+
+SELECT bikes.bike_name, users.name
+FROM bikes
+RIGHT JOIN bookings ON bikes.bike_id = bookings.bike_id
+LEFT JOIN users ON bookings.user_id = users.user_id;
+
+SET SQL_SAFE_UPDATES = 0; 
+
+UPDATE bikes
+SET price_per_day = 500
+WHERE bike_name = 'Activa 5g';
+
+UPDATE users
+SET email = 'teju@gmail.com'
+WHERE name = 'Teju';
+
+DELETE FROM bookings
+WHERE booking_id = 4;
+
+ALTER TABLE users
+ADD city VARCHAR(100);
+
+ALTER TABLE bikes
+MODIFY price_per_day DECIMAL(10,2);
+
+  
+
+ALTER TABLE users
+DROP COLUMN city;
+
+TRUNCATE TABLE bookings;
+
+SELECT bike_name
+FROM bikes
+WHERE price_per_day >
+(
+SELECT AVG(price_per_day)
+FROM bikes
+);
+
+SELECT name
+FROM users
+WHERE user_id IN
+(
+SELECT user_id
+FROM bookings
+WHERE bike_id =
+(
+SELECT bike_id
+FROM bikes
+WHERE bike_name = 'Yezdi Adventure'
+)
+);
