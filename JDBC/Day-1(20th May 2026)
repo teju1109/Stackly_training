@@ -1,0 +1,133 @@
+JDBC - JDBC stands for Java Database Connectivity.
+       It’s a standard API in Java that lets Java programs interact with databases.
+-->Connect to a database
+-->Execute SQL queries
+-->Retrieve and update data
+
+How JDBC works :
+1. Java Application → sends request
+2. JDBC API → processes the request
+3. JDBC Driver → communicates with the database
+4. Database → returns results
+
+API : API stands for Application Programming Interface.
+In Java APIs is used to:
+1. connect to databases,
+2. send HTTP requests,
+3. process files,
+4. communicate with other applications.
+
+JDBC driver : It converts your Java calls into a specific command
+
+| Type   | Driver Name             | Description                         |
+| ------ | ----------------------- | ----------------------------------- |
+| Type 1 | JDBC-ODBC Bridge Driver | Converts JDBC calls into ODBC calls |
+| Type 2 | Native-API Driver       | Uses database native libraries      |
+| Type 3 | Network Protocol Driver | Uses middleware server              |
+| Type 4 | Thin Driver             | Directly connects Java to database  |
+
+JDBC-ODBC Bridge Driver : Java Application → JDBC Driver → ODBC Driver → Database
+--> no longer in use
+--> Slow performance
+--> Platform dependent
+
+Native API Driver : Java Application → Native API Driver → Database
+--> also called as partial java driver
+--> Platform dependent
+
+Network Protocol Driver : Java Application → Network Driver → Middleware Server → Database
+--> uses Middleware server that converts requests
+--> Can connect to multiple databases
+--> Platform independent
+--> Good for large enterprise systems
+--> more complex setup
+
+Thin Driver : Java Application → Type 4 Driver → Database
+--> Pure Java driver
+--> Direct communication with database
+Example driver:
+com.mysql.cj.jdbc.Driver
+
+Classes and Interfaces:
+
+1. Connections: Represents a connection between Java application and database.
+
+create statement()
+prepare statement()
+close()
+Example : Connection con = DriverManager.getConnection(url, user, password);
+
+2. Statement : Used to execute SQL queries.
+               not safe --> SQL Injection rise
+Example : Statement stmt = con.createStatement();
+
+3. PreparedStatement : Special type of Statement used for dynamic queries and better security.
+Example : PreparedStatement ps =
+          con.prepareStatement("INSERT INTO student VALUES(?, ?)");
+
+4. ResultSet : Stores data returned from SELECT query.
+Example : ResultSet rs = stmt.executeQuery("SELECT * FROM student");
+
+SQL Injection Problem :
+SQL Injection is a security attack where a hacker inserts malicious SQL code into an application’s 
+input field to access, modify, or delete database data illegally.
+
+Dangers of SQL Injection
+A hacker may:
+1. login without password,
+2. steal user data,
+3. delete tables,
+4. change records,
+5. access confidential information.
+--> Use PreparedStatement in JDBC to Prevent SQL Injection.
+
+Types of SQL injection problems :
+1. In-bond
+2. Blind SQL
+3. Out of Bound
+
+| Type                      | Meaning                                                                |
+| ------------------------- | ---------------------------------------------------------------------- |
+| In-band SQL Injection     | Attacker uses same channel to attack and receive data                  |
+| Blind SQL Injection       | Database does not directly show data, attacker guesses using responses |
+| Out-of-Band SQL Injection | Data is received through another communication channel                 |
+
+Transaction : 
+--> In databases, a transaction is a group of operations treated as one single unit of work.
+--> If all operations succeed → changes are saved.
+--> If any operation fails → everything is rolled back (undone).
+--> we have to follow ACID properties
+
+ACID :
+A --> Atomicity
+C --> Consistency
+I --> Isolation
+D --> Durability
+
+Atomicity : 
+Meaning: All or Nothing.
+Either the whole transaction happens or none of it happens.
+
+Consistency :
+Maintaining the Set of rules.
+Database must remain correct and valid before and after transaction.
+
+Isolation :
+Multiple transactions should not interfere with each other.
+
+Durability :
+Once transaction is committed, data is permanently saved.
+
+| Letter | Meaning     | Simple Idea                           |
+| ------ | ----------- | ------------------------------------- |
+| A      | Atomicity   | All or nothing                        |
+| C      | Consistency | Data stays correct                    |
+| I      | Isolation   | Transactions don’t disturb each other |
+| D      | Durability  | Saved permanently                     |
+
+Batch Processing :
+multiple tasks or multiple database operations together as a single group instead of one-by-one.
+
+Limitations of JDBC :
+1. Large Amount of Boilerplate Code
+2. No abstraction method used here.
