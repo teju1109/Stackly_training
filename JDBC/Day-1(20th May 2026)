@@ -18,6 +18,13 @@ In Java APIs is used to:
 4. communicate with other applications.
 
 JDBC driver : It converts your Java calls into a specific command
+here :
+| Java Call            | Converted SQL Meaning    |
+| -------------------- | ------------------------ |
+|  executeQuery()      | SELECT command           |
+|  executeUpdate()     | INSERT / UPDATE / DELETE |
+|  prepareStatement()  | Precompiled SQL          |
+
 
 | Type   | Driver Name             | Description                         |
 | ------ | ----------------------- | ----------------------------------- |
