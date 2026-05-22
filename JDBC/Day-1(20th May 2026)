@@ -10,6 +10,20 @@ How JDBC works :
 3. JDBC Driver → communicates with the database
 4. Database → returns results
 
+Flow of JDBC :
+
+Java Program
+     ↓
+Java Calls
+     ↓
+JDBC API
+     ↓
+JDBC Driver
+     ↓
+SQL / Database Commands
+     ↓
+Database
+
 API : API stands for Application Programming Interface.
 In Java APIs is used to:
 1. connect to databases,
@@ -18,7 +32,8 @@ In Java APIs is used to:
 4. communicate with other applications.
 
 JDBC driver : It converts your Java calls into a specific command
-here :
+here : Java calls are methods used inside the statement.
+
 | Java Call            | Converted SQL Meaning    |
 | -------------------- | ------------------------ |
 |  executeQuery()      | SELECT command           |
