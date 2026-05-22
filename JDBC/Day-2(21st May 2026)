@@ -1,0 +1,247 @@
+Insert, Read, Update and Delete records in JDBC
+
+Step 1: Create Table in MySQL.
+
+CREATE DATABASE jdbc_db;
+USE jdbc_db;
+CREATE TABLE student 
+(
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    marks INT
+);
+
+Step 2: 
+JDBC Insert Program.
+
+package jdbc;
+                
+import java.sql.Connection;           |
+import java.sql.DriverManager;        |------ import java.sql.*;     
+import java.sql.PreparedStatement;    |
+
+public class InsertData
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+
+            // Load Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Create Connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc_db", "root", "Root");
+
+            // SQL Insert Query
+            String query = "INSERT INTO student VALUES (?, ?, ?)";
+
+            // Create PreparedStatement
+            PreparedStatement ps = con.prepareStatement(query);
+
+            // Set Values
+            ps.setInt(1, 101);
+            ps.setString(2, "Teju");
+            ps.setInt(3, 85);
+
+            // Execute Query
+            int rows = ps.executeUpdate();
+
+            // Output
+            if(rows > 0)
+            {
+                System.out.println("Record Inserted Successfully");
+            }
+
+            // Close Connection
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}
+
+| Method                          | Purpose                             |
+| ------------------------------- | ----------------------------------- |
+|  Class.forName()                | Loads MySQL Driver                  |
+|  DriverManager.getConnection()  | Connects Java with Database         |
+|  prepareStatement()             | Creates SQL query object            |
+|  setInt() ,  setString()        | Inserts values into query           |
+|  executeUpdate()                | Executes INSERT/UPDATE/DELETE query |
+
+Flow of JDBC Insert code :
+
+Java Program
+     ↓
+Load Driver
+     ↓
+Create Connection
+     ↓
+Write INSERT Query
+     ↓
+Set Values
+     ↓
+Execute Query
+     ↓
+Data Stored in MySQL
+
+--------------------------------------------------------------------------------------------------------------------------
+
+JDBC Read Program:
+
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class ReadData
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            // Load Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Create Connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc_db", "root", "Root");
+
+            // SQL Select Query
+            String query = "SELECT * FROM student";
+
+            // Create PreparedStatement
+            PreparedStatement ps = con.prepareStatement(query);
+
+            // Execute Query
+            ResultSet rs = ps.executeQuery();
+
+            // Display Records
+            while(rs.next())
+            {
+                System.out.println
+                (
+                    rs.getInt("id") + " " +
+                    rs.getString("name") + " " +
+                    rs.getInt("marks")
+                );
+            }
+
+            // Close Connection
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+
+JDBC Update Program:
+
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class UpdateData
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            // Load Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Create Connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc_db", "root", "Root");
+
+            // SQL Update Query
+            String query =
+                "UPDATE student SET marks=? WHERE id=?";
+
+            // Create PreparedStatement
+            PreparedStatement ps = con.prepareStatement(query);
+
+            // Set Values
+            ps.setInt(1, 95);
+            ps.setInt(2, 101);
+
+            // Execute Query
+            int rows = ps.executeUpdate();
+
+            // Output
+            if(rows > 0)
+            {
+                System.out.println("Record Updated Successfully");
+            }
+
+            // Close Connection
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+
+JDBC Delete Program:
+
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class DeleteData
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            // Load Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Create Connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc_db", "root", "Root");
+
+            // SQL Delete Query
+            String query = "DELETE FROM student WHERE id=?";
+
+            // Create PreparedStatement
+            PreparedStatement ps = con.prepareStatement(query);
+
+            // Set Value
+            ps.setInt(1, 101);
+
+            // Execute Query
+            int rows = ps.executeUpdate();
+
+            // Output
+            if(rows > 0)
+            {
+                System.out.println("Record Deleted Successfully");
+            }
+
+            // Close Connection
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
