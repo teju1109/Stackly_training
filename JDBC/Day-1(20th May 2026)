@@ -78,17 +78,131 @@ create statement()
 prepare statement()
 close()
 Example : Connection con = DriverManager.getConnection(url, user, password);
+Example code :
+
+import java.sql.*;
+
+public class Demo {
+    public static void main(String[] args) {
+        try {
+
+            // Load Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Database details String url = "jdbc:mysql://localhost:3306/studentdb"; String user = "root"; String password = "Root123";
+
+            // Create Connection
+            Connection con = DriverManager.getConnection( url, user, password );
+            System.out.println("Database Connected");
+
+             }
+
+        catch(Exception e) 
+        {
+            System.out.println(e);
+        }
+    }
+}
 
 2. Statement : Used to execute SQL queries.
                not safe --> SQL Injection rise
 Example : Statement stmt = con.createStatement();
+Example code :
+
+import java.sql.*;
+
+public class Demo {
+    public static void main(String[] args) {
+        try {
+
+            // Load Driver
+            Class.forName( "com.mysql.cj.jdbc.Driver" );
+
+            // Create Connection
+            Connection con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/studentdb", "root", "Root123" );
+
+            // Create Statement
+            Statement stmt = con.createStatement();
+            System.out.println("Statement Created");
+            } 
+        catch(Exception e) 
+        {
+            System.out.println(e);
+        }
+    }
+}
 
 3. PreparedStatement : Special type of Statement used for dynamic queries and better security.
 Example : PreparedStatement ps =
           con.prepareStatement("INSERT INTO student VALUES(?, ?)");
+Example code :
+
+import java.sql.*;
+public class Demo {
+    public static void main(String[] args) {
+        try {
+
+            // Load Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Create Connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentdb","root","Root123");
+
+            // Create PreparedStatement
+            PreparedStatement ps = con.prepareStatement("INSERT INTO student VALUES(?, ?)");
+
+            // Set values
+            ps.setInt(1,101);
+            ps.setString(2,"Teju");
+
+            // Execute query
+            ps.executeUpdate();
+
+            System.out.println("Record Inserted");
+
+            } 
+       catch(Exception e) 
+        {
+            System.out.println(e);
+        }
+    }
+}
 
 4. ResultSet : Stores data returned from SELECT query.
 Example : ResultSet rs = stmt.executeQuery("SELECT * FROM student");
+Example code :
+
+import java.sql.*;
+public class Demo {
+    public static void main(String[] args) {
+        try {
+
+            // Load Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connection
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentdb","root","Root123");
+
+            // Statement
+            Statement stmt = con.createStatement();
+
+            // Execute Query
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM student" );
+
+            // Read Data
+            while(rs.next()) 
+            {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                System.out.println(id+" "+name);
+            }
+            } 
+        catch(Exception e) 
+        {
+            System.out.println(e);
+        }
+    }
+}
 
 SQL Injection Problem :
 SQL Injection is a security attack where a hacker inserts malicious SQL code into an application’s 
