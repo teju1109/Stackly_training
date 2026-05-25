@@ -1,0 +1,20 @@
+CREATE DATABASE shop_db;
+USE shop_db;
+
+CREATE TABLE products 
+(
+    prod_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    price DOUBLE,
+    stock INT
+);
+
+CREATE TABLE orders 
+(
+    order_id INT PRIMARY KEY,
+    prod_id INT,
+    qty INT,
+    order_date DATE,
+
+    FOREIGN KEY(prod_id) REFERENCES products(prod_id)
+);
