@@ -1,0 +1,19 @@
+CREATE DATABASE doctor_db;
+USE doctor_db;
+
+CREATE TABLE doctors 
+(
+    doc_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    specialty VARCHAR(30)
+);
+
+CREATE TABLE appointments 
+(
+    appt_id INT PRIMARY KEY,
+    doc_id INT,
+    patient_name VARCHAR(50),
+    appt_time TIME,
+
+    FOREIGN KEY(doc_id) REFERENCES doctors(doc_id)
+);
