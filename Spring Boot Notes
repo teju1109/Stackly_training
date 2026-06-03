@@ -1,0 +1,155 @@
+1. Framework
+A framework is a collection of pre-written code that helps developers build applications faster.
+
+Examples:
+- Spring Framework (Java)
+- Django (Python)
+- Angular (JavaScript)
+
+2. Why Spring?
+Before Spring, Java development relied on Servlets, JSP, and EJB, which required lots of configuration and were difficult to maintain.
+
+3. Spring Framework
+Spring is an open-source Java framework used to build web applications, REST APIs, enterprise applications, microservices, and cloud applications.
+
+Key Features:
+- Dependency Injection (DI)
+- Inversion of Control (IoC)
+- Spring MVC
+- Spring Security
+- Database Connectivity
+- REST APIs
+- Microservices
+
+4. Dependency Injection (DI)
+Instead of creating objects manually, Spring automatically provides required objects (dependencies).
+
+5. Inversion of Control (IoC)
+Spring controls object creation and management instead of the developer.
+
+6. Spring Container
+The core component responsible for:
+- Creating objects
+- Managing objects
+- Injecting dependencies
+- Destroying objects
+
+7. Bean
+Any object managed by the Spring Container is called a Bean.
+
+8. Common Annotations
+@Component - General bean
+@Service - Business logic layer
+@Repository - Database layer
+@Controller - MVC controller
+@RestController - REST API controller
+
+9. Spring Architecture
+Controller -> Service -> Repository -> Database
+
+10. Spring MVC
+MVC stands for:
+- Model (Data)
+- View (UI)
+- Controller (Request Handler)
+
+11. Maven
+A build tool used for dependency management and project building.
+Main file: pom.xml
+
+12. Spring Boot
+Spring Boot is built on top of Spring Framework and reduces configuration effort.
+
+Advantages:
+- Auto Configuration
+- Embedded Tomcat Server
+- Faster Development
+- Production Ready
+
+13. Spring vs Spring Boot
+Spring:
+- More configuration
+- External server required
+
+Spring Boot:
+- Minimal configuration
+- Embedded server
+
+14. Important Spring Boot Annotations
+@SpringBootApplication
+@GetMapping
+@PostMapping
+@RequestMapping
+@RestController
+
+15. First REST API Example
+
+@RestController
+public class HelloController {
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello World";
+    }
+}
+
+16. Project Structure
+
+src/main/java
+- controller
+- service
+- repository
+- entity
+
+src/main/resources
+- application.properties
+
+17. application.properties
+Stores configuration values.
+
+Examples:
+server.port=8081
+
+18. JPA
+Java Persistence API used for database operations.
+
+19. Hibernate
+Hibernate is the implementation of JPA.
+
+Spring Boot -> JPA -> Hibernate -> Database
+
+20. REST API Flow
+Client -> Controller -> Service -> Repository -> Database
+
+21. Microservices
+Large applications are split into smaller independent services.
+
+Examples:
+- User Service
+- Product Service
+- Payment Service
+
+22. Spring Security
+Used for:
+- Authentication
+- Authorization
+- JWT Security
+
+23. Spring Ecosystem
+- Spring Boot
+- Spring MVC
+- Spring Data JPA
+- Spring Security
+- Spring Cloud
+- Spring Batch
+
+24. Learning Order
+Phase 1: Core Java, OOPs, Collections, Exceptions
+Phase 2: Maven, Git, SQL
+Phase 3: Spring Core (IoC, DI, Beans)
+Phase 4: Spring MVC
+Phase 5: Spring Boot
+Phase 6: REST APIs
+Phase 7: JPA & Hibernate
+Phase 8: Spring Security
+Phase 9: Microservices & Spring Cloud
+
