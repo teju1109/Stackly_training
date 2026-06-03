@@ -38,11 +38,25 @@ The core component responsible for:
 Any object managed by the Spring Container is called a Bean.
 
 8. Common Annotations
-@Component - General bean
-@Service - Business logic layer
-@Repository - Database layer
-@Controller - MVC controller
-@RestController - REST API controller
+@Component - Create and manage this class as a Bean
+@Service - Responsible for Calculations, Validations and Business rules
+@Repository - Used for database operations
+@Controller - Used in Spring MVC applications
+@RestController - Returns JSON instead of HTML
+@Autowired - Spring automatically injects the object
+@Bean - Spring creates a Bean from this method
+@Configuration - Used to create configuration classes. Think of it as Settings Class
+@SpringBootApplication - It combines three annotations: @Configuration, @EnableAutoConfiguration and @ComponentScan
+@ComponentScan - Tells Spring where to search for Beans like @Component, @Service, @Repository and @Controller
+@RequestMapping - Maps URLs
+@GetMapping - Used for GET requests
+@PostMapping - Used to save data
+@PutMapping - Used to update data
+@DeleteMapping - Used to delete data
+@PathVariable - Reads values from URL
+@Entity - Used to create database tables
+@OneToMany - One parent, many children
+@ManyToOne - Many children belong to one parent
 
 9. Spring Architecture
 Controller -> Service -> Repository -> Database
