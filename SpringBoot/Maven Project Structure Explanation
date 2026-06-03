@@ -1,0 +1,33 @@
+1. src/main/java
+
+src/main/java
+│
+└── com.teju.demo
+     │
+     ├── controller
+     ├── service
+     ├── repository
+     ├── entity
+     └── DemoApplication.java
+--> It contains the actual source code of your application.
+
+2. src/main/resources
+--> Application Settings Folder
+--> Stores everything that is NOT Java code
+
+3. src/test/java
+--> Contains test classes
+--> Testing, Bug Detection and Quality Checking
+--> verifies whether your application works correctly
+
+4. src/test/resources
+--> Contains files needed during testing
+
+5. JRE System Library
+--> Contains Java libraries like String, ArrayList, HashMap, 
+    Scanner, Exception and Collections
+
+6. pom.xml : The heart of Maven
+             POM means Project Object Model
+             It tells Maven Project Name, Dependencies, Java Version and Build Information
+
