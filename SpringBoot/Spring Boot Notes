@@ -24,6 +24,54 @@ Key Features:
 4. Dependency Injection (DI)
 Instead of creating objects manually, Spring automatically provides required objects (dependencies).
 
+Types of Dependency Injection
+1. Constructor Injection
+
+@Service
+public class EmployeeService {
+    private EmployeeRepository repository;
+    @Autowired
+    public EmployeeService(EmployeeRepository repository) {
+        this.repository = repository;
+    }
+}
+
+Working :
+Spring creates EmployeeRepository
+          ↓
+Spring calls constructor
+          ↓
+Passes EmployeeRepository object
+          ↓
+EmployeeService is ready
+
+2. Setter Injection
+
+@Service
+public class EmployeeService {
+    private EmployeeRepository repository;
+    @Autowired
+    public void setRepository(EmployeeRepository repository) {
+        this.repository = repository;
+    }
+}
+
+Working :
+Creates EmployeeService
+        ↓
+Calls setRepository()
+        ↓
+Injects EmployeeRepository
+
+3. Field Injection
+
+@Service
+public class EmployeeService {
+    @Autowired
+    private EmployeeRepository repository;
+}
+--> Spring injects directly into the field.
+
 5. Inversion of Control (IoC)
 Spring controls object creation and management instead of the developer.
 
