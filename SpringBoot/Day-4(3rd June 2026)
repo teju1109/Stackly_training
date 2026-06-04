@@ -1,0 +1,42 @@
+How to configure spEl in XML
+1. Create maven project
+2. Add Spring-context dependency in pom.xml
+3. Create a package and inside package create student class
+3 variables inside student class - name, marks and result
+give getter, setter and toSring method
+
+How to create XML file
+1. Go to file
+2. click new
+3. click on file
+4. name it using .xml extention
+
+How to pass a single value 
+1. file --> new --> Spring Starter Project --> name it singleValue --> 
+   Click NEXT --> FINISH
+2. Create 2 classes --> Department class and Employee class
+3. add @Component,
+   private String departmentname, // add @Value("IT"-->(departmentname))
+   private int id, // add @Value("101"-->(id))
+   private double salary // add @Value("40000"-->(salary))
+   in Deparment class.
+4. Give setter method :
+--> right click 
+--> source 
+--> generate getter and setter
+--> generate all 
+5. add @Component,
+   private int empid, // add @Value("1")
+   private string empname, // add @Value("tej")
+   private string deptname // add @Value("#{department.departmentname}")
+   private int depid // add @Value("#{department.depid}")
+   private double salary // add @Value("#{department.salary +(department.salary*10/100) }")
+   private string systemuser // add @Value("#{systemProperties['user.name']}")
+   in Employee class.
+6. add @Postconstruct method
+   public void display()
+   {
+      S.O.P(empid + empname + deptname + depid + salary);
+      S.O.P(systemuser);
+   }
+7. run the other main class, not employee or department
