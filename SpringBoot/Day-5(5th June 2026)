@@ -1,0 +1,128 @@
+AOP = Aspect-Oriented Programming
+--> used to separate cross-cutting concerns and business logic.
+Cross-cutting concern : A functionality that is needed in many different parts of an application.
+
+AOP Architecture Diagram
+Client
+   |
+   v
+Proxy Object
+   |
+   +----> Aspect (Logging, Security, Transaction)
+   |
+   v
+Target Object (Business Logic)
+
+1. Client calls a method
+2. Request goes to Proxy
+3. Proxy checks if any Aspect should run
+4. Advice executes (Before/After/Around)
+5. Actual method executes
+6. Advice executes again if required
+7. Result returned to Client
+
+Aspect in Spring AOP :
+An Aspect is a class that contains a cross-cutting concern (common functionality) such as:
+Logging
+Security
+Transaction Management
+Exception Handling
+Performance Monitoring
+--> Instead of writing this common code in every service class, we put it inside an Aspect.
+--> Annotations used is @Aspect
+
+Join Point in Spring AOP :
+A Join Point is a point in the execution of your application where an Aspect can be applied.
+In Spring AOP, a Join Point is usually a method execution.
+
+Application Methods :
+addEmployee()       ← Join Point
+updateEmployee()    ← Join Point
+deleteEmployee()    ← Join Point
+calculateSalary()   ← Join Point
+           |
+           v
+Pointcut selects some Join Points
+           |
+           v
+Advice executes there
+
+Advice in Spring AOP : Advice is the actual code that Spring executes at a Join Point.
+
+Types of Advice
+
+1. Before Advice
+Runs before the method.
+
+2. After Advice
+Runs after the method.
+
+3. After Returning Advice
+Runs only if the method completes successfully.
+
+4. After Throwing Advice
+Runs when an exception occurs.
+
+5. Around Advice
+Runs both before and after the method.
+
+Types of AOP :
+
+1. Compile-Time Weaving
+AOP code is added during compilation.
+
+Source Code
+     ↓
+Compiler + Aspect
+     ↓
+Compiled Class
+
+Advantage :
+Very fast execution
+Powerful AOP capabilities
+
+2. Load-Time Weaving (LTW)
+AOP code is added when the class is loaded into memory.
+
+Class File
+    ↓
+Class Loader
+    ↓
+Aspect Added
+    ↓
+Memory
+
+The original class file is not modified; weaving happens while loading.
+Advantage :
+No need to modify source code
+More flexible than compile-time weaving
+
+3. Runtime Weaving (Proxy-Based AOP)
+AOP code is added while the application is running using proxies.
+
+Client
+   ↓
+Proxy
+   ↓
+Target Object
+
+This is the approach used by Spring AOP.
+Advantage :
+Easy to use
+No special compiler needed
+Built into Spring
+
+Quick Comparison :
+| Type                 | When AOP is Applied          |
+| -------------------- | ---------------------------- |
+| Compile-Time Weaving | During compilation           |
+| Load-Time Weaving    | When class is loaded         |
+| Runtime Weaving      | While application is running |
+
+JDK Dynamic Proxy :
+A JDK Dynamic Proxy is a proxy object created by Java at runtime that sits 
+between the client and the actual object.
+It intercepts method calls and can perform extra work like:
+--> Logging
+--> Security checks
+--> Transactions
