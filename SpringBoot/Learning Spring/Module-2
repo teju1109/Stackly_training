@@ -1,0 +1,108 @@
+MVC : Model, View and Controller 
+--> MVC is a way of dividing a web application into 
+    Controller (handles requests), Model (stores data), and View (shows data),
+    making applications easier to build and maintain.
+
+Model Stores data.
+example :
+Student
+Employee
+Product
+--> addAttribute()? : addAttribute() is used to add data into the Model object.
+    Syntax : model.addAttribute("key", value);
+
+Controller Handles requests.
+example :
+/home
+/login
+/register
+//
+@Controller
+public class HomeController 
+{
+    @RequestMapping("/home")
+    public String home() 
+    {
+        return "home";
+    }
+}
+--> @RestController Returns actual data.
+
+View Shows data.
+--> View is the part of the application that displays data to the user.
+--> View = What the user sees on the screen
+example :
+Home Page
+Login Page
+Dashboard
+//
+<h1>Welcome to Spring MVC</h1>
+
+Types of Views in Spring MVC :
+| View Technology | Description               |
+| --------------- | ------------------------- |
+| JSP             | Most common in Spring MVC |
+| HTML            | Static pages              |
+| Thymeleaf       | Modern template engine    |
+| FreeMarker      | Template engine           |
+| Velocity        | Template engine           |
+
+Request Mapping :
+Request Mapping is used to connect a URL with a Controller method.
+Syntax : @RequestMapping("/url")
+Example : 
+@Controller
+public class WebsiteController 
+{
+    @RequestMapping("/home")
+    public String home() 
+    {
+        return "home";
+    }
+    @RequestMapping("/about")
+    public String about() 
+    {
+        return "about";
+    }
+    @RequestMapping("/contact")
+    public String contact() 
+    {
+        return "contact";
+    }
+}
+
+Request Methods :
+| Method | Purpose       |
+| ------ | ------------- |
+| GET    | Retrieve data |
+| POST   | Send data     |
+| PUT    | Update data   |
+| DELETE | Delete data   |
+
+
+@GetMapping is used to handle HTTP GET requests.(display data from the server)
+@PostMapping is used to handle HTTP POST requests.(send data from the client to the server)
+@PutMapping is used to handle HTTP PUT requests.(update existing data)
+@DeleteMapping is used to handle HTTP DELETE requests.(remove data from the server)
+
+| Annotation       | Action | Meaning              |
+| ---------------- | ------ | -------------------- |
+| `@GetMapping`    | Read   | Get/View data        |
+| `@PostMapping`   | Create | Add new data         |
+| `@PutMapping`    | Update | Modify existing data |
+| `@DeleteMapping` | Delete | Remove data          |
+
+Form Handling :
+Form Handling is the process of collecting data from a user through a form and processing it in the Controller.
+
+@RequestParam is a Spring MVC annotation used to receive data sent from the client and store it in a controller method parameter.
+
+Data Binding is the process of automatically transferring data from a web form into a Java object.
+
+Data Binding vs @RequestParam :
+| @RequestParam                | Data Binding                    |
+| ---------------------------- | ------------------------------- |
+| Used for few fields          | Used for many fields            |
+| Receives one value at a time | Receives entire object          |
+| Lengthy for large forms      | Cleaner code                    |
+| Suitable for simple forms    | Suitable for registration forms |
