@@ -1,0 +1,522 @@
+Module 1: Spring Core 
+
+1. What is Spring?
+2. Problems with normal Java applications
+3. What is IOC (Inversion of Control)?
+4. What is Dependency Injection?
+5. Types of Dependency Injection
+--> Constructor Injection
+--> Setter Injection
+6. Spring Bean
+7. Bean Lifecycle
+8. Bean Scopes
+9. Stereotype Annotations
+--> @Component
+--> @Service
+--> @Repository
+--> @Controller
+10. Autowiring
+11. Java-based Configuration
+--------------------------------------------------------------------------------
+Module 2: Spring MVC
+
+1. What is MVC?
+2. Controller
+3. Request Mapping
+4. Model
+5. View
+6. Form Handling
+7. Data Binding
+--------------------------------------------------------------------------------
+Module 3: Spring AOP
+1. What is AOP?
+2. Aspect
+3. Advice
+4. Join Point
+5. Pointcut
+6. Types of Advice
+--------------------------------------------------------------------------------
+Module 4: Spring Boot
+1. What is Spring Boot?
+2. Spring Initializr
+3. Starter Dependencies
+4. Auto Configuration
+5. Embedded Tomcat
+6. application.properties
+--------------------------------------------------------------------------------
+Module 5: REST API
+1. @RestController
+2. GET API
+3. POST API
+4. PUT API
+5. DELETE API
+6. RequestBody
+7. PathVariable
+8. RequestParam
+--------------------------------------------------------------------------------
+Module 6: Database
+
+1. MySQL Setup
+2. JDBC
+3. Spring Data JPA
+4. Hibernate
+5. CRUD Operations
+--------------------------------------------------------------------------------
+Module 7: Advanced Topics
+1. Validation
+2. Exception Handling
+3. Logging
+4. Security
+5. JWT
+6. Testing
+--------------------------------------------------------------------------------
+Spring Framework :
+A framework that manages Java objects and reduces development effort.
+
+Bean :
+A Bean is simply An object created and managed by Spring.
+example :@Component
+         public class Student {}
+
+IOC (Inversion Of Control) :
+--> The responsibility of creating objects is transferred from the programmer to the Spring Container.
+--> IOC means Spring takes responsibility for creating and managing objects instead of the programmer creating them manually.
+
+Container : 
+--> Spring Container is like a factory.
+--> Spring Container is responsible for creating, managing, and providing Spring Beans.
+Types of Spring Container :
+BeanFactory --> Basic container.
+ApplicationContext --> Advanced container.
+
+Spring Container
+       |
+       |
+Creates Objects
+       |
+       |
+Stores Objects
+       |
+       |
+Provides Objects
+
+ApplicationContext :
+ApplicationContext is the Spring Container that creates and manages Spring Beans.
+
+Dependency Injection (DI) :
+Dependency Injection means providing required objects (dependencies)
+to a class instead of letting the class create them itself.
+
+Types of Dependency Injection :
+
+1. Constructor Injection :
+Dependency is injected through the constructor.
+
+Example :
+@Component
+public class Car 
+{
+    private Engine engine;
+    @Autowired
+    public Car(Engine engine) 
+    {
+        this.engine = engine;
+    }
+    public void drive() 
+    {
+        engine.start();
+    }
+}
+
+Example2 :
+//Car class
+package com.teju.di;
+public class Car 
+{
+    Engine engine; // Car needs an Engine
+    public Car(Engine engine) 
+    {
+        this.engine = engine; // Store the received Engine inside the Car
+    }
+    public void drive() 
+    {
+        engine.start(); // Ask the Engine to start
+        System.out.println("Car Running"); // Display that the Car is running
+    }
+}
+
+//Engine Class
+package com.teju.di;
+public class Engine 
+{
+    public void start() 
+    {
+        System.out.println("Engine Started");
+    }
+    public void stop() 
+    {
+        System.out.println("Engine Stopped");
+    }
+    public void breakdown() 
+    {
+        System.out.println("Engine breakdown");
+    }
+}
+
+//Main class
+package com.teju.di;
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Engine engine = new Engine();
+        Car car = new Car(engine);
+        car.stop();
+    }
+}
+
+2. Setter Injection :
+Dependency is injected using a setter method.
+
+Example :
+@Component
+public class Car 
+{
+    private Engine engine;
+    @Autowired
+    public void setEngine(Engine engine) 
+    {
+        this.engine = engine;
+    }
+    public void drive() 
+    {
+        engine.start();
+    }
+}
+
+3. Field Injection :
+Dependency is injected directly into the field.
+
+Example:
+@Component
+public class Car 
+{
+    @Autowired
+    private Engine engine;
+    public void drive() 
+    {
+        engine.start();
+    }
+}
+
+Comparison :
+| Feature              | Constructor Injection | Setter Injection | Field Injection |
+| -------------------- | --------------------- | ---------------- | --------------- |
+| Injection Through    | Constructor           | Setter Method    | Variable        |
+| Dependency Mandatory | Yes                   | No               | No              |
+| Easy Testing         | Yes                   | Moderate         | Difficult       |
+| Recommended          | Yes                   | Sometimes        | No              |
+| Immutability         | Yes                   | No               | No              |
+
+Bean Lifecycle Steps :
+Step 1: Spring Creates the Bean
+
+@Component
+public class Engine {}
+
+Step 2: Dependency Injection Happens
+
+@Component
+public class Car 
+{
+    private Engine engine;
+    public Car(Engine engine) 
+    {
+        this.engine = engine;
+    }
+}
+
+Step 3: Initialization
+
+Step 4: Bean Ready
+
+Step 5: Destruction 
+--> happens when Spring shuts down:
+
+Visual Flow :
+
+Spring Starts
+     ↓
+Create Bean
+     ↓
+Inject Dependencies
+     ↓
+Initialize Bean
+     ↓
+Use Bean
+     ↓
+Destroy Bean
+     ↓
+Spring Stops
+
+Bean Scopes :
+This topic answers When Spring creates a Bean, how many objects should it create?
+
+Types of Bean Scopes:
+1. Singleton Scope
+--> This is the default scope in Spring:
+@Component
+public class Student {}
+--> No scope specified.
+--> Spring automatically uses:Singleton
+--> Spring creates Only ONE Object and keeps reusing it.
+
+Student s1 = context.getBean(Student.class);----
+                                                |----> Same Object
+Student s2 = context.getBean(Student.class);----
+
+Advantages :
+--> Less memory
+--> Faster
+
+2. Prototype Scope :
+
+Student s1 = context.getBean(Student.class);----> Object1
+
+Student s2 = context.getBean(Student.class);----> Object2
+
+Difference Between Singleton and Prototype :
+| Singleton     | Prototype                |
+| ------------- | ------------------------ |
+| One object    | New object every request |
+| Default scope | Must be specified        |
+| Less memory   | More memory              |
+
+Annotations :
+
+1. @Component : General-purpose Bean.
+Example:
+@Component
+public class Engine {}
+
+2. @Service : Used for Business Logic like calculations and validations.
+Example:
+@Service
+public class SalaryService 
+{
+    public double calculateSalary() 
+    {
+        return 50000;
+    }
+}
+
+3. @Repository : Used for Database Operations like add, update, delete etc etc.
+Example:
+@Repository
+public class EmployeeRepository {}
+
+4. @Controller : Used to handle user requests.
+Example:
+@Controller
+public class HomeController {}
+
+Autowiring : It is the process by which Spring automatically injects dependencies into a bean.
+Types of Autowiring :
+
+1. Constructor Autowiring
+@Component
+public class Car 
+{
+    private Engine engine;
+    public Car(Engine engine) 
+    {
+        this.engine = engine;
+    }
+}
+--> Spring automatically injects Engine.
+
+2. Setter Autowiring
+@Component
+public class Car 
+{
+    private Engine engine;
+    @Autowired
+    public void setEngine(Engine engine) 
+    {
+        this.engine = engine;
+    }
+}
+--> Spring calls setEngine(engine) automatically.
+
+3. Field Autowiring
+@Component
+public class Car 
+{
+    @Autowired
+    private Engine engine;
+}
+--> Spring injects Engine directly into the field.
+
+Java-based Configuration :
+
+@Configuration : Marks a class as a Spring configuration class.
+@Configuration
+public class AppConfig {}
+--> This class contains Spring configuration.
+
+@ComponentScan : Tells Spring which package to scan for components.
+@Configuration
+@ComponentScan("com.teju")
+public class AppConfig {}
+
+@Bean : Used to create and register a bean manually.
+@Configuration
+public class AppConfig 
+{
+    @Bean
+    public Engine engine() 
+    {
+        return new Engine();
+    }
+}
+
+Step 1: Create a Normal Class
+Start with:
+public class AppConfig {}
+
+Step 2: Tell Spring This Is a Configuration Class
+@Configuration
+public class AppConfig {}
+
+Step 3: Tell Spring Where To Search //@ComponentScan("com.teju")
+@Configuration
+@ComponentScan("com.teju")
+public class AppConfig {}
+
+Step 4: Bean creation //@bean
+@Bean
+public Engine engine() 
+{
+    return new Engine();
+}
+
+Final Code :
+@Configuration
+@ComponentScan("com.teju")
+public class AppConfig 
+{
+    @Bean
+    public Engine engine() 
+    {
+        return new Engine();
+    }
+}
+
+MVC : Model, View and Controller 
+--> MVC is a way of dividing a web application into 
+    Controller (handles requests), Model (stores data), and View (shows data),
+    making applications easier to build and maintain.
+
+Model Stores data.
+example :
+Student
+Employee
+Product
+--> addAttribute()? : addAttribute() is used to add data into the Model object.
+    Syntax : model.addAttribute("key", value);
+
+Controller Handles requests.
+example :
+/home
+/login
+/register
+//
+@Controller
+public class HomeController 
+{
+    @RequestMapping("/home")
+    public String home() 
+    {
+        return "home";
+    }
+}
+--> @RestController Returns actual data.
+
+View Shows data.
+--> View is the part of the application that displays data to the user.
+--> View = What the user sees on the screen
+example :
+Home Page
+Login Page
+Dashboard
+//
+<h1>Welcome to Spring MVC</h1>
+
+Types of Views in Spring MVC :
+| View Technology | Description               |
+| --------------- | ------------------------- |
+| JSP             | Most common in Spring MVC |
+| HTML            | Static pages              |
+| Thymeleaf       | Modern template engine    |
+| FreeMarker      | Template engine           |
+| Velocity        | Template engine           |
+
+Request Mapping :
+Request Mapping is used to connect a URL with a Controller method.
+Syntax : @RequestMapping("/url")
+Example : 
+@Controller
+public class WebsiteController 
+{
+    @RequestMapping("/home")
+    public String home() 
+    {
+        return "home";
+    }
+    @RequestMapping("/about")
+    public String about() 
+    {
+        return "about";
+    }
+    @RequestMapping("/contact")
+    public String contact() 
+    {
+        return "contact";
+    }
+}
+
+Request Methods :
+| Method | Purpose       |
+| ------ | ------------- |
+| GET    | Retrieve data |
+| POST   | Send data     |
+| PUT    | Update data   |
+| DELETE | Delete data   |
+
+
+@GetMapping is used to handle HTTP GET requests.(display data from the server)
+@PostMapping is used to handle HTTP POST requests.(send data from the client to the server)
+@PutMapping is used to handle HTTP PUT requests.(update existing data)
+@DeleteMapping is used to handle HTTP DELETE requests.(remove data from the server)
+
+| Annotation       | Action | Meaning              |
+| ---------------- | ------ | -------------------- |
+| `@GetMapping`    | Read   | Get/View data        |
+| `@PostMapping`   | Create | Add new data         |
+| `@PutMapping`    | Update | Modify existing data |
+| `@DeleteMapping` | Delete | Remove data          |
+
+Form Handling :
+Form Handling is the process of collecting data from a user through a form and processing it in the Controller.
+
+@RequestParam is a Spring MVC annotation used to receive data sent from the client and store it in a controller method parameter.
+
+Data Binding is the process of automatically transferring data from a web form into a Java object.
+
+Data Binding vs @RequestParam :
+| @RequestParam                | Data Binding                    |
+| ---------------------------- | ------------------------------- |
+| Used for few fields          | Used for many fields            |
+| Receives one value at a time | Receives entire object          |
+| Lengthy for large forms      | Cleaner code                    |
+| Suitable for simple forms    | Suitable for registration forms |
