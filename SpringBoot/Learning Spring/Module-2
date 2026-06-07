@@ -106,3 +106,16 @@ Data Binding vs @RequestParam :
 | Receives one value at a time | Receives entire object          |
 | Lengthy for large forms      | Cleaner code                    |
 | Suitable for simple forms    | Suitable for registration forms |
+
+Value Injection : Injecting simple values into a bean.
+Examples:
+Name
+Age
+Salary
+Email
+Lists
+Maps
+
+Dependency Injection Using Annotations :
+it is a Spring feature where dependencies (required objects) are automatically
+injected into a class using annotations such as @Autowired, instead of configuring them manually in XML files.
