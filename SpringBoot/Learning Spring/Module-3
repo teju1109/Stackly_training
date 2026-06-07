@@ -1,1 +1,75 @@
+-->AOP (Aspect Oriented Programming) is a programming technique used to separate common functionalities like 
+   logging, security, transactions, and exception handling from business logic.
+-->AOP helps us keep business code separate from extra work like:
+   Logging
+   Security
+   Auditing
+   Performance Monitoring
+Real-Life Example : Imagine a student entering an exam hall.
+Main task : Write Exam
+Extra tasks : Check Hall Ticket, Check ID Card and Mark Attendance
+--> These extra tasks happen before the main task.
+--> AOP handles such extra tasks automatically.
+
+Aspect : An Aspect is a class that contains cross-cutting concerns.
+--> In Simple Words An Aspect is a special class where we write common code.
+
+Advice : Advice is the action performed by an Aspect at a specific point in the program.
+--> Advice is the actual code that runs.
+
+Join Point : A Join Point is a point in the application where an Aspect can be applied.
+--> Join Point is a method where Spring can execute additional code.
+Example :
+public void login() {}
+public void register() {}
+public void transferMoney() {}
+--> All these methods are Join Points.
+
+Pointcut : A Pointcut is an expression that selects specific Join Points.
+Real-Life Example : Imagine a company has 100 rooms, 
+                    The security guard is told to Check only rooms 10 to 20.
+                    That instruction is the Pointcut.
+
+Relationship Between Aspect, Advice, Join Point, Pointcut :
+
+Aspect
+   ↓
+Contains
+   ↓
+Advice
+   ↓
+Runs At
+   ↓
+Join Point
+   ↓
+Selected By
+   ↓
+Pointcut
+
+Types of Advice : 
+
+1. Before Advice : Runs before a method executes.
+2. After Advice : Runs after method execution.
+3. After Returning Advice : Runs only if method completes successfully.
+4. After Throwing Advice : Runs when an exception occurs.
+5. Around Advice : Runs before and after the method.
+
+Lombok : 
+Lombok is a Java library that automatically generates boilerplate code such as
+getters, setters, constructors, and toString() methods using annotations.
+
+Common Lombok Annotations : 
+
+@Getter : Creates getters.
+@Setter : Creates setters.
+@NoArgsConstructor : Creates a default constructor.
+@AllArgsConstructor : Creates a constructor with all fields.
+@Data : Most commonly used.
+        Creates : Getters, Setters, toString(), equals() & hashCode()
+--> @Data is a Lombok annotation that automatically generates commonly used methods such as 
+    getters, setters, toString(), equals(), hashCode(), and a required-arguments constructor for a class.
+--> While writing the code import lombok.annotations; for each annotation.
+
+
+
 
