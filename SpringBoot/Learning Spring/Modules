@@ -27,6 +27,10 @@ Module 2: Spring MVC
 5. View
 6. Form Handling
 7. Data Binding
+8. XML-Based Configuration
+9. Value Injection
+10. Dependency Injection Using Annotations
+
 --------------------------------------------------------------------------------
 Module 3: Spring AOP
 1. What is AOP?
@@ -35,40 +39,9 @@ Module 3: Spring AOP
 4. Join Point
 5. Pointcut
 6. Types of Advice
+7. Lombok
 --------------------------------------------------------------------------------
-Module 4: Spring Boot
-1. What is Spring Boot?
-2. Spring Initializr
-3. Starter Dependencies
-4. Auto Configuration
-5. Embedded Tomcat
-6. application.properties
---------------------------------------------------------------------------------
-Module 5: REST API
-1. @RestController
-2. GET API
-3. POST API
-4. PUT API
-5. DELETE API
-6. RequestBody
-7. PathVariable
-8. RequestParam
---------------------------------------------------------------------------------
-Module 6: Database
 
-1. MySQL Setup
-2. JDBC
-3. Spring Data JPA
-4. Hibernate
-5. CRUD Operations
---------------------------------------------------------------------------------
-Module 7: Advanced Topics
-1. Validation
-2. Exception Handling
-3. Logging
-4. Security
-5. JWT
-6. Testing
 --------------------------------------------------------------------------------
 Spring Framework :
 A framework that manages Java objects and reduces development effort.
