@@ -87,6 +87,107 @@ View -->
 <p th:text="${student.name}"></p>
 </body>
 </html>
-
+-----------------------------------------------------------------------------------------------------------------------------
 @RestController --> This class handles web requests.
 @GetMapping --> It is used to handle HTTP GET requests.
+@PostMapping --> It is used to handle HTTP POST requests.
+@ModelAttribute --> It is used to bind form/request data to a Java object.
+-----------------------------------------------------------------------------------------------------------------------------
+Data Binding : It is the process of automatically transferring data from a form/request to a Java object.
+
+Form Handling : Taking data entered by the user in an HTML form and processing it in the Spring application.
+For example:
+--> Login Form
+--> Registration Form
+--> Contact Form
+--> Student Form
+
+Code Example :
+
+Model Class--> 
+package com.example.model;
+
+public class Student 
+{
+    private String name;
+    private int age;
+
+    public String getName() 
+    {
+        return name;
+    }
+
+    public void setName(String name) 
+    {
+        this.name = name;
+    }
+
+    public int getAge() 
+    {
+        return age;
+    }
+
+    public void setAge(int age) 
+    {
+        this.age = age;
+    }
+}
+
+//public String getName() --> Returns name.
+//public void setName(String name) --> Stores name value.
+//public int getAge() --> Returns age.
+//public void setAge(int age) --> Stores age value.
+//this.name = name; --> Assigns value to variable.
+
+Controller--> 
+package com.example.controller;
+
+import com.example.model.Student;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class StudentController 
+{
+    @GetMapping("/form")
+    public String showForm() 
+    {
+        return "studentForm";
+    }
+
+    @PostMapping("/saveStudent")
+    public String saveStudent(Student student) 
+    {
+        System.out.println(student.getName());
+        System.out.println(student.getAge());
+
+        return "success";
+    }
+}
+
+//@GetMapping("/form") --> When user visits localhost:8080/form this method executes.
+//return "studentForm"; --> Loads studentForm.html
+//@PostMapping("/saveStudent") --> Handles form submission.
+//public String saveStudent(Student student) --> Spring automatically creates Student object.
+
+studentForm.html-->
+
+<!DOCTYPE html>
+<html>
+<body>
+<form action="/saveStudent" method="post">
+
+    Name:
+    <input type="text" name="name">
+    <br><br>
+    Age:
+    <input type="number" name="age">
+    <br><br>
+    <button type="submit">
+        Submit
+    </button>
+</form>
+</body>
+</html>
+-----------------------------------------------------------------------------------------------------------------------------
