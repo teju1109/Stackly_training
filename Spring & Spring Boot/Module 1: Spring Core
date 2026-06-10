@@ -285,3 +285,90 @@ Spring Bean -->
 A Spring Bean is simply an object that is created, managed, and maintained by the Spring Container.
 Spring Bean : Student student = context.getBean(Student.class);
 
+Bean Creation Methods in Spring :
+1. @Component
+2. @Bean - Create and manage this object as a Spring Bean.
+3. Using XML Configuration.(Less common now.)
+--> Spring IoC Container creates bean
+--> Only objects managed by Spring are Beans.
+--> Beans stored are Inside the Spring IoC Container.
+
+Code Example :
+Student.java --> 
+
+package com.example;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student 
+{
+    public Student() 
+    {
+        System.out.println("Constructor Called");
+    }
+
+    @PostConstruct
+    public void init() 
+    {
+        System.out.println("Bean Initialization");
+    }
+
+    @PreDestroy
+    public void destroy() 
+    {
+        System.out.println("Bean Destruction");
+    }
+
+    public void study() 
+    {
+        System.out.println("Studying Spring");
+    }
+}
+
+Main.java --> 
+package com.example;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("com.example");
+        Student student = context.getBean(Student.class);
+        student.study();
+        context.close();
+    }
+}
+
+Output :
+Constructor Called
+Bean Initialization
+Studying Spring
+Bean Destruction
+
+@PostConstruct --> Runs after the bean is created and dependencies are injected.
+@PreDestroy --> Runs just before the bean is destroyed.
+--> //context.close(); is mandatory 
+Bean Lifecycle :
+Bean Created
+    ↓
+@PostConstruct
+    ↓
+Bean Used
+    ↓
+@PreDestroy
+    ↓
+Bean Destroyed
+
+@PostConstruct vs @PreDestroy :
+| @PostConstruct      | @PreDestroy             |
+| ------------------- | ----------------------- |
+| Initialization      | Cleanup                 |
+| Runs after creation | Runs before destruction |
+| Start resources     | Release resources       |
+
+
