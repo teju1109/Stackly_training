@@ -1,0 +1,99 @@
+Spring : Spring is a Java framework that helps developers build applications easily.
+Spring -->
+1. Creates objects
+2. Connects objects
+3. Manages object lifecycle
+4. Reduces code
+5. Makes applications easier to maintain
+--> Spring contains a container called IoC Container
+    IoC = Inversion of Control
+    --> The container is responsible for:
+        1. Reading configurations
+        2. Creating objects
+        3. Storing objects
+        4. Injecting dependencies
+        5. Managing object lifecycle
+
+here, Configuration means telling Spring how your application should be set up and 
+      how different objects should be created and connected.
+Types of Configuration in Spring : 
+1. XML-Based Configuration
+2. Java-Based Configuration
+3. Annotation-Based Configuration(Most commonly used today.)
+Common Configuration Annotations :
+| Annotation       | Purpose                    |
+| ---------------- | -------------------------- |
+| `@Configuration` | Marks configuration class  |
+| `@Bean`          | Creates bean manually      |
+| `@Component`     | Creates bean automatically |
+| `@Service`       | Service layer bean         |
+| `@Repository`    | Database layer bean        |
+| `@Controller`    | MVC controller bean        |
+| `@Autowired`     | Inject dependency          |
+
+Code Example :
+Student.java -->
+
+package com.example;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student 
+{
+    public void study() 
+    {
+        System.out.println("Studying Spring");
+    }
+}
+
+Main.java -->
+
+package com.example;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.example");
+        Student student = context.getBean(Student.class);
+        student.study();
+    }
+}
+
+Explanation :
+in Student class -->
+
+package com.example; tells Java which package the class belongs to.
+
+import org.springframework.stereotype.Component; imports Component annotation.
+
+@Component Tells Spring to create and manage this class as an object(Student).
+
+in Main class -->
+
+//ApplicationContext context = new AnnotationConfigApplicationContext("com.example");
+ApplicationContext context is a Spring container that creates, Stores and manages objects.
+new AnnotationConfigApplicationContext("com.example") Starts Spring container, Scans package and Finds classes
+having:@Component
+
+Student student=context.getBean(Student.class); Ask Spring to Give me Student object.
+context = Spring container
+getBean() = fetch bean
+Student.class = bean type to fetch
+
+student.study(); Calls study method.
+
+
+Difference Between Related Concepts :
+| Spring             | Spring Boot            |
+| ------------------ | ---------------------- |
+| Framework          | Built on top of Spring |
+| More configuration | Less configuration     |
+| Setup manually     | Auto configuration     |
+| More code          | Less code              |
+-----------------------------------------------------------------------------------------------------------------------------
+
