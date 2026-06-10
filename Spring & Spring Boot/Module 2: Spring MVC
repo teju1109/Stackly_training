@@ -1,0 +1,89 @@
+MVC (Model View Controller)
+--> It is a design pattern used to organize an application into three separate parts:
+
+Model → Stores data and business logic.
+View → Displays data to the user.
+Controller → Receives user requests and connects Model and View.
+
+--> MVC helps keep code clean, organized, and easy to maintain.
+| Part       | Responsibility        |
+| ---------- | --------------------- |
+| Model      | Data + Business Logic |
+| View       | User Interface        |
+| Controller | Request Handling      |
+
+Internal Working :
+Suppose user opens : http://localhost:8080/student
+
+Step 1
+Request goes to Controller.
+//StudentController
+Step 2
+Controller asks Model for data.
+//StudentService
+Step 3
+Model fetches data.
+//Student Name = Teju
+Step 4
+Data returned to Controller.
+Step 5
+Controller sends data to View.
+Step 6
+View displays data.
+//Welcome Teju
+
+Spring MVC Code Example :
+
+Model -->
+package com.example.model;
+
+public class Student 
+{
+    private String name;
+
+    public Student(String name) 
+    {
+        this.name = name;
+    }
+    public String getName() 
+    {
+        return name;
+    }
+}
+//private String name; Stores student name.
+//this.name = name; Stores value inside variable.
+//public String getName() --> Getter method, Returns student name.
+
+Controller -->
+package com.example.controller;
+
+import com.example.model.Student;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class StudentController 
+{
+    @GetMapping("/student")
+    public String showStudent(Model model) 
+    {
+        Student student = new Student("Teju");
+        model.addAttribute("student", student);
+        return "student";
+    }
+}
+
+//@GetMapping("/student") --> Handles URL : /student
+When user visits : localhost:8080/student,this method executes.
+//public String getStudent(Model model) --> Method executed when request arrives.
+
+View -->
+(student.html)
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Student Information</h1>
+<p th:text="${student.name}"></p>
+</body>
+</html>
