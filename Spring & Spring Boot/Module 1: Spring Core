@@ -181,3 +181,107 @@ IoC vs DI :
 | Bigger concept          | Part of IoC                   |
 --> Spring IoC Container injects dependencies
 -----------------------------------------------------------------------------------------------------------------------------
+Types of Dependency Injection :
+1. Constructor Injection
+--> Constructor Injection means injecting a dependency through the constructor.
+Code Example :
+
+Course.java -->
+package com.example;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Course 
+{
+    public void learn() 
+    {
+        System.out.println("Learning Spring");
+    }
+}
+
+Student.java -->
+package com.example;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student 
+{
+    private Course course;
+
+    @Autowired
+    public Student(Course course) 
+    {
+        this.course = course;
+    }
+
+    public void study() 
+    {
+        course.learn();
+    }
+}
+
+Main.java -->
+
+package com.example;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.example");
+        Student student = context.getBean(Student.class);
+        student.study();
+    }
+}
+
+here, Spring creates a Course object and Course object is injected into Student using constructor
+Dependency is injected when the object is created.
+
+2. Setter Injection
+
+Student.java
+package com.example;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student {
+
+    private Course spring;
+
+    @Autowired
+    public void setCourse(Course spring) {
+
+        this.spring = spring;
+    }
+
+    public void study() {
+
+        spring.learn();
+    }
+}
+
+--> Dependency is injected after the object is created.
+--> Course can be optional.
+--> Used when dependency may change later.
+
+Constructor Injection vs Setter Injection :
+| Constructor Injection                      | Setter Injection                          |
+| ------------------------------------------ | ----------------------------------------- |
+| Dependency injected during object creation | Dependency injected after object creation |
+| Recommended                                | Less preferred                            |
+| Good for mandatory dependencies            | Good for optional dependencies            |
+| Immutable object possible                  | Mutable object                            |
+| Easier testing                             | Slightly harder testing                   |
+-----------------------------------------------------------------------------------------------------------------------------
+Spring Bean -->
+A Spring Bean is simply an object that is created, managed, and maintained by the Spring Container.
+Spring Bean : Student student = context.getBean(Student.class);
+
