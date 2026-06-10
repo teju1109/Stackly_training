@@ -87,3 +87,6 @@ View -->
 <p th:text="${student.name}"></p>
 </body>
 </html>
+
+@RestController --> This class handles web requests.
+@GetMapping --> It is used to handle HTTP GET requests.
