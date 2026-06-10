@@ -18,7 +18,7 @@ Module 1: Spring Core
 10. Autowiring
 11. Java-based Configuration
 --------------------------------------------------------------------------------
-Module 2: Spring MVC
+Module 3: Spring MVC
 
 1. What is MVC?
 2. Controller
@@ -32,7 +32,7 @@ Module 2: Spring MVC
 10. Dependency Injection Using Annotations
 
 --------------------------------------------------------------------------------
-Module 3: Spring AOP
+Module 2: Spring AOP
 1. What is AOP?
 2. Aspect
 3. Advice
@@ -41,7 +41,25 @@ Module 3: Spring AOP
 6. Types of Advice
 7. Lombok
 --------------------------------------------------------------------------------
-
+Module 4 :
+Introduction to Web Services
+Need for Web Services
+Communication Between Applications
+HTTP Protocol
+SMTP Protocol
+Types of Web Services
+SOAP Web Services
+XML in SOAP
+REST Web Services
+REST Architecture
+HTTP Methods (mentioned indirectly)
+JSON Format
+XML Format
+Plain Text Responses
+@RestController
+@RestControllerAdvice
+Running Spring Boot Applications in Browser
+Testing Spring Boot APIs using Postman
 --------------------------------------------------------------------------------
 Spring Framework :
 A framework that manages Java objects and reduces development effort.
