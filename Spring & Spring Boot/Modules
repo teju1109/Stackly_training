@@ -1,0 +1,63 @@
+Module 1: Spring Core
+
+What is Spring?
+Problems with Normal Java Applications
+What is IoC (Inversion of Control)?
+What is Dependency Injection?
+Types of Dependency Injection
+--> Constructor Injection
+--> Setter Injection
+Spring Bean
+Bean Lifecycle
+Bean Scopes
+Stereotype Annotations
+--> @Component
+--> @Service
+--> @Repository
+--> @Controller
+Autowiring
+Java-Based Configuration
+
+Module 2: Spring MVC
+
+What is MVC?
+Controller
+Request Mapping
+Model
+View
+Form Handling
+Data Binding
+XML-Based Configuration
+Value Injection
+Dependency Injection Using Annotations
+
+Module 3: Spring AOP
+
+What is AOP?
+Aspect
+Advice
+Join Point
+Pointcut
+Types of Advice
+Lombok
+
+Module 4: Web Services
+
+Introduction to Web Services
+Need for Web Services
+Communication Between Applications
+HTTP Protocol
+SMTP Protocol
+Types of Web Services
+SOAP Web Services
+XML in SOAP
+REST Web Services
+REST Architecture
+HTTP Methods
+JSON Format
+XML Format
+Plain Text Responses
+@RestController
+@RestControllerAdvice
+Running Spring Boot Applications in Browser
+Testing Spring Boot APIs using Postman
