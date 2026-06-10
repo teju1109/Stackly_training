@@ -1,0 +1,69 @@
+Module 1: Spring Core
+1. What is Spring?
+2. Problems with Normal Java Applications
+3. What is IoC (Inversion of Control)?
+4. What is Dependency Injection?
+5. Types of Dependency Injection
+--> Constructor Injection
+--> Setter Injection
+6. Spring Bean
+7. Bean Lifecycle
+8. Bean Scopes
+9. Stereotype Annotations
+--> @Component
+--> @Service
+--> @Repository
+--> @Controller
+10. Autowiring
+11. Java-Based Configuration
+
+Module 2: Spring AOP
+1. What is AOP?
+2. Aspect
+3. Advice
+4. Join Point
+5. Pointcut
+6. Types of Advice
+7. Lombok
+
+Module 3: Spring MVC
+1. What is MVC?
+2. Controller
+3. Request Mapping
+4. Model
+5. View
+6. Form Handling
+7. Data Binding
+8. XML-Based Configuration
+9. Value Injection
+10.Dependency Injection Using Annotations
+
+Module 4: Web Services
+1. Introduction to Web Services
+2. Need for Web Services
+3. Communication Between Applications
+4. HTTP Protocol
+5. SMTP Protocol
+6. Types of Web Services
+7. SOAP Web Services
+8. XML in SOAP
+9. REST Web Services
+10. REST Architecture
+11. HTTP Methods
+12. JSON Format
+13. XML Format
+14. Plain Text Responses
+15. @RestController
+16. @RestControllerAdvice
+17. Running Spring Boot Applications in Browser
+18. Testing Spring Boot APIs using Postman
+-----------------------------------------------------------------------------------------------------------------------------
+
+Spring : Spring is a Java framework that helps developers build applications easily.
+Spring --> 
+1. Creates objects
+2. Connects objects
+3. Manages object lifecycle
+4. Reduces code
+5. Makes applications easier to maintain
+
