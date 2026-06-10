@@ -371,4 +371,55 @@ Bean Destroyed
 | Runs after creation | Runs before destruction |
 | Start resources     | Release resources       |
 
+Bean Scopes : Bean Scope decides how many Bean objects Spring creates
+TYPES :
+1. Singleton Scope (Default)
+--> Only one object is created for the entire Spring container.
+Student s1 = context.getBean(Student.class);
+Student s2 = context.getBean(Student.class);
+here, s1 == s2   // true
 
+2. Prototype Scope
+--> new object is created every time getBean() is called.
+Student s1 = context.getBean(Student.class);
+Student s2 = context.getBean(Student.class);
+here, s1 =/= s2
+
+3. Request Scope --> One Bean per HTTP request,Used in web applications.
+
+4. Session Scope --> One Bean per user session.
+
+5. Application Scope --> One Bean for entire web application.
+
+Spring uses Singleton → 95%, Prototype → 4% & Others → 1%
+
+Difference :
+| Singleton         | Prototype                          |
+| ----------------- | ---------------------------------- |
+| One object        | New object every time              |
+| Default scope     | Must specify `@Scope("prototype")` |
+| Memory efficient  | Uses more memory                   |
+| `s1 == s2` → true | `s1 == s2` → false                 |
+
+--> @Scope is used to define the lifecycle and number of bean instances Spring should create.
+
+@Service --> Used for business logic classes.
+Example:
+Calculate salary
+Validate user
+Process payments
+
+@Repository --> Used for database-related classes.
+Example:
+Save data
+Update data
+Delete data
+Fetch data from database
+
+@Controller --> Used to handle web requests in Spring MVC.
+Example:
+Receive requests from browser
+Call service methods
+Return views/pages
+
+@Configuration --> It is used to define beans manually
