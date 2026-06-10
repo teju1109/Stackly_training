@@ -191,3 +191,168 @@ studentForm.html-->
 </body>
 </html>
 -----------------------------------------------------------------------------------------------------------------------------
+Value Injection :
+
+Instead of writing:
+Student student = new Student();
+student.setName("Teju");
+
+Spring can automatically inject the value:
+@Value("Teju")
+private String name;
+
+Benefits:
+--> Less code
+--> Easy maintenance
+--> Values can be changed without changing Java code
+--> Configuration becomes centralized
+
+Code Example :
+Student.java--> 
+
+package com.example;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student 
+{
+    @Value("Teju")
+    private String name;
+
+    public void display() 
+    {
+        System.out.println(name);
+    }
+}
+
+Main Class-->
+package com.example;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App 
+{
+    public static void main(String[] args) 
+    {
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.example");
+        Student student = context.getBean(Student.class);
+        student.display();
+    }
+}
+
+Types of Value Injection :
+1. String Value -->
+@Value("Teju")
+private String name;
+2. Integer Value -->
+@Value("23")
+private int age;
+3. Double Value -->
+@Value("50000")
+private double salary;
+4. Boolean Value -->
+@Value("true")
+private boolean active;
+5. Property File Value -->
+@Value("${student.name}")
+private String name;
+
+Constructor Value Injection :
+
+@Component
+public class Student 
+{
+    private String name;
+
+    public Student(@Value("Teju") String name) 
+    {
+        this.name = name;
+    }
+}
+--> Spring injects value through constructor.
+
+Setter Value Injection :
+
+@Component
+public class Student 
+{
+    private String name;
+
+    @Value("Teju")
+    public void setName(String name) 
+    {
+        this.name = name;
+    }
+}
+--> Spring injects value through setter.
+-----------------------------------------------------------------------------------------------------------------------------
+Dependency Injection (DI) Using Annotations :
+Code Example :
+
+StudentService.java--> 
+
+package com.example.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class StudentService 
+{
+    public void display()  
+    {
+        System.out.println("Student Service Called");
+    }
+}
+//@Service --> Marks class as a Service Bean.
+
+StudentController.java -->
+
+package com.example.controller;
+
+import com.example.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class StudentController 
+{
+    @Autowired
+    private StudentService service;
+
+    public void execute() 
+    {
+        service.display();
+    }
+}
+//@Controller --> Marks class as Controller Bean.
+//@Autowired --> Inject StudentService automatically.
+//public void execute() --> Calls service.
+
+Main Class-->
+
+package com.example;
+
+import com.example.controller.StudentController;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App 
+{
+    public static void main(String[] args) 
+    {
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.example");
+        StudentController controller = context.getBean(StudentController.class);
+        controller.execute();
+    }
+}
+//IOC Container --> ApplicationContext context, It Stores beans.
+//new AnnotationConfigApplicationContext("com.example"); --> Searches for annotations.
+//controller.execute(); --> Runs controller method.
+
+Types of Dependency Injection :
+1. Field Injection : Spring injects directly into field.
+2. Setter Injection
+3. Constructor Injection (Most preferred in modern Spring)
