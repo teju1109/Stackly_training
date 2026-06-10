@@ -15,7 +15,7 @@ Stereotype Annotations
 --> @Service
 --> @Repository
 --> @Controller
-Autowiring
+--> @Autowiring
 Java-Based Configuration
 
 Module 2: Spring MVC
