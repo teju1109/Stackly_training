@@ -78,7 +78,7 @@ in Main class -->
 //ApplicationContext context = new AnnotationConfigApplicationContext("com.example");
 ApplicationContext context is a Spring container that creates, Stores and manages objects.
 new AnnotationConfigApplicationContext("com.example") Starts Spring container, Scans package and Finds classes
-having:@Component
+having annotations like @Component, @Bean etc etc.
 
 Student student=context.getBean(Student.class); Ask Spring to Give me Student object.
 context = Spring container
@@ -96,4 +96,88 @@ Difference Between Related Concepts :
 | Setup manually     | Auto configuration     |
 | More code          | Less code              |
 -----------------------------------------------------------------------------------------------------------------------------
+Problems with Normal Java Applications :
+--> Tight Coupling
+--> Object Management Problems
+--> Code Duplication
+--> Difficult Testing
+--> Difficult Maintenance
+So, Spring was created to solve.
+-----------------------------------------------------------------------------------------------------------------------------
+IoC (Inversion of Control) --> 
+A Spring Container that controls creating and managing objects.
+//Student student = context.getBean(Student.class);
+here, Spring creates the object --> Student student = new Student();
 
+--> Objects created are stored inside the IoC Container.
+--> IoC and DI are not the same.
+--> IoC Container stores objects, not code.
+-----------------------------------------------------------------------------------------------------------------------------
+Dependency Injection (DI) -->
+A technique where Spring provides the required object (dependency) to another object and injects it automatically.
+here the required object is called dependency.
+
+Code Example :
+Course.java -->
+
+package com.example;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Course 
+{
+    public void learn() 
+    {
+        System.out.println("Learning Spring");
+    }
+}
+
+Student.java -->
+
+package com.example;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student 
+{
+    @Autowired
+    private Course spring;
+
+    public void study() 
+    {
+        spring.learn();
+    }
+}
+
+Main.java -->
+
+package com.example;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.example");
+        Student student = context.getBean(Student.class);
+        student.study();
+    }
+}
+
+Explanation :
+@Autowired --> Automatically inject the Course object here.
+private Course course; and not public Course course; is Because of Encapsulation, so only Students can access 
+
+IoC vs DI :
+| IoC                     | DI                            |
+| ----------------------- | ----------------------------- |
+| Principle               | Technique                     |
+| Control given to Spring | Dependency supplied by Spring |
+| Bigger concept          | Part of IoC                   |
+--> Spring IoC Container injects dependencies
+-----------------------------------------------------------------------------------------------------------------------------
