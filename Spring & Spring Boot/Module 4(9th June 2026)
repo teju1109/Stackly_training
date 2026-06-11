@@ -98,3 +98,27 @@ Explanation :
 | Service    | Contains business logic and validations |
 | Repository | Communicates with database              |
 | Database   | Stores actual data                      |
+------------------------------------------------------------------------------------------------------------
+| Annotation          | Purpose                                                                                             | Where Used               | Example                                      |
+| ------------------- | --------------------------------------------------------------------------------------------------- | ------------------------ | -------------------------------------------- |
+| @RestController   | Marks a class as a REST API controller. Methods return data directly as JSON/XML instead of a view. | Class Level              | `@RestController`                            |
+| @RequestMapping   | Defines a base URL for all methods inside a controller. Can also specify HTTP methods.              | Class/Method Level       | `@RequestMapping("/students")`               |
+| @GetMapping       | Handles HTTP GET requests (Fetch Data).                                                             | Method Level             | `@GetMapping("/{id}")`                       |
+| @PostMapping      | Handles HTTP POST requests (Create Data).                                                           | Method Level             | `@PostMapping("/save")`                      |
+| @PutMapping       | Handles HTTP PUT requests (Update Data).                                                            | Method Level             | `@PutMapping("/{id}")`                       |
+| @DeleteMapping    | Handles HTTP DELETE requests (Delete Data).                                                         | Method Level             | `@DeleteMapping("/{id}")`                    |
+| @PathVariable     | Reads a value from the URL path and assigns it to a method parameter.                               | Method Parameter         | `@PathVariable Long id`                      |
+| @RequestBody      | Converts JSON data from the request body into a Java object.                                        | Method Parameter         | `@RequestBody Student student`               |
+| @Autowired        | Automatically injects a bean (Dependency Injection).                                                | Field/Constructor/Setter | `@Autowired private StudentService service;` |
+| @Service          | Marks a class as a Service Layer bean containing business logic.                                    | Class Level              | `@Service`                                   |
+| @Repository       | Marks a class/interface as a Repository Layer bean for database operations.                         | Class Level              | `@Repository`                                |
+------------------------------------------------------------------------------------------------------------
+CRUD Mapping Table :
+| Operation | HTTP Method | Annotation       |
+| --------- | ----------- | ---------------- |
+| Create    | POST        |  @PostMapping    |
+| Read      | GET         |  @GetMapping     |
+| Update    | PUT         |  @PutMapping     |
+| Delete    | DELETE      |  @DeleteMapping  |
+------------------------------------------------------------------------------------------------------------
+//Learn how to use Postman
