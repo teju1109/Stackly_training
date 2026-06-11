@@ -356,3 +356,5 @@ Types of Dependency Injection :
 1. Field Injection : Spring injects directly into field.
 2. Setter Injection
 3. Constructor Injection (Most preferred in modern Spring)
+-----------------------------------------------------------------------------------------------------------------------------
+How to run Spring Boot project in Postman and in the Browser
