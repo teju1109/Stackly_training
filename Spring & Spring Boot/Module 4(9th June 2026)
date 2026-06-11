@@ -32,3 +32,69 @@ This format is called a Representation.
 --> Data Representation format is JSON or XML
 3. Statelessness : REST APIs are stateless., The server does not remember previous requests.
 Every request should contain all required information.
+------------------------------------------------------------------------------------------------------------
+Spring Boot : 
+--> Spring Boot is a framework built on top of Spring that makes it easy and fast to create Java applications.
+--> It removes most of the configuration work required in Spring and allows developers to build applications quickly.
+In Simple Words :
+Spring Framework = Powerful but requires more setup.
+Spring Boot = Spring Framework + Auto Configuration + Embedded Server + Faster Development.
+Spring Boot Project Structure :
+src
+ └── main
+      ├── java
+      │     └── com.example
+      │             ├── controller
+      │             ├── service
+      │             ├── repository
+      │             └── model
+      │
+      └── resources
+              ├── application.properties
+              └── static
+
+Spring Boot REST Architecture :
+Client                                    
+  |
+  | HTTP Request
+  V
+Controller Layer
+  |
+  V
+Service Layer
+  |
+  V
+Repository Layer
+  |
+  V
+Database
+
+Explanation :
+
+1. Client Layer
+--> The Client is the application or user that sends a request to the Spring Boot application.
+--> The Client's job is only to Send requests and Receive responses.
+2. Controller Layer
+--> The Controller is the entry point of the application.
+--> It receives requests from clients and sends responses back.
+--> Annotation used is @RestController
+--> Responsibile for Receive & Return HTTP Request, Read parameters and Call Service Layer
+3. Service Layer
+--> The Service Layer contains business logic.
+--> Annotation used is @Service
+--> Responsibile for Business Logic only
+4. Repository Layer
+--> Repository Layer communicates with the database.
+--> Annotation used is @Repository
+--> Responsibility for Insert Data[save()], Update Data[save()], Delete Data[deleteById()] and Fetch Data[findById()]
+5. Database Layer
+--> The Database stores the actual data.
+--> Examples : MySQL, Oracle, SQL Server etc etc 
+
+| Layer      | Responsibility                          |
+| ---------- | --------------------------------------- |
+| Client     | Sends requests and receives responses   |
+| Controller | Handles HTTP requests and responses     |
+| Service    | Contains business logic and validations |
+| Repository | Communicates with database              |
+| Database   | Stores actual data                      |
