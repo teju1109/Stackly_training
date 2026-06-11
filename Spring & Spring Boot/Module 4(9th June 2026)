@@ -1,0 +1,34 @@
+WEB SERVICES :
+-->  Web Service is a way for two different applications to communicate with each other over a network (usually the Internet) 
+and exchange data.
+--> It allows one application to request information or perform an action on another application.
+Types of Web Services :
+1. SOAP Web Services : SOAP = Simple Object Access Protocol
+Features :
+--> Highly secure
+--> Strict rules
+--> Uses XML only
+
+2. REST Web Services : REST = Representational State Transfer
+Features :
+--> Fast
+--> Lightweight
+--> Easy to develop
+Today most applications use REST APIs.
+
+SOAP vs REST :
+| Feature     | SOAP      | REST      |
+| ----------- | --------- | --------- |
+| Data Format | XML       | JSON/XML  |
+| Speed       | Slower    | Faster    |
+| Complexity  | High      | Low       |
+| Learning    | Difficult | Easy      |
+| Popularity  | Less      | Very High |
+
+REST Concepts :
+1. Resource : A Resource is any data or object that the API exposes.
+2. Representation : Resources are stored internally in one format but sent to clients in another format.
+This format is called a Representation.
+--> Data Representation format is JSON or XML
+3. Statelessness : REST APIs are stateless., The server does not remember previous requests.
+Every request should contain all required information.
