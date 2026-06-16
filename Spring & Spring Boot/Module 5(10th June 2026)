@@ -1,0 +1,68 @@
+| Annotation              | Definition                                                                                           | Purpose                                                        | Example                                                               |
+| ----------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **@NoArgsConstructor**  | Lombok annotation that creates a constructor with no parameters automatically.                       | Avoids writing an empty constructor manually.                  | `Student s = new Student();`                                          |
+| **@AllArgsConstructor** | Lombok annotation that creates a constructor with all fields as parameters.                          | Quickly initialize all object values.                          | `Student s = new Student(1,"Teju",22);`                               |
+| **@NotBlank**           | Validation annotation that checks a String is not null, empty, or only spaces.                       | Used for mandatory text fields.                                | `"Teju"` ✅, `" "` ❌                                                |
+| **@Min(value)**         | Validation annotation that checks a numeric value is greater than or equal to the specified minimum. | Used for age, salary, marks, etc.                              | `@Min(18)` means age must be at least 18.                             |
+| **@NotNull**            | Validation annotation that checks a field is not null.                                               | Ensures a value is provided.                                   | `name = null` ❌                                                      |
+| **@Validated**          | Spring annotation that activates validation on request data.                                         | Triggers validation annotations like `@NotBlank`, `@Min`, etc. | Used on Controller methods/classes.                                   |
+| **@PatchMapping**       | Handles HTTP PATCH requests.                                                                         | Used for partial updates of a resource.                        | Update only a customer's email instead of the entire customer record. |
+| **@RequestBody**        | Reads JSON data from the request body and converts it into a Java object.                            | Used when client sends data to the server.                     | POST customer details.                                                |
+| **@PathVariable**       | Reads values from the URL path.                                                                      | Used to identify a specific resource.                          | `/students/101` → `101` is the path variable.                         |
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Postman :
+Postman is an API testing tool used by developers to send requests to a server and check the responses.
+http example : http://localhost:8080/students
+--> Instead of creating a webpage to test it, you can use Postman to:
+1. Create students
+2. View students
+3. Update students
+4. Delete students
+directly from Postman.
+
+Postman Interface : 
+1. Request Method Dropdown
+GET
+POST
+PUT
+PATCH
+DELETE
+
+2. URL Box
+http://localhost:8080/students
+
+3. Body Tab --> Used to send JSON data.
+
+4. Headers Tab --> Used to send metadata.
+Example:
+Content-Type : application/json
+
+5. Response Section
+Shows:
+{
+   "id":101,
+   "name":"Teju"
+}
+
+HTTP Methods in Postman :
+| Method | Operation | Meaning             |
+| ------ | --------- | ------------------- |
+| GET    | Read      | Fetch data          |
+| POST   | Create    | Insert data         |
+| PUT    | Update    | Replace entire data |
+| PATCH  | Update    | Partial update      |
+| DELETE | Delete    | Remove data         |
+
+HTTP Status Codes in Postman :
+| Code | Meaning               |
+| ---- | --------------------- |
+| 200  | OK                    |
+| 201  | Created               |
+| 204  | No Content            |
+| 400  | Bad Request           |
+| 401  | Unauthorized          |
+| 403  | Forbidden             |
+| 404  | Not Found             |
+| 500  | Internal Server Error |
