@@ -1,0 +1,141 @@
+Spring Data JPA :
+JPA --> Java Persistence API
+--> A specification that defines how Java objects should be stored in databases.
+--> Hibernate is the implementation of JPA.
+JPA = Rules
+Hibernate = Tool implementing rules
+Application
+     ↓
+Spring Data JPA
+     ↓
+Hibernate
+     ↓
+Database
+--> Spring Data JPA handles : Session management, Transaction handling, Query execution, Object mapping & CRUD operations
+
+Methods JpaRepository :
+1. save() --> Used to insert or update a record.
+Generated SQL:
+INSERT INTO student(id,name)
+VALUES(101,'Teju');
+
+2. findById() --> Fetch a record using Primary Key.
+Generated SQL:
+SELECT * FROM student
+WHERE id=101;
+
+3. findAll() --> Retrieve all records.
+Generated SQL:
+SELECT * FROM student;
+
+4. delete() --> Delete using the object.
+Generated SQL:
+DELETE FROM student
+WHERE id=101;
+
+5. deleteById() --> Delete directly using Primary Key.
+Generated SQL:
+DELETE FROM student
+WHERE id=101;
+
+6. count() --> Returns total number of records.
+Generated SQL:
+SELECT COUNT(*) FROM student;
+
+7. existsById() --> Checks whether a record exists.
+Generated SQL:
+SELECT COUNT(*) FROM student
+WHERE id=101;
+--------------------------------------------------------------------------------------------------------------------------------------
+Entity Mapping :
+Entity Mapping is the process of mapping a Java class to a database table.
+
+Java Class   ↔   Database Table
+Object       ↔   Row
+Field        ↔   Column
+
+Example:
+Student.java
+      ↓
+student table
+--> @Entity tells Hibernate : "This class should be mapped to a database table."
+
+@Table Annotation : Used to specify a custom table name.
+@Id : Every table needs a Primary Key, @Id marks a field as the Primary Key.
+--> we use Primary Key because it uniquely identifies a record
+@GeneratedValue : Used to generate Primary Key values automatically.
+@GeneratedValue Strategies : There are 4 strategies
+1. GenerationType.IDENTITY(Most commonly used)
+--> Database generates IDs using AUTO_INCREMENT.
+
+2. GenerationType.SEQUENCE : Uses a database sequence object.
+
+3. GenerationType.TABLE : Stores IDs in a separate table.
+--> Extra table access.
+--> Slower performance.
+--> Most projects avoid it.
+
+4. GenerationType.AUTO : Hibernate automatically decides the strategy.
+
+Complete Entity Example :
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "students")
+public class Student 
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private Integer age;
+}
+
+Hibernate creates:
+
+CREATE TABLE students
+(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    age INTEGER
+);
+--------------------------------------------------------------------------------------------------------------------------------------
+Repository Interfaces :
+Repository is an interface that helps your application communicate with the database.
+
+1. CrudRepository :
+CRUD = Create, Read, Update and Delete
+--> Provides basic database operations.
+Syntax :
+public interface StudentRepository
+extends CrudRepository<Student, Long> {}
+
+2. JpaRepository :
+--> Most commonly used repository.
+Syntax :
+public interface StudentRepository
+extends JpaRepository<Student, Long> {}
+Features of JpaRepository Contains : CrudRepository + PagingAndSortingRepository + Additional JPA Features
+JpaRepository is Preferred because it provides:
+1. CRUD
+2. Pagination
+3. Sorting
+4. Batch operations
+5. Flush operations
+
+Query Derivation :
+Spring automatically creates SQL queries based on method names,
+You only write method names, Spring generates the query.
+
+Query Derivation Keywords :
+| Method Name              | Generated Query        |
+| ------------------------ | ---------------------- |
+| findByName               | WHERE name=?           |
+| findByAge                | WHERE age=?            |
+| findByNameAndAge         | WHERE name=? AND age=? |
+| findByNameOrAge          | WHERE name=? OR age=?  |
+| findByAgeGreaterThan     | WHERE age > ?          |
+| findByAgeLessThan        | WHERE age < ?          |
+| findByNameContaining     | LIKE %value%           |
+| findByCityOrderByNameAsc | ORDER BY               |
