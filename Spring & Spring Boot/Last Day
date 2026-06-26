@@ -1,0 +1,107 @@
+File Upload in Spring Boot (Step-by-Step) :
+
+1. Create a Spring Boot Project
+Create a new Spring Boot project.
+Add dependencies:
+Spring Web
+(Optional) Lombok
+
+2. Configure application.properties
+Set the maximum file size.
+Set the maximum request size.
+(Optional) Specify the upload folder path.
+Example:
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+file.upload-dir=uploads/
+
+3. Create Upload Folder
+Create a folder (e.g., uploads) in your project or specify any local path.
+
+4. Create Service Interface
+Add a method:
+uploadFile(MultipartFile file)
+
+5. Create Service Implementation
+Receive the MultipartFile.
+Get the original filename.
+Save the file using Files.copy() or file.transferTo().
+Return success message.
+
+6. Create Controller
+Create a POST API.
+Use @RequestParam("file") MultipartFile file.
+Call the service method.
+Return response.
+
+7. Test in Postman
+Select POST request.
+Choose Body → form-data.
+Key:
+file (Type = File)
+Select a file.
+Click Send.
+Verify the file is stored in the upload folder.
+---------------------------------------------------------------------------------------------------------
+File Download in Spring Boot (Step-by-Step)
+
+1. Create Service Interface
+Add a method:
+downloadFile(String fileName)
+
+2. Create Service Implementation
+Locate the file from the upload folder.
+Convert it into a Resource.
+Return the Resource.
+
+3. Create Controller
+Create a GET API.
+Accept filename using @PathVariable or @RequestParam.
+Call service method.
+Set response headers:
+Content-Disposition
+Content-Type
+Return ResponseEntity<Resource>.
+
+4. Test in Browser/Postman
+Open:http://localhost:8080/download/filename.pdf
+OR send a GET request in Postman.
+Browser/Postman downloads the file automatically.
+-----------------------------------------------------------------------------------------------------
+Overall Flow :
+Upload
+
+Client
+   │
+   ▼
+POST /upload
+   │
+Controller
+   │
+Service
+   │
+Save File
+   │
+Uploads Folder
+
+
+Download
+
+Client
+   │
+   ▼
+GET /download/{filename}
+   │
+Controller
+   │
+Service
+   │
+Read File
+   │
+Return Resource
+   │
+File Download
+
+
+
+
