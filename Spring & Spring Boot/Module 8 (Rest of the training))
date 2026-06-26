@@ -1,0 +1,285 @@
+JPA Relationships :
+In a database, tables are connected to each other which are known as relationships,
+Instead of storing everything in one table, databases connect tables using relationships.
+JPA helps us create these relationships using annotations.
+
+Types of Relationships :
+| Relationship | Meaning                     | Example
+| ------------ | --------------------------- |---------------
+| OneToOne     | One object ↔ One object     | Teju --> Adharcard
+| OneToMany    | One object → Many objects   | IT --> 1. Tej, 2.Teju, 3.Teja, 4.Tejesh
+| ManyToOne    | Many objects → One object   | 1. Tej, 2.Teju, 3.Teja, 4.Tejesh --> IT
+| ManyToMany   | Many objects ↔ Many objects | Tej --> Java, MySQL, HTML, CSS, Spring, SpringBoot, JDBC
+                                             | Java --> 1. Tej, 2.Teju, 3.Teja, 4.Tejesh
+
+@JoinColumn : It tells JPA where to store the foreign key.
+Example :
+@ManyToOne
+@JoinColumn(name="department_id")
+private Department department;
+
+Database :
+Employee
+id
+name
+department_id
+
+--> Without @JoinColumn, JPA generates a default foreign key name (such as department_id),
+but specifying it gives you control over the column name.
+
+Which annotation creates which table :
+| Annotation    | Foreign Key Stored In                  |
+| ------------- | -------------------------------------- |
+| `@OneToOne`   | Owner entity table                     |
+| `@OneToMany`  | Child table (when using `@JoinColumn`) |
+| `@ManyToOne`  | Many-side table                        |
+| `@ManyToMany` | Separate join table                    |
+----------------------------------------------------------------------------------------------------------------
+Fetch Strategies (EAGER vs LAZY) 
+Fetch Strategy is a mechanism in JPA that determines when related entities should be loaded from the database.
+Whenever you retrieve an object from the database, JPA must decide:
+--> Should it load the related objects immediately?
+--> Or should it load them only when they are needed?
+This decision is called the Fetch Strategy.
+
+Loading unnecessary data
+--> Slows down the application
+--> Uses more memory
+--> Increases database queries
+To avoid this problem, JPA provides two fetch strategies:
+1. EAGER
+2. LAZY
+
+Types of Fetch Strategy :
+1. FetchType.EAGER
+EAGER fetch means JPA loads the parent entity and all its related entities immediately in a single operation.
+Think of it as: "Load everything now."
+
+2. FetchType.LAZY
+LAZY fetch means JPA loads only the requested entity first and loads related entities only when they are accessed.
+Think of it as: "Load only when needed."
+
+Default Fetch Types :
+| Relationship  | Default Fetch Type |
+| ------------- | ------------------ |
+| `@OneToOne`   | EAGER              |
+| `@ManyToOne`  | EAGER              |
+| `@OneToMany`  | LAZY               |
+| `@ManyToMany` | LAZY               |
+
+Difference Between EAGER and LAZY :
+| Feature          | EAGER                              | LAZY                                      |
+| ---------------- | ---------------------------------- | ----------------------------------------- |
+| Meaning          | Loads related entities immediately | Loads related entities only when accessed |
+| Database Queries | Executes immediately               | Executes only when needed                 |
+| Memory Usage     | High                               | Low                                       |
+| Performance      | Slower for large data              | Better for large data                     |
+| Best For         | Small related objects              | Large collections                         |
+--------------------------------------------------------------------------------------------------------------------------
+Cascade Types in JPA :
+Cascade is a feature in JPA that automatically applies operations performed on a parent entity to its related child entities.
+--> Instead of saving or deleting the parent and child separately, JPA can do it automatically.
+
+Syntax :
+@OneToMany(cascade = CascadeType.ALL)
+private List<Employee> employees;
+Here,
+cascade = CascadeType.ALL
+means : Apply all operations (save, update, delete, etc.) from the parent to the child.
+
+Types of Cascade :
+| Cascade Type | Purpose                               | Example
+| ------------ | ------------------------------------- |------------------------------------
+| PERSIST      | Save child automatically              |@OneToMany(cascade = CascadeType.PERSIST)
+|              |                                       |private List<Employee> employees;
+|              |                                       |
+| MERGE        | Update child automatically            |department.setName("Software");
+|              |                                       |emp.setName("David");
+|              |                                       |departmentRepository.save(department);
+|              |                                       |
+| REMOVE       | Delete child automatically            |departmentRepository.delete(department);
+|              |                                       |
+| REFRESH      | Reload child from database            |entityManager.refresh(department);
+|              |                                       |
+| DETACH       | Detach child from persistence context |entityManager.detach(department);
+|              |                                       |
+| ALL          | Apply all cascade operations          |@OneToMany(cascade = CascadeType.ALL)
+|              |                                       |private List<Employee> employees;
+-----------------------------------------------------------------------------------------------------
+
+JPQL (Java Persistence Query Language) & Native Queries :
+--> JPQL is an object-oriented query language used to retrieve, update, and delete data from the database
+    using entity class names and their fields instead of table names and column names.
+--> JPQL is SQL for JPA Entities.
+
+SQL vs JPQL
+Suppose we have a table:
+Employee Table
+| id | name  | salary |
+| -- | ----- | ------ |
+| 1  | John  | 50000  |
+| 2  | David | 60000  |
+
+SQL
+SELECT * FROM employee;
+Notice:
+--> Uses table name
+--> Uses column names
+JPQL
+SELECT e FROM Employee e
+Notice:
+--> Uses Entity class name
+--> Uses Java field names
+This is the biggest difference.
+
+Syntax : JPQL is usually written using the @Query annotation.
+@Query("JPQL Query")
+Example:
+@Query("SELECT e FROM Employee e")
+List<Employee> getEmployees();
+--> using WHERE 
+@Query("SELECT e FROM Employee e WHERE e.salary > 50000")
+List<Employee> getEmployees();
+--> Using @Param
+@Query("SELECT e FROM Employee e WHERE e.name = :name")
+List<Employee> findEmployee(@Param("name") String name);
+--> using Sorting
+@Query("SELECT e FROM Employee e ORDER BY e.salary DESC")
+List<Employee> getEmployees();
+--> using COUNT
+@Query("SELECT COUNT(e) FROM Employee e")
+Long countEmployees();
+--> using SUM
+@Query("SELECT SUM(e.salary) FROM Employee e")
+Double totalSalary();
+--> using AVG
+@Query("SELECT AVG(e.salary) FROM Employee e")
+Double averageSalary();
+--> using LIKE
+Find names starting with "J".
+@Query("SELECT e FROM Employee e WHERE e.name LIKE 'J%'")
+
+Native Query : 
+A Native Query is a SQL query written using actual database table names and column names instead of entity names.
+
+JPQL vs Native Query :
+| JPQL                  | Native Query               |
+| --------------------- | -------------------------- |
+| Uses Entity names     | Uses Table names           |
+| Uses Java field names | Uses Database column names |
+| Database-independent  | Database-specific          |
+| Recommended           | Use only when needed       |
+-------------------------------------------------------------------------------------------------------------
+Pagination and Sorting in Spring Data JPA
+
+Pagination is the process of dividing a large number of records into smaller pages instead of loading all records at once.
+Simple Definition : 
+Instead of showing 10,000 records, show:
+Page 1 → 10 records
+Page 2 → 10 records
+Page 3 → 10 records
+--> This improves application performance and user experience.
+
+Sorting is the process of arranging records in ascending or descending order based on one or more fields.
+Example:
+Salary (Highest → Lowest)
+Name (A → Z)
+Date (Newest → Oldest)
+
+Pagination Syntax :
+Spring Data JPA provides the Pageable interface.
+
+Repository:
+public interface EmployeeRepository
+extends JpaRepository<Employee, Long> {}
+
+Service:
+Pageable pageable = PageRequest.of(0, 5);
+Page<Employee> page = employeeRepository.findAll(pageable);
+explanation :
+PageRequest.of(0,5)
+0 → First page (page numbering starts from 0)
+5 → Number of records per page
+---------------------------------------------------------------------------------------------------------------------
+Entity Lifecycle :
+--> The Entity Lifecycle in JPA describes the different states an entity object goes through from
+    its creation until it is removed from the database.
+--> An entity doesn't stay in one state forever.
+--> It changes its state while interacting with JPA.
+
+Entity Lifecycle States :
+--> There are 4 main states
+          NEW
+           │
+      persist()
+           │
+           ▼
+      MANAGED
+      /      \
+detach()    remove()
+   │            │
+   ▼            ▼
+DETACHED    REMOVED
+
+--> A Transient entity is an object that has been created in Java  
+    but is not associated with the Persistence Context and is not stored in the database.
+--> A Managed entity is an object that is associated with the Persistence Context and is being tracked by JPA.
+--> A Detached entity is an object that was previously managed but is no longer associated with the Persistence Context.
+--> A Removed entity is an object that has been marked for deletion and will be deleted from the database 
+    when the transaction is committed.
+--> Persistence Context is a memory area where JPA stores and manages entity objects during a transaction.
+--> Dirty Checking is the process by which JPA automatically detects changes made to Managed entities
+    and updates the database when the transaction is committed.
+------------------------------------------------------------------------------------------------------------------------
+Auditing is a JPA feature used to automatically track who created or modified an entity and when those actions occurred.
+--> Auditing automatically stores information such as:
+1. Who created the record?
+2. When was it created?
+3. Who updated it?
+4. When was it updated?
+
+Auditing Annotations :
+| Annotation           | Purpose                                                        |
+| -------------------- | ---------------------------------------------------------------|
+| `@CreatedDate`       | Stores creation date                                           |
+| `@LastModifiedDate`  | Stores last update date                                        |
+| `@CreatedBy`         | Stores creator name                                            |
+| `@LastModifiedBy`    | Stores last modifier name                                      |
+| `@EnableJpaAuditing` | Enables auditing                                               |
+| `@EntityListeners`   | Tells JPA to listen for entity events such as insert and update|
+
+to Enable Auditing
+Create a configuration class.
+@Configuration
+@EnableJpaAuditing
+public class AuditConfig {}
+---------------------------------------------------------------------------------------------------------------------------
+A Transaction is a sequence of one or more database operations that are treated as a single unit of work.
+A transaction follows the rule:
+1. Either all operations succeed, or all operations fail.
+2. This is called Atomicity.
+
+@Transactional is a Spring annotation that ensures all database operations 
+inside a method are executed within a single transaction.
+If one operation fails, all previous operations are rolled back.
+
+--> Commit permanently saves all changes made during a transaction to the database.
+--> Rollback cancels all changes made during a transaction and restores the database to its previous state.
+
+ACID Properties : Every transaction follows ACID.
+A – Atomicity
+Definition:
+All operations succeed or all fail.
+
+C – Consistency
+Definition:
+A transaction moves the database from one valid state to another valid state.
+
+I – Isolation
+Definition:
+Multiple transactions should not interfere with each other.
+
+D – Durability
+Definition:
+Once a transaction is committed, the data is permanently stored even if the system crashes.
+
