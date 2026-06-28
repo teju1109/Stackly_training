@@ -1,0 +1,130 @@
+Step 1 - Create Spring Boot Project
+
+In Spring Initializr choose
+Project : Maven
+Language : Java
+Spring Boot : 3.5.17
+Java : 17
+--> Dependencies used :
+Spring Web
+Spring Data JPA
+MySQL Driver
+Validation
+Lombok (optional)
+
+--> Click Generate.
+--> Open in STS.
+------------------------------------------------------------------------------------------------------------------------
+Step 2 - Configure Database
+
+Create database :
+CREATE DATABASE ecommerce_db;
+Inside application.properties
+write :
+spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce_db
+spring.datasource.username=root
+spring.datasource.password=Root
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+Now Spring knows where to store data.
+------------------------------------------------------------------------------------------------------------------------
+Step 3 - Create Packages
+
+Create these packages :
+controller
+entity
+repository
+service
+serviceimpl
+--> This is the project skeleton.
+------------------------------------------------------------------------------------------------------------------------
+Step 4 - Create Entity Classes
+
+Now create database tables.
+Each class becomes one table.
+
+Customer
+Product
+ShoppingCart
+CartItem
+Order
+OrderItem
+Payment
+Each entity contains :
+@Id
+@GeneratedValue
+@Column
+-- > When application starts, Hibernate automatically creates table.
+------------------------------------------------------------------------------------------------------------------------
+Step 5 - Create Repository
+--> Repository talks to MySQL.
+
+Example :
+public interface ProductRepository
+extends JpaRepository<Product, Long>{}
+------------------------------------------------------------------------------------------------------------------------
+Step 6 - Create Service Interface
+Service contains business methods.
+------------------------------------------------------------------------------------------------------------------------
+Step 7 - Create Service Implementation
+
+--> Now write actual logic.
+--> Inject repository
+------------------------------------------------------------------------------------------------------------------------
+Step 8 - Create Controller
+--> Controller receives HTTP requests.
+Example :
+POST
+GET
+PUT
+DELETE
+--> Controller calls Service.
+--> Service calls Repository.
+--> Repository talks to Database.
+------------------------------------------------------------------------------------------------------------------------
+Step 9 - Run Project
+Run --> EcommerceApiApplication.java
+------------------------------------------------------------------------------------------------------------------------
+Step 10 - Test in Postman
+
+Create Product
+POST : localhost:8080/products
+Body :
+{
+    "productName":"Laptop",
+    "category":"Electronics",
+    "price":55000,
+    "stock":12
+}
+
+Get Products
+GET : localhost:8080/products
+
+Update
+PUT : localhost:8080/products/1
+
+Delete
+DELETE :  localhost:8080/products/1
+------------------------------------------------------------------------------------------------------------------------
+Construction order of your entire project :
+1. Create Spring Boot Project
+↓
+2. Configure MySQL
+↓
+3. Create Packages
+↓
+4. Create Entity Classes
+↓
+5. Create Repository Interfaces
+↓
+6. Create Service Interfaces
+↓
+7. Create Service Implementations
+↓
+8. Create Controllers
+↓
+9. Run Application
+↓
+10. Test Using Postman
+------------------------------------------------------------------------------------------------------------------------
